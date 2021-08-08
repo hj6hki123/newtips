@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:alpha="0.5"
+            android:background="#3652A1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:text="窗簾"
+                android:gravity="center"
+                android:textColor="#D4D2D5"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry1_btn1"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:background="@drawable/buttonshape"
+                android:text="開"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry1_btn2"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonshape"
+                android:text="關"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry1_btn3"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonshape"
+                android:text="停止"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:alpha="0.5"
+            android:background="#8E60DF"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:text="窗戶"
+                android:gravity="center"
+                android:textColor="#D4D2D5"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry2_btn1"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:background="@drawable/buttonshape"
+                android:text="開"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry2_btn2"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonshape"
+                android:text="關"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry2_btn3"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonshape"
+                android:text="停止"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:id="@+id/LinearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:alpha="0.5"
+            android:background="#045A81"
+            android:gravity="center">
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:text="風扇"
+                android:gravity="center"
+                android:textColor="#D4D2D5"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry3_btn1"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:background="@drawable/buttonshape"
+                android:text="開"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry3_btn2"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonshape"
+                android:text="關"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+            <LinearLayout
+                android:layout_width="170dp"
+                android:layout_height="60dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:alpha="0.5"
+            android:background="#5168ED"
+            android:gravity="center">
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:text="其他"
+                android:gravity="center"
+                android:textColor="#D4D2D5"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry4_btn1"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:background="@drawable/buttonshape"
+                android:text="冷氣開關"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/angry4_btn2"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonshape"
+                android:text="除溼開關"
+                android:textColor="#F9FFF7"
+                android:textSize="30sp" />
+            <LinearLayout
+                android:layout_width="170dp"
+                android:layout_height="60dp"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
