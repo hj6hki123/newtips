@@ -1,10 +1,13 @@
 package com.example.newtips;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +19,7 @@ public class page2 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
+    MyBroadcastReceiver mMyReceiver;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -45,12 +48,52 @@ public class page2 extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //---------------------------------------------------------------------------
+        Button curtain_on=(Button)getView().findViewById(R.id.angry1_btn1);
+        Button curtain_off=(Button)getView().findViewById(R.id.angry1_btn2);
+        Button curtain_stop=(Button)getView().findViewById(R.id.angry1_btn3);
+        curtain_on.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x01);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        curtain_off.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x02);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        curtain_stop.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x00);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        //---------------------------------------------------------------------------
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        IntentFilter itFilter = new IntentFilter("KEY");//KEY為廣播辨識碼
+        mMyReceiver = new MyBroadcastReceiver();
+        getActivity().registerReceiver(mMyReceiver, itFilter); //註冊廣播接收器
     }
 
     @Override

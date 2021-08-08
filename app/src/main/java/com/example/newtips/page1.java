@@ -3,19 +3,25 @@ package com.example.newtips;
 import android.annotation.SuppressLint;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -26,15 +32,22 @@ public class page1 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Thread threadA;
+    Thread threadRecv;
+    Thread threadSend;
     MyBroadcastReceiver mMyReceiver;
     Socket clientSocket;
     InetAddress serverIp;
     int serverPort;
     boolean CONEACCEPT_FLAG=false;
     boolean connectfrag;
-    TextView Dlight,Dwet,Dwind,Dtemp,Dwatt,Dhottemp,Dco2,Dch2o,Dchemical,Dpm25,Dpm10,Dsensor,Ddrop,Dface;
-
+    TextView Dlight,Dwet,Dwind,Dtemp,Dwatt,Dhottemp,Dco2,Dch2o,Dchemical,Dpm25,Dpm10,Dsensor,Ddrop,Dface,stateText;
+    Button DisconnectBtn;
+    InputStream is;
+    BufferedInputStream bis;
+    OutputStream os;
+    BufferedOutputStream bos;
+    private  static boolean whilestate=false;
+    private  String Ipaddress;
 
 
     // TODO: Rename and change types of parameters
@@ -79,7 +92,19 @@ public class page1 extends Fragment {
         Dsensor=(TextView)getView().findViewById(R.id.data_sensor);
         Ddrop=(TextView)getView().findViewById(R.id.data_drop);
         Dface=(TextView)getView().findViewById(R.id.data_face);
-        allclear();
+        DisconnectBtn=(Button)getView().findViewById(R.id.Btn_disconnect);
+        allclear();//VIEW初始化
+        threadRecv=new Thread(TCPconnect);
+        threadRecv.start();
+        threadSend=new Thread(TCPsender);
+        threadSend.start();
+
+        DisconnectBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeSocket(clientSocket);
+            }
+        });
 
     }
 
@@ -89,11 +114,8 @@ public class page1 extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+            mParam2 = getArguments().getString(ARG_PARAM2); }
         Log.e("page1","created");
-        threadA=new Thread(TCPconnect);
-        threadA.start();
 
 
         IntentFilter itFilter = new IntentFilter("KEY");//KEY為廣播辨識碼
@@ -111,134 +133,223 @@ public class page1 extends Fragment {
     }
 
 
-
-
-
     private Runnable TCPconnect=new Runnable() {
-        @SuppressLint("SetTextI18n")
         @Override
         public void run() {
 
-            while(true)
-            {
-                Log.e("thread","while");
-                connectfrag=CheckConnect();
-                if(connectfrag==false)
-                    continue;
+          while (true){
+              connectfrag = CheckConnect();
+            Log.e("thread", "while");
+
+            if (connectfrag == false)
+                continue;
+
+            else if (connectfrag == true) {
+                try {
+                    Log.v("connectstate", "success");
+
+                    is = clientSocket.getInputStream();
+                    // Buffer the input stream
+                    bis = new BufferedInputStream(is);
+                    // Create a buffer in which to store the data
+                    os = clientSocket.getOutputStream();
+                    // Buffer the input stream
+                    bos = new BufferedOutputStream(os);
+                    // Create a buffer in which to store the data
+                    byte[] buffer = new byte[1024];
+                    int[] buffer_decode = new int[1024];//資料在這
+                    while (clientSocket.isConnected()) {
+
+                        int countBytesRead = bis.read(buffer, 0, 255);
+
+                        for (int i = 0; i < buffer.length; i++)
+                            buffer_decode[i] = (buffer[i] & 0xff);// byte java:-128~127 to 0~255
 
 
-                else if(connectfrag==true)
-                {
-                    try
-                    {
-                        Log.v("connectstate","success");
-
-                        InputStream is = clientSocket.getInputStream();
-                        // Buffer the input stream
-                        BufferedInputStream bis = new BufferedInputStream(is);
-                        // Create a buffer in which to store the data
-                        byte[] buffer = new byte[1024];
-                        int[] buffer_decode=new int[1024];//資料在這
-                        while (clientSocket.isConnected())
+                        if (buffer_decode[0] == 0xFF && buffer_decode[1] == 0xA0)//收資料
                         {
-                            int countBytesRead = bis.read(buffer, 0, 255);
+                            try {
 
-                            for(int i=0 ;i<buffer.length;i++)
-                                buffer_decode[i]=(buffer[i]&0xff);// byte java:-128~127 to 0~255
+                                int dlight = (buffer_decode[2] * 256)
+                                        + (buffer_decode[3]);
+                                Dlight.setText(Integer.toString(dlight));
 
+                                double dtemp = ((buffer_decode[4] * 256)
+                                        + (buffer_decode[5]));
+                                dtemp = dtemp / 10;
+                                Dtemp.setText(Double.toString(dtemp));
 
-                            if(buffer_decode[0]==0xFF && buffer_decode[1]==0xA0)//收資料
-                            {
-                                try
-                                {
-                                    int dlight=(buffer_decode[2]*256)
-                                            +(buffer_decode[3]);
-                                    Dlight.setText(Integer.toString(dlight));
+                                double dwet = (buffer_decode[6] * 256)
+                                        + (buffer_decode[7]);
+                                dwet = dwet / 10;
+                                Dwet.setText(Double.toString(dwet));
 
-                                    double dtemp=((buffer_decode[4]*256)
-                                            +(buffer_decode[5]));
-                                    dtemp=dtemp/10;
-                                    Dtemp.setText(Double.toString(dtemp));
+                                double dwatt = (buffer_decode[8] * 65536)
+                                        + (buffer_decode[9] * 256)
+                                        + (buffer_decode[10]);
+                                dwatt = dwatt / 100;
+                                Dwatt.setText(Double.toString(dwatt));////
 
-                                    double dwet=(buffer_decode[6]*256)
-                                            +(buffer_decode[7]);
-                                    dwet=dwet/10;
-                                    Dwet.setText(Double.toString(dwet));
+                                double dwind = (buffer_decode[11] * 256)
+                                        + (buffer_decode[12]);
+                                dwind = dwind / 10;
+                                Dwind.setText(Double.toString(dwind));
 
-                                    double dwatt=(buffer_decode[8]*65536)
-                                            +(buffer_decode[9]*256)
-                                            +(buffer_decode[10]);
-                                    dwatt=dwatt/100;
-                                    Dwatt.setText(Double.toString(dwatt));////
+                                double dhottemp = (buffer_decode[13] * 256)
+                                        + (buffer_decode[14]);
+                                dhottemp = dhottemp / 10;
+                                Dhottemp.setText(Double.toString(dhottemp));
 
-                                    double dwind=(buffer_decode[11]*256)
-                                            +(buffer_decode[12]);
-                                    dwind=dwind/10;
-                                    Dwind.setText(Double.toString(dwind));
+                                double dco2 = (buffer_decode[15] * 256)
+                                        + (buffer_decode[16]);
+                                Dco2.setText(Double.toString(dco2));
 
-                                    double dhottemp=(buffer_decode[13]*256)
-                                            +(buffer_decode[14]);
-                                    dhottemp=dhottemp/10;
-                                    Dhottemp.setText(Double.toString(dhottemp));
+                                double dch2o = (buffer_decode[17] * 256)
+                                        + (buffer_decode[18]);
+                                Dch2o.setText(Double.toString(dch2o));
 
-                                    double dco2=(buffer_decode[15]*256)
-                                            +(buffer_decode[16]);
-                                    Dco2.setText(Double.toString(dco2));
+                                double dchemical = (buffer_decode[19] * 256)
+                                        + (buffer_decode[20]);
+                                Dchemical.setText(Double.toString(dchemical));
 
-                                    double dch2o=(buffer_decode[17]*256)
-                                            +(buffer_decode[18]);
-                                    Dch2o.setText(Double.toString(dch2o));
+                                double dpm25 = (buffer_decode[21] * 256)
+                                        + (buffer_decode[22]);
+                                Dpm25.setText(Double.toString(dpm25));
 
-                                    double dchemical=(buffer_decode[19]*256)
-                                            +(buffer_decode[20]);
-                                    Dchemical.setText(Double.toString(dchemical));
-
-                                    double dpm25=(buffer_decode[21]*256)
-                                            +(buffer_decode[22]);
-                                    Dpm25.setText(Double.toString(dpm25));
-
-                                    double dpm10=(buffer_decode[23]*256)
-                                            +(buffer_decode[24]);
-                                    Dpm10.setText(Double.toString(dpm10));
-
-                                    double dpmsensor=(buffer_decode[25]);
-                                    Dsensor.setText(Double.toString(dpmsensor));
-
-                                    double ddrop=(buffer_decode[26]);
-                                    Ddrop.setText(Double.toString(ddrop));
-
-                                    double dfaca=(buffer_decode[27]);
-                                    Dface.setText(Double.toString(dfaca));
+                                double dpm10 = (buffer_decode[23] * 256)
+                                        + (buffer_decode[24]);
+                                Dpm10.setText(Double.toString(dpm10));
+                                //todo:光電感應  IF buffer_decode[25] ==1 有警報 ELSE 無警報
+                                int dpmsensor = (buffer_decode[25]);
+                                Dsensor.setText(dpmsensor == 1 ? "警報中" : "無警報");
+                                //todo:雨滴  IF buffer_decode[25] ==1 有下雨 ELSE 沒下雨
+                                int ddrop = (buffer_decode[26]);
+                                Ddrop.setText(ddrop == 1 ? "下雨中" : "沒下雨");
+                                //todo:人臉  IF buffer_decode[25] ==1 辨識成功 ELSE ""
+                                int dfaca = (buffer_decode[27]);
+                                Dface.setText(dfaca == 1 ? "辨識成功" : "");
 
 
-                                }
-                                catch (Exception e)
-                                {
-                                    Log.e("Exception",e.toString());
-                                }
+                            } catch (Exception e) {
+                                Log.e("Exception", e.toString());
                             }
-                            else
-                                allclear();
+                        } else
+                            allclear();
 
-
-
-                        }
-
-                    }//try
-                    catch (java.io.IOException e)
-
-                    {
-                        allclear();
-                        clientSocket=null;
-                        connectfrag=false;
                     }
 
-                }//else if(connectfrag==true)
+                }//try
 
-            }//while(true)
+                catch (IOException e) {
+                    allclear();
+                    clientSocket = null;
+                    connectfrag = false;
+
+                }
+
+
+            }//else if(connectfrag==true)
+        }
 
         }//run
     };
+
+    private Runnable TCPsender=new Runnable() {
+        @Override
+        public void run()
+        {
+            byte[] S_buffer=new byte[5];
+
+            while(true)
+            {
+                try
+                {
+                    while(clientSocket==null){}
+                    while (clientSocket.isConnected())
+                    {
+                        switch(mMyReceiver.dataType)
+                        {
+                            case "light" :
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x01;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+                            case "LED_light" :
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x02;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+                            case "curtain" :
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x03;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+                            case  "window":
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x04;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+                            case  "dehumidifier":
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x05;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+                            case  "conditioner":
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x06;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+                            case  "fan":
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x07;
+                                S_buffer[2]= mMyReceiver.datable1;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                                broadrecvClean();
+                                break;
+
+                            default:
+                                S_buffer[0]= (byte) 0xFF;
+                                S_buffer[1]= (byte) 0x20;
+                                S_buffer[2]= (byte) 0x00;
+                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[4]= (byte) 0xFF;
+                        }
+
+                        bos.write(S_buffer ,0 ,5);
+                        bos.flush();
+                        Log.d("state","sending");
+                        Thread.sleep(100);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.e("TCPsenderCrack", e.toString());
+
+                }
+
+            }
+        }
+    };
+
 
 
     public boolean CheckConnect()
@@ -268,6 +379,7 @@ public class page1 extends Fragment {
                 CONEACCEPT_FLAG=false;
 
                 Log.e("llllllllllllllll", "4");
+
                 //???????????????????製作跳至設定ip之fragment?????????????
             }
         } catch (IOException e) {
@@ -307,6 +419,28 @@ public class page1 extends Fragment {
         Ddrop.setText("");
         Dface.setText("");
     }
+    private void broadrecvClean()
+    {
+        mMyReceiver.dataType="";
+        mMyReceiver.datable1=(byte) 0x00;
+    }
+    private void closeSocket(Socket socket) {
+        try {
+            if(socket!=null){
+            if (!socket.isClosed()) {
+                is.close();
+                bis.close();
+                os.close();
+                bos.close();
+                socket.close();
+
+            }}
+        } catch (IOException e) {
+            //onError(new ProxyCacheException("Error closing socket", e));
+        }
+    }
+
+
 
 
 }

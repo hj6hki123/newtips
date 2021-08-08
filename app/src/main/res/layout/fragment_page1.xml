@@ -9,99 +9,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="連線狀態:" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="test"/>
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:orientation="horizontal"
-            android:gravity="bottom|left">
-
-            <EditText
-                android:id="@+id/IP_1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLength="3"
-                android:textSize="20sp"
-                android:imeOptions="actionNext"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:text="." />
-            <EditText
-                android:id="@+id/IP_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLength="3"
-                android:textSize="20sp"
-                android:imeOptions="actionNext"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:text="." />
-            <EditText
-                android:id="@+id/IP_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLength="3"
-                android:textSize="20sp"
-                android:imeOptions="actionNext"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:text="."
-                />
-            <EditText
-                android:id="@+id/IP_4"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLength="3"
-                android:textSize="20sp"
-                android:imeOptions="actionNext"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="connect"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="10dp"/>
-        </LinearLayout>
 
 
         <!--"==========================================================================1"-->
@@ -733,7 +640,58 @@
             android:alpha="0.1"
             android:background="#0D1023" />
         <!--"==========================================================================1"-->
+        <!--"==========================================================================1"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/wave"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="語音辨識"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/data_sound"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:gravity="right"
+                android:textColor="#7E8C13A1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="0dip"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.1"
+            android:background="#0D1023" />
+        <!--"==========================================================================1"-->
+        <Button
+            android:background="@drawable/buttonshape"
+            android:id="@+id/Btn_disconnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="disconnect"
+            android:gravity="center"/>
 
 
 
