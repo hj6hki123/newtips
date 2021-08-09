@@ -412,6 +412,7 @@ public class page1 extends Fragment {
         Dsensor.setText("");
         Ddrop.setText("");
         Dface.setText("");
+        Dsound.setText("");
     }
     private void broadrecvClean()
     {

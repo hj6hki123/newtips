@@ -36,7 +36,8 @@
             android:layout_width="170dp"
             android:layout_height="60dp"
             android:max="255"
-            android:progress="60" />
+            android:progress="60"
+            />
         <Button
             android:id="@+id/SPClight_btn_yellow"
             android:layout_width="170dp"
