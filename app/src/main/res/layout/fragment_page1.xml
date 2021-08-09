@@ -685,14 +685,6 @@
             android:alpha="0.1"
             android:background="#0D1023" />
         <!--"==========================================================================1"-->
-        <Button
-            android:background="@drawable/buttonshape"
-            android:id="@+id/Btn_disconnect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="disconnect"
-            android:gravity="center"/>
-
 
 
     </LinearLayout>

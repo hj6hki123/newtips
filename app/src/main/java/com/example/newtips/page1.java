@@ -41,13 +41,10 @@ public class page1 extends Fragment {
     boolean CONEACCEPT_FLAG=false;
     boolean connectfrag;
     TextView Dlight,Dwet,Dwind,Dtemp,Dwatt,Dhottemp,Dco2,Dch2o,Dchemical,Dpm25,Dpm10,Dsensor,Ddrop,Dface,stateText;
-    Button DisconnectBtn;
     InputStream is;
     BufferedInputStream bis;
     OutputStream os;
     BufferedOutputStream bos;
-    private  static boolean whilestate=false;
-    private  String Ipaddress;
 
 
     // TODO: Rename and change types of parameters
@@ -92,19 +89,12 @@ public class page1 extends Fragment {
         Dsensor=(TextView)getView().findViewById(R.id.data_sensor);
         Ddrop=(TextView)getView().findViewById(R.id.data_drop);
         Dface=(TextView)getView().findViewById(R.id.data_face);
-        DisconnectBtn=(Button)getView().findViewById(R.id.Btn_disconnect);
         allclear();//VIEW初始化
         threadRecv=new Thread(TCPconnect);
         threadRecv.start();
         threadSend=new Thread(TCPsender);
         threadSend.start();
 
-        DisconnectBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                closeSocket(clientSocket);
-            }
-        });
 
     }
 
