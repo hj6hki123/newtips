@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +51,40 @@ public class MainActivity extends AppCompatActivity {
                 }).attach();
     }
 
+    private static Boolean isExit = false;
+    private static Boolean hasTask = false;
+    Timer timerExit = new Timer();
+    TimerTask task = new TimerTask()
+    {
+        @Override
+        public void run() {
+            isExit = false;
+            hasTask = true;
+
+        }
+    };
 
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if(isExit == false )
+            {
+                isExit = true; //記錄下一次要退出
+                Toast.makeText(this, "再按一次Back退出APP", Toast.LENGTH_SHORT).show();
+                if (!hasTask) {
+                    timerExit.schedule(task, 2000);
+                }
+            }
+            else
+                {
+                    finish(); // 離開程式
+                    System.exit(0);
+                }
 
+
+            }
+            return  false;
+
+    }
 }

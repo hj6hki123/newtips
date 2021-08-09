@@ -107,6 +107,11 @@ public class page3 extends Fragment {
                 spelight_white.setBackgroundResource(R.drawable.buttonshape);
                 spcflagW = false;
             }
+            else
+            {
+                spelight_white.setBackgroundResource(R.drawable.buttonshape2);
+                spcflagW = true;
+            }
         }
 
         @Override
@@ -163,6 +168,11 @@ public class page3 extends Fragment {
             {
                 spelight_yellow.setBackgroundResource(R.drawable.buttonshape);
                 spcflagY = false;
+            }
+            else
+            {
+                spelight_yellow.setBackgroundResource(R.drawable.buttonshape2);
+                spcflagY = true;
             }
         }
 

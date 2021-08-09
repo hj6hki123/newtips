@@ -40,7 +40,7 @@ public class page1 extends Fragment {
     int serverPort;
     boolean CONEACCEPT_FLAG=false;
     boolean connectfrag;
-    TextView Dlight,Dwet,Dwind,Dtemp,Dwatt,Dhottemp,Dco2,Dch2o,Dchemical,Dpm25,Dpm10,Dsensor,Ddrop,Dface,stateText;
+    TextView Dlight,Dwet,Dwind,Dtemp,Dwatt,Dhottemp,Dco2,Dch2o,Dchemical,Dpm25,Dpm10,Dsensor,Ddrop,Dface,Dsound;
     InputStream is;
     BufferedInputStream bis;
     OutputStream os;
@@ -89,6 +89,8 @@ public class page1 extends Fragment {
         Dsensor=(TextView)getView().findViewById(R.id.data_sensor);
         Ddrop=(TextView)getView().findViewById(R.id.data_drop);
         Dface=(TextView)getView().findViewById(R.id.data_face);
+        Dsound=(TextView)getView().findViewById(R.id.data_sound);
+
         allclear();//VIEW初始化
         threadRecv=new Thread(TCPconnect);
         threadRecv.start();
@@ -212,13 +214,15 @@ public class page1 extends Fragment {
                                 //todo:光電感應  IF buffer_decode[25] ==1 有警報 ELSE 無警報
                                 int dpmsensor = (buffer_decode[25]);
                                 Dsensor.setText(dpmsensor == 1 ? "警報中" : "無警報");
-                                //todo:雨滴  IF buffer_decode[25] ==1 有下雨 ELSE 沒下雨
+                                //todo:雨滴  IF buffer_decode[26] ==1 有下雨 ELSE 沒下雨
                                 int ddrop = (buffer_decode[26]);
                                 Ddrop.setText(ddrop == 1 ? "下雨中" : "沒下雨");
-                                //todo:人臉  IF buffer_decode[25] ==1 辨識成功 ELSE ""
+                                //todo:人臉  IF buffer_decode[27] ==1 辨識成功 ELSE ""
                                 int dfaca = (buffer_decode[27]);
                                 Dface.setText(dfaca == 1 ? "辨識成功" : "");
-
+                                //todo:語音辨識  IF buffer_decode[28] ==1 打開電燈 ELSE ""
+                                int dsound = (buffer_decode[28]);
+                                Dsound.setText(dsound == 1 ? "打開電燈" : "");
 
                             } catch (Exception e) {
                                 Log.e("Exception", e.toString());
@@ -327,7 +331,7 @@ public class page1 extends Fragment {
                         bos.write(S_buffer ,0 ,5);
                         bos.flush();
                         Log.d("state","sending");
-                        Thread.sleep(500);
+                        Thread.sleep(200);
                     }
                 }
                 catch (Exception e)
@@ -348,7 +352,7 @@ public class page1 extends Fragment {
             Log.e("llllllllllllllll", "1");
 
 
-            serverIp = InetAddress.getByName("10.147.17.177");
+            serverIp = InetAddress.getByName("192.168.1.1");
             serverPort = Integer.valueOf("2005");
 
             Log.e("ADDR", serverIp.toString());
