@@ -273,7 +273,7 @@ public class page1 extends Fragment {
                                 S_buffer[0]= (byte) 0xFF;
                                 S_buffer[1]= (byte) 0x01;
                                 S_buffer[2]= mMyReceiver.datable1;
-                                S_buffer[3]= (byte) 0x00;
+                                S_buffer[3]= mMyReceiver.datable2;
                                 S_buffer[4]= (byte) 0xFF;
                                 broadrecvClean();
                                 break;
@@ -337,7 +337,7 @@ public class page1 extends Fragment {
                         bos.write(S_buffer ,0 ,5);
                         bos.flush();
                         Log.d("state","sending");
-                        Thread.sleep(100);
+                        Thread.sleep(500);
                     }
                 }
                 catch (Exception e)
@@ -359,7 +359,7 @@ public class page1 extends Fragment {
 
 
             serverIp = InetAddress.getByName("10.147.17.177");
-            serverPort = Integer.valueOf("9998");
+            serverPort = Integer.valueOf("2005");
 
             Log.e("ADDR", serverIp.toString());
             Log.e("llllllllllllllll", "2");
@@ -423,6 +423,7 @@ public class page1 extends Fragment {
     {
         mMyReceiver.dataType="";
         mMyReceiver.datable1=(byte) 0x00;
+        mMyReceiver.datable2=(byte) 0x00;
     }
     private void closeSocket(Socket socket) {
         try {

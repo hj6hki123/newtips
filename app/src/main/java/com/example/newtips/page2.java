@@ -18,7 +18,8 @@ public class page2 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private boolean conditionerFlag = false;
+    private boolean dehumidifierFlag = false;
     MyBroadcastReceiver mMyReceiver;
 
     // TODO: Rename and change types of parameters
@@ -81,6 +82,110 @@ public class page2 extends Fragment {
                 getActivity().sendBroadcast(it); //發送廣播訊息
             }
         });
+        //---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
+        Button window_on=(Button)getView().findViewById(R.id.angry2_btn1);
+        Button window_off=(Button)getView().findViewById(R.id.angry2_btn2);
+        Button window_stop=(Button)getView().findViewById(R.id.angry2_btn3);
+        window_on.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "window");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x01);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        window_off.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "window");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x02);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        window_stop.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "window");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x00);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        //---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
+        Button fan_on=(Button)getView().findViewById(R.id.angry3_btn1);
+        Button fan_off=(Button)getView().findViewById(R.id.angry3_btn2);
+        fan_on.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "fan");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x01);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+        fan_off.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent("KEY"); //設定廣播識別碼
+                it.putExtra("iuforon", "fan");//設定廣播夾帶參數
+                it.putExtra("stream3",(byte)0x00);
+                getActivity().sendBroadcast(it); //發送廣播訊息
+            }
+        });
+
+        //---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
+        Button conditioner_switch=(Button)getView().findViewById(R.id.angry4_btn1);
+        Button dehumidifier_switch=(Button)getView().findViewById(R.id.angry4_btn2);
+
+        conditioner_switch.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(conditionerFlag)) {
+                    conditionerFlag = true;
+                    Intent it = new Intent("KEY"); //設定廣播識別碼
+                    it.putExtra("iuforon", "conditioner");//設定廣播夾帶參數
+                    it.putExtra("stream3",(byte)0x01);
+                    getActivity().sendBroadcast(it); //發送廣播訊息
+                    conditioner_switch.setBackgroundResource(R.drawable.buttonshape2);
+                } else {
+                    conditionerFlag = false;
+                    Intent it = new Intent("KEY"); //設定廣播識別碼
+                    it.putExtra("iuforon", "conditioner");//設定廣播夾帶參數
+                    it.putExtra("stream3",(byte)0x00);
+                    getActivity().sendBroadcast(it); //發送廣播訊息
+                    conditioner_switch.setBackgroundResource(R.drawable.buttonshape);
+                }
+
+
+            }
+        });
+        dehumidifier_switch.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(dehumidifierFlag)) {
+                    dehumidifierFlag = true;
+                    Intent it = new Intent("KEY"); //設定廣播識別碼
+                    it.putExtra("iuforon", "dehumidifier");//設定廣播夾帶參數
+                    it.putExtra("stream3",(byte)0x01);
+                    getActivity().sendBroadcast(it); //發送廣播訊息
+                    dehumidifier_switch.setBackgroundResource(R.drawable.buttonshape2);
+                } else {
+                    dehumidifierFlag = false;
+                    Intent it = new Intent("KEY"); //設定廣播識別碼
+                    it.putExtra("iuforon", "dehumidifier");//設定廣播夾帶參數
+                    it.putExtra("stream3",(byte)0x00);
+                    getActivity().sendBroadcast(it); //發送廣播訊息
+                    dehumidifier_switch.setBackgroundResource(R.drawable.buttonshape);
+                }
+
+            }
+        });
+
         //---------------------------------------------------------------------------
     }
 
