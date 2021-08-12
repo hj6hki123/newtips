@@ -1,7 +1,12 @@
 package com.example.newtips;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -25,6 +30,8 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class page1 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -45,7 +52,7 @@ public class page1 extends Fragment {
     BufferedInputStream bis;
     OutputStream os;
     BufferedOutputStream bos;
-
+    Button gotocamera;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -90,6 +97,7 @@ public class page1 extends Fragment {
         Ddrop=(TextView)getView().findViewById(R.id.data_drop);
         Dface=(TextView)getView().findViewById(R.id.data_face);
         Dsound=(TextView)getView().findViewById(R.id.data_sound);
+        gotocamera=(Button) getView().findViewById(R.id.gotocam);
 
         allclear();//VIEW初始化
         threadRecv=new Thread(TCPconnect);
@@ -97,6 +105,15 @@ public class page1 extends Fragment {
         threadSend=new Thread(TCPsender);
         threadSend.start();
 
+        //todo:BUTTON CLICK LISTENER跳轉到其他畫面
+        gotocamera.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                openApp(getActivity(),"com.ipcamer.demo");//Todo:透過包名進入該程式
+
+            }
+        });
 
     }
 
@@ -352,8 +369,8 @@ public class page1 extends Fragment {
             Log.e("llllllllllllllll", "1");
 
 
-            serverIp = InetAddress.getByName("192.168.1.1");
-            serverPort = Integer.valueOf("2005");
+            serverIp = InetAddress.getByName("10.147.17.177"); //IP
+            serverPort = Integer.valueOf("9998");            //PORT
 
             Log.e("ADDR", serverIp.toString());
             Log.e("llllllllllllllll", "2");
@@ -437,6 +454,19 @@ public class page1 extends Fragment {
     }
 
 
-
+    public  void openApp(Context context, String appPackageName) {
+        if (context == null) {
+            Log.e("<Class name>","Context is null");
+            return;
+        }
+        PackageManager pm = context.getPackageManager();
+        Intent intent = pm.getLaunchIntentForPackage(appPackageName);
+        if (intent != null) {
+            context.startActivity(intent);
+        }else{
+            Log.e("<Class name>", "Cannot start app, appPackageName:'" + appPackageName + "'");
+            Toast.makeText(context,"無法開啟:"+appPackageName,Toast.LENGTH_LONG).show();
+        }
+    }
 
 }

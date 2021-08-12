@@ -2,5 +2,6 @@
     <string name="app_name">RasPyClient</string>
     <string name="tab1_name">感測器</string>
     <string name="tab2_name">電器</string>
-    <string name="tab3_name">燈光</string>
+    <string name="tab3_name">燈光
+    </string>
 </resources>

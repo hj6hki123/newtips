@@ -37,20 +37,21 @@ public class MainActivity extends AppCompatActivity {
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                         switch (position) {
                             case 0:
-                                tab.setText("感測器");
+                                tab.setText(R.string.tab1_name);
                                 break;
                             case 1:
-                                tab.setText("電器");
+                                tab.setText(R.string.tab2_name);
                                 break;
                             default:
-                                tab.setText("感光");
+                                tab.setText(R.string.tab3_name);
                                 break;
                         }
-
                     }
-                }).attach();
-    }
 
+                }
+                ).attach();
+    }
+    //todo:返回鍵延遲
     private static Boolean isExit = false;
     private static Boolean hasTask = false;
     Timer timerExit = new Timer();
@@ -71,20 +72,20 @@ public class MainActivity extends AppCompatActivity {
             if(isExit == false )
             {
                 isExit = true; //記錄下一次要退出
-                Toast.makeText(this, "再按一次Back退出APP", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "再按一次Back重啟", Toast.LENGTH_SHORT).show();
                 if (!hasTask) {
                     timerExit.schedule(task, 2000);
                 }
             }
             else
-                {
-                    finish(); // 離開程式
-                    System.exit(0);
-                }
-
-
+            {
+                finish(); // 離開程式
+                System.exit(0);
             }
-            return  false;
+
+
+        }
+        return  false;
 
     }
 }

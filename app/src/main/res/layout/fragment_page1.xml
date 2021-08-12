@@ -11,6 +11,7 @@
         >
 
 
+
         <!--"==========================================================================1"-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -684,8 +685,21 @@
             android:layout_height="1dp"
             android:alpha="0.1"
             android:background="#0D1023" />
-        <!--"==========================================================================1"-->
 
+
+        <!--"==========================================================================1"-->
+        <Button
+            android:background="@drawable/buttonshap3"
+            android:layout_marginTop="30dp"
+            android:id="@+id/gotocam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:typeface="sans"
+            android:textSize="10pt"
+            android:layout_gravity="center"
+            android:text="攝影鏡頭"
+            android:textColor="@color/white"
+            />
 
     </LinearLayout>
 </ScrollView>
