@@ -9,6 +9,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.airbnb.lottie.Lottie;
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -39,6 +44,9 @@ public class page1 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private Handler handler=new Handler();
+
+    TextView connect_state;
     Thread threadRecv;
     Thread threadSend;
     MyBroadcastReceiver mMyReceiver;
@@ -53,6 +61,7 @@ public class page1 extends Fragment {
     OutputStream os;
     BufferedOutputStream bos;
     Button gotocamera;
+    LottieAnimationView Clottie;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,6 +91,8 @@ public class page1 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Clottie=getView().findViewById(R.id.Clottie);
+        connect_state=(TextView) getView().findViewById(R.id.connect_state);
         Dlight=(TextView)getView().findViewById(R.id.data_light);
         Dwet=(TextView)getView().findViewById(R.id.data_wet);
         Dwind=(TextView)getView().findViewById(R.id.data_wind);
@@ -98,6 +109,7 @@ public class page1 extends Fragment {
         Dface=(TextView)getView().findViewById(R.id.data_face);
         Dsound=(TextView)getView().findViewById(R.id.data_sound);
         gotocamera=(Button) getView().findViewById(R.id.gotocam);
+
 
         allclear();//VIEW初始化
         threadRecv=new Thread(TCPconnect);
@@ -131,6 +143,9 @@ public class page1 extends Fragment {
         mMyReceiver = new MyBroadcastReceiver();
         getActivity().registerReceiver(mMyReceiver, itFilter); //註冊廣播接收器
 
+
+
+
     }
 
     @Override
@@ -151,10 +166,34 @@ public class page1 extends Fragment {
             Log.e("thread", "while");
 
             if (connectfrag == false)
+            {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Clottie.setAnimation(R.raw.cerror);
+                        Clottie.playAnimation();
+                        connect_state.setText("Disconnect");
+                        connect_state.getResources().getColor(R.color.red);
+                    }
+                });
                 continue;
+            }
+
 
             else if (connectfrag == true) {
                 try {
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Clottie.setAnimation(R.raw.csuccess);
+                            Clottie.playAnimation();
+                            Clottie.loop(false);
+                            connect_state.setText("Connected");
+                            connect_state.getResources().getColor(R.color.green);
+                        }
+                    });
+
                     Log.v("connectstate", "success");
 
                     is = clientSocket.getInputStream();
@@ -168,6 +207,7 @@ public class page1 extends Fragment {
                     byte[] buffer = new byte[1024];
                     int[] buffer_decode = new int[1024];//資料在這
                     while (clientSocket.isConnected()) {
+
 
                         int countBytesRead = bis.read(buffer, 0, 255);
 
@@ -255,6 +295,7 @@ public class page1 extends Fragment {
                     allclear();
                     clientSocket = null;
                     connectfrag = false;
+                    Log.e("Connectbrocken",e.toString());
 
                 }
 
@@ -353,7 +394,6 @@ public class page1 extends Fragment {
                 }
                 catch (Exception e)
                 {
-                    Log.e("TCPsenderCrack", e.toString());
 
                 }
 
@@ -378,7 +418,7 @@ public class page1 extends Fragment {
 
             clientSocket=new Socket();
             InetSocketAddress isa = new InetSocketAddress(serverIp,serverPort);
-            clientSocket.connect(isa,5000);
+            clientSocket.connect(isa,3000);
 
             Log.e("llllllllllllllll", "3");
 

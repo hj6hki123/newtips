@@ -22,11 +22,11 @@ public class IntrodusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introdus);
-        lottieAnimationView=findViewById(R.id.lottie);
+
         chirtext=findViewById(R.id.imageView);
 
 
-        chirtext.animate().translationX(-2000).setDuration(500).setStartDelay(1700);
+        chirtext.animate().translationX(2000).setDuration(100).setStartDelay(1800);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -37,7 +37,7 @@ public class IntrodusActivity extends AppCompatActivity {
                 finish();//銷毀目前activity
 
             }
-        },2300);
+        },2000);
     }
 
 }
