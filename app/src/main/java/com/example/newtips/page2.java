@@ -58,6 +58,10 @@ public class page2 extends Fragment {
         curtain_on.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                curtain_on.setBackgroundResource(R.drawable.buttonshape2);
+                curtain_off.setBackgroundResource(R.drawable.buttonshape);
+                curtain_stop.setBackgroundResource(R.drawable.buttonshape);
+
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x01);
@@ -67,6 +71,9 @@ public class page2 extends Fragment {
         curtain_off.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                curtain_on.setBackgroundResource(R.drawable.buttonshape);
+                curtain_off.setBackgroundResource(R.drawable.buttonshape2);
+                curtain_stop.setBackgroundResource(R.drawable.buttonshape);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x02);
@@ -76,6 +83,9 @@ public class page2 extends Fragment {
         curtain_stop.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                curtain_on.setBackgroundResource(R.drawable.buttonshape);
+                curtain_off.setBackgroundResource(R.drawable.buttonshape);
+                curtain_stop.setBackgroundResource(R.drawable.buttonshape2);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x00);
@@ -90,6 +100,9 @@ public class page2 extends Fragment {
         window_on.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                window_on.setBackgroundResource(R.drawable.buttonshape2);
+                window_off.setBackgroundResource(R.drawable.buttonshape);
+                window_stop.setBackgroundResource(R.drawable.buttonshape);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "window");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x01);
@@ -99,6 +112,9 @@ public class page2 extends Fragment {
         window_off.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                window_on.setBackgroundResource(R.drawable.buttonshape);
+                window_off.setBackgroundResource(R.drawable.buttonshape2);
+                window_stop.setBackgroundResource(R.drawable.buttonshape);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "window");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x02);
@@ -108,6 +124,9 @@ public class page2 extends Fragment {
         window_stop.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                window_on.setBackgroundResource(R.drawable.buttonshape);
+                window_off.setBackgroundResource(R.drawable.buttonshape);
+                window_stop.setBackgroundResource(R.drawable.buttonshape2);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "window");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x00);
@@ -121,6 +140,8 @@ public class page2 extends Fragment {
         fan_on.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fan_on.setBackgroundResource(R.drawable.buttonshape2);
+                fan_off.setBackgroundResource(R.drawable.buttonshape);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "fan");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x01);
@@ -130,6 +151,8 @@ public class page2 extends Fragment {
         fan_off.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fan_on.setBackgroundResource(R.drawable.buttonshape);
+                fan_off.setBackgroundResource(R.drawable.buttonshape2);
                 Intent it = new Intent("KEY"); //設定廣播識別碼
                 it.putExtra("iuforon", "fan");//設定廣播夾帶參數
                 it.putExtra("stream3",(byte)0x00);

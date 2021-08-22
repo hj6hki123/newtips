@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -37,6 +38,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import android.graphics.Color;
 
 public class page1 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -173,7 +175,7 @@ public class page1 extends Fragment {
                         Clottie.setAnimation(R.raw.cerror);
                         Clottie.playAnimation();
                         connect_state.setText("Disconnect");
-                        connect_state.getResources().getColor(R.color.red);
+                        connect_state.setTextColor(Color.rgb(255,0,0));
                     }
                 });
                 continue;
@@ -190,7 +192,8 @@ public class page1 extends Fragment {
                             Clottie.playAnimation();
                             Clottie.loop(false);
                             connect_state.setText("Connected");
-                            connect_state.getResources().getColor(R.color.green);
+                            connect_state.setTextColor(Color.rgb(0,255,0));
+
                         }
                     });
 
@@ -409,8 +412,8 @@ public class page1 extends Fragment {
             Log.e("llllllllllllllll", "1");
 
 
-            serverIp = InetAddress.getByName("10.147.17.177"); //IP
-            serverPort = Integer.valueOf("9998");            //PORT
+            serverIp = InetAddress.getByName("192.168.1.1"); //IP
+            serverPort = Integer.valueOf("2001");            //PORT
 
             Log.e("ADDR", serverIp.toString());
             Log.e("llllllllllllllll", "2");
@@ -418,7 +421,7 @@ public class page1 extends Fragment {
 
             clientSocket=new Socket();
             InetSocketAddress isa = new InetSocketAddress(serverIp,serverPort);
-            clientSocket.connect(isa,3000);
+            clientSocket.connect(isa,5000);
 
             Log.e("llllllllllllllll", "3");
 

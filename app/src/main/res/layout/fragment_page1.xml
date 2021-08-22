@@ -115,7 +115,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:text="%RH"
+                android:text="%"
                 />
         </LinearLayout>
 
@@ -480,7 +480,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:text="μg/m3"/>
         </LinearLayout>
 
@@ -526,7 +526,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:text="μg/m3" />
         </LinearLayout>
 

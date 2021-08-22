@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import android.graphics.Color;
 
 public class page3 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +23,7 @@ public class page3 extends Fragment {
 
     Button spelight_white,spelight_yellow,norlight_red,norlight_green,norlight_blue;
     SeekBar seekBar1,seekBar2;
+    TextView trytext,trytext2;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -75,6 +78,9 @@ public class page3 extends Fragment {
         norlight_blue.setOnClickListener(Bnorlight);
         seekBar1.setOnSeekBarChangeListener(seekBar_W);
         seekBar2.setOnSeekBarChangeListener(seekBar_Y);
+
+        trytext=getView().findViewById(R.id.trytext);
+        trytext2=getView().findViewById(R.id.trytext2);
     }
 
     @Override
@@ -102,6 +108,7 @@ public class page3 extends Fragment {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
             Wlight=i;
+
             if(i==0)
             {
                 spelight_white.setBackgroundResource(R.drawable.buttonshape);
