@@ -345,6 +345,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:text="ppm"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -390,7 +391,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="20sp" />
+                android:text="mg/m\u00b3"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <View
@@ -435,7 +437,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="20sp" />
+                android:text="μg/m\u00b3"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <View
@@ -481,7 +484,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="μg/m3"/>
+                android:text="μg/m\u00b3"/>
         </LinearLayout>
 
         <View
@@ -527,7 +530,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="μg/m3" />
+                android:text="μg/m\u00b3" />
         </LinearLayout>
 
         <View
