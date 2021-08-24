@@ -412,8 +412,8 @@ public class page1 extends Fragment {
             Log.e("llllllllllllllll", "1");
 
 
-            serverIp = InetAddress.getByName("192.168.1.1"); //IP
-            serverPort = Integer.valueOf("2001");            //PORT
+            serverIp = InetAddress.getByName(getString(R.string.IP)); //IP
+            serverPort = Integer.valueOf(getString(R.string.PORT));            //PORT
 
             Log.e("ADDR", serverIp.toString());
             Log.e("llllllllllllllll", "2");
