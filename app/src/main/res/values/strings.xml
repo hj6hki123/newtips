@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">RasPyClient</string>
-    <string name="tab1_name">感測器</string>
+    <string name="tab1_name">主頁</string>
     <string name="tab2_name">電器</string>
-    <string name="tab3_name">燈光</string>
+    <string name="tab3_name">簡介</string>
     <string name="PORT">2005</string>
     <string name="IP">192.168.1.1</string>
 </resources>

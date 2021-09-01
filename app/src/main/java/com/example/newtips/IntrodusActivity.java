@@ -22,10 +22,7 @@ public class IntrodusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introdus);
-
         chirtext=findViewById(R.id.imageView);
-
-
         chirtext.animate().translationX(2000).setDuration(100).setStartDelay(1800);
 
 
