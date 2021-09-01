@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.newtips.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

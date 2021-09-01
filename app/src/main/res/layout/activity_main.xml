@@ -10,12 +10,14 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="373dp"
-        app:tabSelectedTextColor="#EF642D"
+        android:layout_height="36dp"
+        app:tabSelectedTextColor="#7B3BED"
+        app:tabRippleColor="#6DBF9BFD"
+        app:tabIndicatorColor="#B4EAD30C"
+        app:tabTextAppearance="@style/CustomTabWidgetText"
         app:tabTextColor="#000000"
-        app:tabTextAppearance="@style/CustomTabWidgetText">
+        tools:layout_editor_absoluteX="182dp"
+        tools:layout_editor_absoluteY="373dp">
 
     </com.google.android.material.tabs.TabLayout>
 

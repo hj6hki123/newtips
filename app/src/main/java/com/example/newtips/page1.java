@@ -1,6 +1,7 @@
 package com.example.newtips;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,6 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.newtips.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -41,7 +43,8 @@ import java.util.List;
 import android.graphics.Color;
 
 public class page1 extends Fragment {
-
+    MyBroadcast myBroadcast = new MyBroadcast();
+    StringBuffer stringBuffer = new StringBuffer();
 
     public page1() {
         // Required empty public constructor
@@ -52,4 +55,7 @@ public class page1 extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_page1, container, false);
     }
+
+
+
 }
