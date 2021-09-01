@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -40,12 +41,20 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import android.graphics.Color;
 
 public class page1 extends Fragment {
+    private ServiceConnection sc;
+    public SocketService socketService;
+
+
     MyBroadcast myBroadcast = new MyBroadcast();
     StringBuffer stringBuffer = new StringBuffer();
-
+    ExecutorService exec = Executors.newCachedThreadPool();
+    TextView textviewTD;
     public page1() {
         // Required empty public constructor
     }
@@ -56,6 +65,17 @@ public class page1 extends Fragment {
         return inflater.inflate(R.layout.fragment_page1, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textviewTD=view.findViewById(R.id.TD);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
 
 }
