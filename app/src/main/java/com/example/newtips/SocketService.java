@@ -14,13 +14,21 @@ import com.example.newtips.common.Constants;
 import com.example.newtips.common.EventMsg;
 
 
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.NoRouteToHostException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.nio.channels.InterruptedByTimeoutException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +46,8 @@ public class SocketService extends Service {
     private String port;
     private TimerTask task;
 
+
+
     /*默认重连*/
     private boolean isReConnect = true;
 
@@ -51,7 +61,6 @@ public class SocketService extends Service {
 
 
     public class SocketBinder extends Binder {
-
         /*返回SocketService 在需要的地方可以通过ServiceConnection获取到SocketService  */
         public SocketService getService() {
             return SocketService.this;
@@ -61,7 +70,6 @@ public class SocketService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
 
     }
 
@@ -89,40 +97,90 @@ public class SocketService extends Service {
 
                     socket = new Socket();
                     try {
+
                         /*超时时间为2秒*/
                         socket.connect(new InetSocketAddress(ip, Integer.valueOf(port)), 2000);
-                        /*连接成功的话  发送心跳包*/
+
+
                         if (socket.isConnected()) {
 
-
-                            /*因为Toast是要运行在主线程的  这里是子线程  所以需要到主线程哪里去显示toast*/
                             toastMsg("socket已连接");
 
-                            /*发送连接成功的消息*/
                             EventMsg msg = new EventMsg();
                             msg.setTag(Constants.CONNET_SUCCESS);
-                            /*发送心跳数据*/
-                            sendBeatData();
+
+                            InputStreamReader dis = new InputStreamReader(socket.getInputStream());
+                            BufferedReader br = new BufferedReader(dis);
+
+                            Intent i=new Intent(getApplicationContext(), MainActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            socket.setSoTimeout(10000);//設定接收延遲
+                            while(true)
+                            {
+
+                                Thread.sleep(300);
+
+
+
+
+                                switch (GlobalData.FSM)
+                                {
+                                    case "IDLE":
+                                        GlobalData.FSM="Longin";
+                                        break;
+
+                                    case "Longin":
+                                        GlobalData.logingmap.put("Title","1");
+                                        GlobalData.logingmap.put("User","hj6hki");
+                                        GlobalData.logingmap.put("Password","A37130317a");
+                                        JSONObject login_json=new JSONObject(GlobalData.logingmap);
+                                        sendOrder(login_json.toString()+"");
+                                        String loginacess=br.readLine();
+                                        Log.e("get",loginacess);
+
+                                        break;
+
+                                    case "Datatransport":
+
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+
+
+
+
+                            }
                         }
 
 
-                    } catch (IOException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                         if (e instanceof SocketTimeoutException) {
-                            toastMsg("连接超时，正在重连");
+                            toastMsg("連線超時!正在重新連線");
 
                             releaseSocket();
 
                         } else if (e instanceof NoRouteToHostException) {
-                            toastMsg("该地址不存在，请检查");
-                            stopSelf();
+                            toastMsg("該地址錯誤!請重新檢查");
+                            releaseSocket();
 
                         } else if (e instanceof ConnectException) {
-                            toastMsg("连接异常或被拒绝，请检查");
-                            stopSelf();
-
+                            toastMsg("連接異常或被拒絕!請重新檢查");
+                            releaseSocket();
                         }
-
+                        else if(e instanceof SocketException)
+                        {
+                            toastMsg("伺服器連接異常!請查看連線狀態");
+                            releaseSocket();
+                        }
+                        else if(e instanceof InterruptedException)
+                        {
+                            toastMsg("延時崩潰");
+                            releaseSocket();
+                        }
 
                     }
 
@@ -159,12 +217,13 @@ public class SocketService extends Service {
                     try {
                         outputStream = socket.getOutputStream();
                         if (outputStream != null) {
-                            outputStream.write((order).getBytes("gbk"));
+                            outputStream.write((order).getBytes("UTF-8"));
                             outputStream.flush();
                         }
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Log.e("sd",e.toString());
                     }
 
                 }
@@ -205,6 +264,14 @@ public class SocketService extends Service {
         }
 
         timer.schedule(task, 0, 2000);
+    }
+
+
+    public static String getData()
+    {
+        String data="";
+
+        return data;
     }
 
 

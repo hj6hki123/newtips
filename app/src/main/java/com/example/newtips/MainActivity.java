@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(IntrodusActivity.introdusActivity!=null){
+            IntrodusActivity.introdusActivity.finish();
+        }
 
         //< get elements >
         TabLayout tabLayout = findViewById(R.id.tabs);

@@ -1,7 +1,11 @@
 package com.example.newtips;
 
+import static android.content.Context.BIND_AUTO_CREATE;
+
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,8 +16,10 @@ import android.content.pm.PackageManager;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +36,7 @@ import androidx.fragment.app.Fragment;
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.newtips.R;
+import com.example.newtips.common.Constants;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -49,11 +56,6 @@ import android.graphics.Color;
 public class page1 extends Fragment {
     private ServiceConnection sc;
     public SocketService socketService;
-
-
-    MyBroadcast myBroadcast = new MyBroadcast();
-    StringBuffer stringBuffer = new StringBuffer();
-    ExecutorService exec = Executors.newCachedThreadPool();
     TextView textviewTD;
     public page1() {
         // Required empty public constructor
@@ -74,8 +76,30 @@ public class page1 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bindSocketService();
+    }
 
+    private void bindSocketService() {
+
+        sc = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                SocketService.SocketBinder binder = (SocketService.SocketBinder) service;
+                socketService = binder.getService();
+            }
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+            }
+        };
+        Intent intent = new Intent(getActivity(), SocketService.class);
+        getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Intent intent = new Intent(getActivity().getApplicationContext(), SocketService.class);
+        getActivity().stopService(intent);
+    }
 }
