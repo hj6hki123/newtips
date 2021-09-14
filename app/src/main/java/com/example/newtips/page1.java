@@ -51,7 +51,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -71,7 +73,8 @@ public class page1 extends Fragment {
     UDP udpServer;
     MyBroadcast myBroadcast = new MyBroadcast();
     StringBuffer stringBuffer = new StringBuffer();
-
+    ArrayAdapter<String> spinnerAdapter;
+    Set<String> sett=new HashSet<>();
 
 
     Spinner spinner;
@@ -90,8 +93,8 @@ public class page1 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         spinner=view.findViewById(R.id.spinner2);
-        List<String> list =new ArrayList<>();
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
+
+        spinnerAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
@@ -125,7 +128,7 @@ public class page1 extends Fragment {
         //註冊廣播器，使回傳能夠從其他類別內傳回此Activity
         IntentFilter intentFilter = new IntentFilter(UDP.RECEIVE_ACTION);
         getActivity().registerReceiver(myBroadcast, intentFilter);
-        //udp_setting
+        //UDP_setting
         udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
         udpServer.setPort(8888);
         udpServer.changeServerStatus(true);
@@ -192,13 +195,21 @@ public class page1 extends Fragment {
                     String msg = intent.getStringExtra(UDP.RECEIVE_STRING);
                     byte[] bytes = intent.getByteArrayExtra(UDP.RECEIVE_BYTES);
                     stringBuffer.append("收到： ").append(msg).append("\n");
-
-                    Log.e("UDP_DATA",msg+"");
+                    if(msg.length()>0)
+                    {
+                        spinnerAdapter.clear();
+                        sett.add(msg);
+                        List<String> list =new ArrayList<>();
+                        for(String i : sett)
+                        {
+                            list.add(i);
+                        }
+                        spinnerAdapter.addAll(list);
+                    }
                     break;
             }
         }
     }
-
 
     @Override
     public void onDestroyView() {
