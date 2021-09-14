@@ -51,7 +51,7 @@ public class SocketService extends Service {
     /*默认重连*/
     private boolean isReConnect = true;
 
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private Handler handler = new Handler();
 
 
     @Override
@@ -137,6 +137,7 @@ public class SocketService extends Service {
                                         JSONObject login_json=new JSONObject(GlobalData.logingmap);
                                         sendOrder(login_json.toString()+"");
                                         String loginacess=br.readLine();
+                                        GlobalData.receivedata=loginacess;
                                         Log.e("get",loginacess);
 
                                         break;
@@ -147,9 +148,6 @@ public class SocketService extends Service {
                                     default:
                                         break;
                                 }
-
-
-
 
 
                             }
@@ -219,6 +217,7 @@ public class SocketService extends Service {
                         if (outputStream != null) {
                             outputStream.write((order).getBytes("UTF-8"));
                             outputStream.flush();
+
                         }
 
                     } catch (IOException e) {

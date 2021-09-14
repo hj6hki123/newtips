@@ -24,8 +24,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +50,10 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -56,7 +62,12 @@ import android.graphics.Color;
 public class page1 extends Fragment {
     private ServiceConnection sc;
     public SocketService socketService;
-    TextView textviewTD;
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Timer timer = new Timer();
+    private TimerTask task;
+
+    Spinner spinner;
+
     public page1() {
         // Required empty public constructor
     }
@@ -70,16 +81,75 @@ public class page1 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textviewTD=view.findViewById(R.id.TD);
+        spinner=view.findViewById(R.id.spinner2);
+        List<String> list =new ArrayList<>();
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sPos=String.valueOf(position);
+                String sInfo=parent.getItemAtPosition(position).toString();
+
+                Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bindSocketService();
+        timerUI();
+
     }
 
-    private void bindSocketService() {
+
+    private void timerUI()
+    {
+        if (timer == null) {
+            timer = new Timer();
+        }
+
+        if (task == null) {
+            task = new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //TODO:updata UI
+
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+        }
+
+        timer.schedule(task, 0, 500);
+
+    }
+
+
+
+
+
+    private void bindSocketService()
+    {
 
         sc = new ServiceConnection() {
             @Override
