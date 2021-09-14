@@ -59,12 +59,20 @@ import java.util.concurrent.Executors;
 
 import android.graphics.Color;
 
+
+
 public class page1 extends Fragment {
     private ServiceConnection sc;
     public SocketService socketService;
     private Handler handler = new Handler(Looper.getMainLooper());
     private Timer timer = new Timer();
     private TimerTask task;
+    ExecutorService exec = Executors.newCachedThreadPool();
+    UDP udpServer;
+    MyBroadcast myBroadcast = new MyBroadcast();
+    StringBuffer stringBuffer = new StringBuffer();
+
+
 
     Spinner spinner;
 
@@ -104,6 +112,8 @@ public class page1 extends Fragment {
         });
 
 
+
+
     }
 
     @Override
@@ -112,6 +122,14 @@ public class page1 extends Fragment {
         bindSocketService();
         timerUI();
 
+        //註冊廣播器，使回傳能夠從其他類別內傳回此Activity
+        IntentFilter intentFilter = new IntentFilter(UDP.RECEIVE_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter);
+        //udp_setting
+        udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
+        udpServer.setPort(8888);
+        udpServer.changeServerStatus(true);
+        exec.execute(udpServer);
     }
 
 
@@ -145,9 +163,6 @@ public class page1 extends Fragment {
     }
 
 
-
-
-
     private void bindSocketService()
     {
 
@@ -163,6 +178,25 @@ public class page1 extends Fragment {
         };
         Intent intent = new Intent(getActivity(), SocketService.class);
         getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
+    }
+
+
+    private class MyBroadcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String mAction = intent.getAction();
+            assert mAction != null;
+            switch (mAction) {
+                /**接收來自UDP回傳之訊息*/
+                case UDP.RECEIVE_ACTION:
+                    String msg = intent.getStringExtra(UDP.RECEIVE_STRING);
+                    byte[] bytes = intent.getByteArrayExtra(UDP.RECEIVE_BYTES);
+                    stringBuffer.append("收到： ").append(msg).append("\n");
+
+                    Log.e("UDP_DATA",msg+"");
+                    break;
+            }
+        }
     }
 
 
