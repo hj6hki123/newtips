@@ -40,6 +40,7 @@ import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.newtips.R;
 import com.example.newtips.common.Constants;
+import com.ntt.customgaugeview.library.GaugeView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -77,8 +78,10 @@ public class page1 extends Fragment {
     ArrayAdapter<String> spinnerAdapter;
     Set<String> sett=new HashSet<>();
 
-
+//TODO:UI 宣告
     Spinner spinner;
+    GaugeView gaugeView_Vupp,gaugeView_Vdown,gaugeView_Iupp,gaugeView_Idown;
+
 
     public page1() {
         // Required empty public constructor
@@ -90,16 +93,42 @@ public class page1 extends Fragment {
         return inflater.inflate(R.layout.fragment_page1, container, false);
     }
 
+    protected void initUI(View root){
+        gaugeView_Vupp = (GaugeView) root.findViewById(R.id.gauge_view_Vupp);
+        gaugeView_Vupp.setShowRangeValues(true);
+        gaugeView_Vupp.setTargetValue(0);
+        gaugeView_Vupp.setAlpha((float)1);
+
+
+        gaugeView_Iupp = (GaugeView) root.findViewById(R.id.gauge_view_Iupp);
+        gaugeView_Iupp.setShowRangeValues(true);
+        gaugeView_Iupp.setTargetValue(0);
+        gaugeView_Iupp.setAlpha((float)0.1);
+
+        gaugeView_Vdown = (GaugeView) root.findViewById(R.id.gauge_view_Vdown);
+        gaugeView_Vdown.setShowRangeValues(true);
+        gaugeView_Vdown.setTargetValue(0);
+        gaugeView_Vdown.setAlpha((float)1);
+
+        gaugeView_Idown = (GaugeView) root.findViewById(R.id.gauge_view_Idown);
+        gaugeView_Idown.setShowRangeValues(true);
+        gaugeView_Idown.setTargetValue(0);
+        gaugeView_Idown.setAlpha((float)0.1);
+
+        spinner=root.findViewById(R.id.spinner2);
+
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        spinner=view.findViewById(R.id.spinner2);
+
+        initUI(view);//UI初始化
+
 
         spinnerAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
-
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

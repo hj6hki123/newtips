@@ -49,6 +49,7 @@
         gauge:textUnitSize="0.06"
         gauge:textValueSize="0.15"
         />
+
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view2"
         android:layout_width="wrap_content"
@@ -68,6 +69,5 @@
         gauge:subdivisions="1"
         gauge:textUnit="kW"
         gauge:textUnitSize="0.06"
-        gauge:textValueSize="0.15"
-        />
+        gauge:textValueSize="0.15" />
 </RelativeLayout>
