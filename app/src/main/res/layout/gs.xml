@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gauge="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e2931"
+
+    tools:context="com.example.newtips.Gsavtivity">
+
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="77dp"
+        android:text="Tap me!" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="208dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:onClick="OnFinish"
+        android:text="結束" />
+
+    <com.ntt.customgaugeview.library.GaugeView
+        android:id="@+id/gauge_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        gauge:divisions="8"
+        gauge:rangeValues="@array/speedTestRangeValues"
+        gauge:scaleEndValue="5000"
+        gauge:showInnerRim="false"
+        gauge:showNeedle="true"
+        gauge:showOuterBorder="false"
+        gauge:showOuterRim="true"
+        gauge:showOuterShadow="false"
+        gauge:showRangeText="true"
+        gauge:showRanges="true"
+        gauge:showScale="true"
+        gauge:subdivisions="1"
+        gauge:textUnit="kW"
+        gauge:textUnitSize="0.06"
+        gauge:textValueSize="0.15"
+        />
+    <com.ntt.customgaugeview.library.GaugeView
+        android:id="@+id/gauge_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        gauge:divisions="8"
+        gauge:rangeValues="@array/speedTestRangeValues"
+        gauge:scaleEndValue="5000"
+        gauge:showInnerRim="false"
+        gauge:showNeedle="true"
+        gauge:showOuterBorder="false"
+        gauge:showOuterRim="true"
+        gauge:showOuterShadow="false"
+        gauge:showRangeText="true"
+        gauge:showRanges="true"
+        gauge:showScale="true"
+        gauge:subdivisions="1"
+        gauge:textUnit="kW"
+        gauge:textUnitSize="0.06"
+        gauge:textValueSize="0.15"
+        />
+</RelativeLayout>
