@@ -49,6 +49,7 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -136,7 +137,7 @@ public class page1 extends Fragment {
     }
 
 
-    private void timerUI()
+    private void timerUI()//每過0.5秒更新一次UI
     {
         if (timer == null) {
             timer = new Timer();
@@ -199,12 +200,7 @@ public class page1 extends Fragment {
                     {
                         spinnerAdapter.clear();
                         sett.add(msg);
-                        List<String> list =new ArrayList<>();
-                        for(String i : sett)
-                        {
-                            list.add(i);
-                        }
-                        spinnerAdapter.addAll(list);
+                        spinnerAdapter.addAll(sett);
                     }
                     break;
             }
