@@ -81,7 +81,8 @@ public class page1 extends Fragment {
 //TODO:UI 宣告
     Spinner spinner;
     GaugeView gaugeView_Vupp,gaugeView_Vdown,gaugeView_Iupp,gaugeView_Idown;
-
+    TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1;
+    TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2;
 
     public page1() {
         // Required empty public constructor
@@ -115,7 +116,19 @@ public class page1 extends Fragment {
         gaugeView_Idown.setTargetValue(0);
         gaugeView_Idown.setAlpha((float)0.1);
 
-        spinner=root.findViewById(R.id.spinner2);
+        textView_VOLT1 = (TextView) root.findViewById(R.id.textViewVOLT1);
+        textView_CURRENT1 = (TextView)root.findViewById(R.id.textViewCURRENT1);
+        textView_WATT1 = (TextView)root.findViewById(R.id.textViewWATT1);
+        textView_FREQ1 = (TextView)root.findViewById(R.id.textViewFREQ1);
+        textView_KHW1 = (TextView)root.findViewById(R.id.textViewKWH1);
+
+        textView_VOLT2 = (TextView)root.findViewById(R.id.textViewVOLT2);
+        textView_CURRENT2 = (TextView)root.findViewById(R.id.textViewCURRENT2);
+        textView_WATT2 = (TextView)root.findViewById(R.id.textViewWATT2);
+        textView_FREQ2 = (TextView)root.findViewById(R.id.textViewFREQ2);
+        textView_KHW2 = (TextView)root.findViewById(R.id.textViewKWH2);
+
+        spinner=(Spinner) root.findViewById(R.id.spinner2);
 
     }
 
@@ -236,10 +249,5 @@ public class page1 extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Intent intent = new Intent(getActivity().getApplicationContext(), SocketService.class);
-        getActivity().stopService(intent);
-    }
+
 }

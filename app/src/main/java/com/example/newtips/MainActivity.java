@@ -22,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(IntrodusActivity.introdusActivity!=null){
-            IntrodusActivity.introdusActivity.finish();
-        }
+
 
         //< get elements >
         TabLayout tabLayout = findViewById(R.id.tabs);
@@ -56,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 ).attach();
     }
     //todo:返回鍵延遲
-    private static Boolean isExit = false;
-    private static Boolean hasTask = false;
+    private  Boolean isExit = false;
+    private  Boolean hasTask = false;
     Timer timerExit = new Timer();
     TimerTask task = new TimerTask()
     {
@@ -76,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
             if(isExit == false )
             {
                 isExit = true; //記錄下一次要退出
-                Toast.makeText(this, "再按一次Back重啟", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "再按一次Back登出", Toast.LENGTH_SHORT).show();
                 if (!hasTask) {
                     timerExit.schedule(task, 2000);
                 }
             }
             else
             {
+                GlobalData.FSM="IDLE";
                 finish(); // 離開程式
-                System.exit(0);
             }
 
 

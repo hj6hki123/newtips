@@ -23,22 +23,22 @@ public class IntrodusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introdus);
         chirtext=findViewById(R.id.imageView);
-        chirtext.animate().translationX(2000).setDuration(100).setStartDelay(1800);
+        chirtext.animate().translationX(2000).setDuration(100).setStartDelay(1500);
 
         introdusActivity=this;
-       /* new Handler().postDelayed(new Runnable() {
+       new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(getApplicationContext(), MainActivity.class);
+                Intent i=new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
             }
-        },2000); */
+        },1800);
 
         String ip = "10.147.17.177".trim();
         String port = "9998".trim();
 
         if (TextUtils.isEmpty(ip) || TextUtils.isEmpty(port)) {
-            Toast.makeText(this , "ip和端口号不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this , "ip和端口號不能為空", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(this.getApplicationContext(), SocketService.class);

@@ -1,7 +1,9 @@
 package com.example.newtips;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -14,6 +16,7 @@ import com.example.newtips.common.Constants;
 import com.example.newtips.common.EventMsg;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -99,12 +102,13 @@ public class SocketService extends Service {
                     try {
 
                         /*超时时间为2秒*/
-                        socket.connect(new InetSocketAddress(ip, Integer.valueOf(port)), 2000);
+                        socket.connect(new InetSocketAddress(ip, Integer.valueOf(port)), 5000);
 
 
                         if (socket.isConnected()) {
 
                             toastMsg("socket已连接");
+                            GlobalData.connectstate=true;
 
                             EventMsg msg = new EventMsg();
                             msg.setTag(Constants.CONNET_SUCCESS);
@@ -112,37 +116,62 @@ public class SocketService extends Service {
                             InputStreamReader dis = new InputStreamReader(socket.getInputStream());
                             BufferedReader br = new BufferedReader(dis);
 
-                            Intent i=new Intent(getApplicationContext(), MainActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                            socket.setSoTimeout(10000);//設定接收延遲
+
                             while(true)
                             {
 
                                 Thread.sleep(300);
 
 
-
-
                                 switch (GlobalData.FSM)
                                 {
                                     case "IDLE":
-                                        GlobalData.FSM="Longin";
                                         break;
 
                                     case "Longin":
                                         GlobalData.logingmap.put("Title","1");
-                                        GlobalData.logingmap.put("User","hj6hki");
-                                        GlobalData.logingmap.put("Password","A37130317a");
+                                        GlobalData.logingmap.put("User",GlobalData.Login_user);
+                                        GlobalData.logingmap.put("Password",GlobalData.Login_password);
                                         JSONObject login_json=new JSONObject(GlobalData.logingmap);
                                         sendOrder(login_json.toString()+"");
+
                                         String loginacess=br.readLine();
-                                        GlobalData.receivedata=loginacess;
                                         Log.e("get",loginacess);
+                                        JSONObject login_acess=new JSONObject(loginacess);
+                                        if(login_acess.getString("Title").equals("1"))
+                                        {
+                                            if(login_acess.getString("Loginacess").equals("true"))
+                                            {
+                                                GlobalData.FSM="Datatransport";
+                                                Intent i=new Intent(getApplicationContext(), MainActivity.class);
+                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(i);
+                                            }
+                                            else
+                                            {
+                                                GlobalData.FSM="IDLE";
+                                                toastMsg("登入失敗請檢察帳號密碼");
+                                            }
+
+                                        }
+                                        else//title!=1
+                                        {
+                                            GlobalData.FSM="IDLE";
+                                            toastMsg("登入表頭錯誤");
+                                        }
 
                                         break;
 
                                     case "Datatransport":
+                                        GlobalData.datamap.put("Title","2");
+                                        GlobalData.datamap.put("Volt","100");
+                                        GlobalData.datamap.put("Current","8");
+                                        GlobalData.datamap.put("User","hj6hki123");
+                                        JSONObject data_json=new JSONObject(GlobalData.datamap);
+                                        sendOrder(data_json.toString()+"");
+
+                                        String dataget=br.readLine();
+                                        Log.e("Datatransport",dataget+"");
 
                                         break;
                                     default:
@@ -154,8 +183,9 @@ public class SocketService extends Service {
                         }
 
 
-                    } catch (IOException | InterruptedException e) {
+                    } catch (IOException | InterruptedException | JSONException e) {
                         e.printStackTrace();
+                        GlobalData.connectstate=false;
                         if (e instanceof SocketTimeoutException) {
                             toastMsg("連線超時!正在重新連線");
 
@@ -177,6 +207,11 @@ public class SocketService extends Service {
                         else if(e instanceof InterruptedException)
                         {
                             toastMsg("延時崩潰");
+                            releaseSocket();
+                        }
+                        else if(e instanceof JSONException)
+                        {
+                            toastMsg("JSON資料接收錯誤");
                             releaseSocket();
                         }
 
