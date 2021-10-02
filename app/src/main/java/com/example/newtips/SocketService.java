@@ -32,6 +32,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.nio.channels.InterruptedByTimeoutException;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,8 +50,8 @@ public class SocketService extends Service {
     private String port;
     private TimerTask task;
 
-
-
+    HashMap<String,String> logingmap= new HashMap();
+    HashMap<String,String> datamap= new HashMap();
     /*默认重连*/
     private boolean isReConnect = true;
 
@@ -129,10 +130,10 @@ public class SocketService extends Service {
                                         break;
 
                                     case "Longin":
-                                        GlobalData.logingmap.put("Title","1");
-                                        GlobalData.logingmap.put("User",GlobalData.Login_user);
-                                        GlobalData.logingmap.put("Password",GlobalData.Login_password);
-                                        JSONObject login_json=new JSONObject(GlobalData.logingmap);
+                                        logingmap.put("Title","1");
+                                        logingmap.put("User",GlobalData.Login_user);
+                                        logingmap.put("Password",GlobalData.Login_password);
+                                        JSONObject login_json=new JSONObject(logingmap);
                                         sendOrder(login_json.toString()+"");
 
                                         String loginacess=br.readLine();
@@ -163,11 +164,11 @@ public class SocketService extends Service {
                                         break;
 
                                     case "Datatransport":
-                                        GlobalData.datamap.put("Title","2");
-                                        GlobalData.datamap.put("Volt","100");
-                                        GlobalData.datamap.put("Current","8");
-                                        GlobalData.datamap.put("User","hj6hki123");
-                                        JSONObject data_json=new JSONObject(GlobalData.datamap);
+                                        datamap.put("Title","2");
+                                        datamap.put("MacAddress","");
+                                        datamap.put("Device1","0");
+                                        datamap.put("Device2","0");
+                                        JSONObject data_json=new JSONObject(datamap);
                                         sendOrder(data_json.toString()+"");
 
                                         String dataget=br.readLine();
@@ -240,10 +241,10 @@ public class SocketService extends Service {
     }
 
 
-    /*发送数据*/
+    /*發送數據*/
     public void sendOrder(final String order) {
         if (socket != null && socket.isConnected()) {
-            /*发送指令*/
+            /*發送指令*/
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -264,7 +265,7 @@ public class SocketService extends Service {
             }).start();
 
         } else {
-            toastMsg("socket连接错误,请重试");
+            toastMsg("socket連接錯誤,請重試");
         }
     }
 

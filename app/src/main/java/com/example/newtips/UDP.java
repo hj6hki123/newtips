@@ -16,7 +16,7 @@ class UDP implements Runnable {
     public static final String RECEIVE_STRING = "ReceiveString";
     public static final String RECEIVE_BYTES = "ReceiveBytes";
 
-    private int port = 8888;
+    private int port = 31999;
     private String ServerIp;
     private boolean isOpen;
     private static DatagramSocket ds = null;

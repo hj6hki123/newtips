@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
 
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
@@ -66,6 +68,8 @@ import android.graphics.Color;
 
 
 public class page1 extends Fragment {
+    SharedPreferences pref ;
+
     private ServiceConnection sc;
     public SocketService socketService;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -76,13 +80,14 @@ public class page1 extends Fragment {
     MyBroadcast myBroadcast = new MyBroadcast();
     StringBuffer stringBuffer = new StringBuffer();
     ArrayAdapter<String> spinnerAdapter;
-    Set<String> sett=new HashSet<>();
+    Set<String> sett;
 
 //TODO:UI 宣告
     Spinner spinner;
     GaugeView gaugeView_Vupp,gaugeView_Vdown,gaugeView_Iupp,gaugeView_Idown;
     TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1;
     TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2;
+    Button switch1,switch2;
 
     public page1() {
         // Required empty public constructor
@@ -135,13 +140,13 @@ public class page1 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        pref =getActivity().getPreferences(Context.MODE_PRIVATE);
         initUI(view);//UI初始化
-
-
         spinnerAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+        sett=new HashSet<String>(pref.getStringSet("Macaddress", new HashSet<>()));//!!new一個set防止sett引用sp變數
+        spinnerAdapter.addAll(sett);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -157,6 +162,36 @@ public class page1 extends Fragment {
             }
         });
 
+        switch1=view.findViewById(R.id.switch1);
+        switch2=view.findViewById(R.id.switch2);
+
+        switch1.setOnClickListener(
+                (V)->
+                {
+                    if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
+                    {
+                        //todo:給server端開啟訊號
+                    }
+                    else if (GlobalData.datamap_getserver.get("Switch1").equals("ON"))
+                    {
+                        //todo:給server端關閉訊號
+                    }
+
+                }
+        );
+        switch2.setOnClickListener(
+                (V)->
+                {
+                    if(GlobalData.datamap_getserver.get("Switch2").equals("OFF"))
+                    {
+                        //todo:給server端開啟訊號
+                    }
+                    else if (GlobalData.datamap_getserver.get("Switch2").equals("ON"))
+                    {
+                        //todo:給server端關閉訊號
+                    }
+                }
+        );
 
 
 
@@ -165,6 +200,8 @@ public class page1 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         bindSocketService();
         timerUI();
 
@@ -173,10 +210,16 @@ public class page1 extends Fragment {
         getActivity().registerReceiver(myBroadcast, intentFilter);
         //UDP_setting
         udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
-        udpServer.setPort(8888);
+        udpServer.setPort(31999);
         udpServer.changeServerStatus(true);
         exec.execute(udpServer);
+
+
+
+
     }
+
+
 
 
     private void timerUI()//每過0.5秒更新一次UI
@@ -194,6 +237,40 @@ public class page1 extends Fragment {
                             @Override
                             public void run() {
                                 //TODO:updata UI
+                                textView_VOLT1.setText(GlobalData.datamap_getserver.get("Volt1"));
+                                textView_CURRENT1.setText(GlobalData.datamap_getserver.get("Current1"));
+                                textView_WATT1.setText(GlobalData.datamap_getserver.get("Watt1"));
+                                textView_FREQ1.setText(GlobalData.datamap_getserver.get("Freq1"));
+                                textView_KHW1.setText(GlobalData.datamap_getserver.get("Kwh1"));
+
+                                textView_VOLT2.setText(GlobalData.datamap_getserver.get("Volt2"));
+                                textView_CURRENT2.setText(GlobalData.datamap_getserver.get("Current2"));
+                                textView_WATT2.setText(GlobalData.datamap_getserver.get("Watt2"));
+                                textView_FREQ2.setText(GlobalData.datamap_getserver.get("Freq2"));
+                                textView_KHW2.setText(GlobalData.datamap_getserver.get("Kwh2"));
+
+                                if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
+                                {
+                                    switch1.setText("OFF");
+                                    switch1.setBackgroundResource(R.drawable.buttonshap3);
+                                }
+                                else if (GlobalData.datamap_getserver.get("Switch1").equals("ON"))
+                                {
+                                    switch1.setText("ON");
+                                    switch1.setBackgroundResource(R.drawable.buttonshap3);
+                                }
+
+                                if(GlobalData.datamap_getserver.get("Switch2").equals("OFF"))
+                                {
+                                    switch2.setText("OFF");
+                                    switch2.setBackgroundResource(R.drawable.buttonshape);
+                                }
+                                else if (GlobalData.datamap_getserver.get("Switch2").equals("ON"))
+                                {
+                                    switch2.setText("ON");
+                                    switch2.setBackgroundResource(R.drawable.buttonshap3);
+                                }
+
 
                             }
                         });
@@ -243,6 +320,10 @@ public class page1 extends Fragment {
                         spinnerAdapter.clear();
                         sett.add(msg);
                         spinnerAdapter.addAll(sett);
+                        pref.edit().putStringSet("Macaddress",sett)
+                                    .commit();
+                        Toast.makeText(getActivity(),pref.getStringSet("Macaddress",sett).toString(),Toast.LENGTH_SHORT).show();
+
                     }
                     break;
             }
