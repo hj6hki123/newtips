@@ -19,6 +19,9 @@ import com.example.newtips.common.EventMsg;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,7 +53,7 @@ public class SocketService extends Service {
     private String port;
     private TimerTask task;
 
-    HashMap<String,String> logingmap= new HashMap();
+
     HashMap<String,String> datamap= new HashMap();
     /*默认重连*/
     private boolean isReConnect = true;
@@ -130,12 +133,14 @@ public class SocketService extends Service {
                                         break;
 
                                     case "Longin":
+                                        //傳資料
+                                        HashMap<String,String> logingmap= new HashMap();
                                         logingmap.put("Title","1");
                                         logingmap.put("User",GlobalData.Login_user);
                                         logingmap.put("Password",GlobalData.Login_password);
                                         JSONObject login_json=new JSONObject(logingmap);
                                         sendOrder(login_json.toString()+"");
-
+                                        //收資料
                                         String loginacess=br.readLine();
                                         Log.e("get",loginacess);
                                         JSONObject login_acess=new JSONObject(loginacess);
@@ -165,13 +170,21 @@ public class SocketService extends Service {
 
                                     case "Datatransport":
                                         datamap.put("Title","2");
-                                        datamap.put("MacAddress","");
-                                        datamap.put("Device1","0");
-                                        datamap.put("Device2","0");
+                                        datamap.put("MacAddress","");//todo:添加全域macaddr_select
+                                        datamap.put("Device1",GlobalData.Deviceswitch1);
+                                        datamap.put("Device2",GlobalData.Deviceswitch2);
                                         JSONObject data_json=new JSONObject(datamap);
                                         sendOrder(data_json.toString()+"");
 
                                         String dataget=br.readLine();
+
+                                        JSONObject jsondataget=new JSONObject(dataget);
+                                        if(jsondataget.getString("Title").equals("2"))
+                                        {
+                                            GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                        }
+
+
                                         Log.e("Datatransport",dataget+"");
 
                                         break;

@@ -171,10 +171,12 @@ public class page1 extends Fragment {
                     if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
                     {
                         //todo:給server端開啟訊號
+                        GlobalData.Deviceswitch1="ON";
                     }
                     else if (GlobalData.datamap_getserver.get("Switch1").equals("ON"))
                     {
                         //todo:給server端關閉訊號
+                        GlobalData.Deviceswitch1="OFF";
                     }
 
                 }
@@ -185,10 +187,12 @@ public class page1 extends Fragment {
                     if(GlobalData.datamap_getserver.get("Switch2").equals("OFF"))
                     {
                         //todo:給server端開啟訊號
+                        GlobalData.Deviceswitch2="ON";
                     }
                     else if (GlobalData.datamap_getserver.get("Switch2").equals("ON"))
                     {
                         //todo:給server端關閉訊號
+                        GlobalData.Deviceswitch2="OFF";
                     }
                 }
         );
