@@ -10,4 +10,11 @@
     <string-array name="planets_array">
         <item>ANDAMAN NICOBAR ISLANDS</item>
     </string-array>
+
+
+    <string-array name="gauge_array">
+        <item>電壓表</item>
+        <item>電流表</item>
+
+    </string-array>
 </resources>

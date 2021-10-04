@@ -37,7 +37,7 @@
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/VoltageValues"
-        gauge:scaleEndValue="40"
+        gauge:scaleEndValue="230"
         gauge:showInnerRim="false"
         gauge:showNeedle="true"
         gauge:showOuterBorder="false"
@@ -69,7 +69,7 @@
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/CurrentValues"
-        gauge:scaleEndValue="40"
+        gauge:scaleEndValue="16"
         gauge:showInnerRim="false"
         gauge:showNeedle="true"
         gauge:showOuterBorder="false"
@@ -79,7 +79,7 @@
         gauge:showRanges="true"
         gauge:showScale="true"
         gauge:subdivisions="1"
-        gauge:textUnit="Volt"
+        gauge:textUnit="Current"
         gauge:textUnitSize="0.06"
         gauge:textValueSize="0.15" />
 
@@ -102,7 +102,7 @@
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/VoltageValues"
-        gauge:scaleEndValue="40"
+        gauge:scaleEndValue="230"
         gauge:showInnerRim="false"
         gauge:showNeedle="true"
         gauge:showOuterBorder="false"
@@ -134,7 +134,7 @@
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/CurrentValues"
-        gauge:scaleEndValue="40"
+        gauge:scaleEndValue="16"
         gauge:showInnerRim="false"
         gauge:showNeedle="true"
         gauge:showOuterBorder="false"
@@ -144,7 +144,7 @@
         gauge:showRanges="true"
         gauge:showScale="true"
         gauge:subdivisions="1"
-        gauge:textUnit="Volt"
+        gauge:textUnit="Current"
         gauge:textUnitSize="0.06"
         gauge:textValueSize="0.15" />
 
@@ -704,22 +704,50 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
-        android:background="#4D000000"
+        android:background="#1A000000"
         app:layout_constraintBottom_toTopOf="@+id/textV2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textC1"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintVertical_bias="0.69"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
-        android:background="#4D000000"
+        android:background="#1A000000"
         app:layout_constraintBottom_toTopOf="@+id/textView_devicename1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.050000012"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_gauge1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/gauge_view_Vupp"
+        app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vupp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gauge_view_Vupp"
+        app:layout_constraintTop_toTopOf="@+id/gauge_view_Vupp"
+        app:layout_constraintVertical_bias="0.062"
+        android:gravity="center_vertical"/>
+    <Spinner
+        android:id="@+id/spinner_gauge2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/gauge_view_Vdown"
+        app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vdown"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gauge_view_Vdown"
+        app:layout_constraintTop_toTopOf="@+id/gauge_view_Vdown"
+        app:layout_constraintVertical_bias="0.062"
+        android:gravity="center_vertical"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
