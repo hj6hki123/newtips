@@ -13,7 +13,7 @@ public class GlobalData {
     public static String FSM="IDLE";
     public static String receivedata="";
     public static Boolean connectstate=false;
-
+    public static String macaddress_select="none";
 //傳給server的資料
     public static String Login_user="";
     public static String Login_password="";
@@ -35,6 +35,8 @@ public class GlobalData {
             put("Freq2","0");
             put("Kwh1","0");
             put("Kwh2","0");
+            put("Pf1","0");
+            put("Pf2","0");
             put("Switch1","OFF");
             put("Switch2","OFF");
         }

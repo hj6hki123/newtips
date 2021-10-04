@@ -169,23 +169,31 @@ public class SocketService extends Service {
                                         break;
 
                                     case "Datatransport":
-                                        datamap.put("Title","2");
-                                        datamap.put("MacAddress","");//todo:添加全域macaddr_select
-                                        datamap.put("Device1",GlobalData.Deviceswitch1);
-                                        datamap.put("Device2",GlobalData.Deviceswitch2);
-                                        JSONObject data_json=new JSONObject(datamap);
-                                        sendOrder(data_json.toString()+"");
-
-                                        String dataget=br.readLine();
-
-                                        JSONObject jsondataget=new JSONObject(dataget);
-                                        if(jsondataget.getString("Title").equals("2"))
+                                        if(!GlobalData.macaddress_select.equals("none"))
                                         {
-                                            GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                            datamap.put("Title","2");
+                                            datamap.put("MacAddress",GlobalData.macaddress_select);//todo:添加全域macaddr_select
+                                            datamap.put("Device1",GlobalData.Deviceswitch1);
+                                            datamap.put("Device2",GlobalData.Deviceswitch2);
+                                            JSONObject data_json=new JSONObject(datamap);
+                                            sendOrder(data_json.toString()+"");
+
+                                            String dataget=br.readLine();
+
+                                            JSONObject jsondataget=new JSONObject(dataget);
+                                            if(jsondataget.getString("Title").equals("2"))
+                                            {
+                                                GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                            }
+
+
+                                            Log.e("Datatransport",dataget+"");
+                                        }
+                                        else
+                                        {
+                                            Log.e("Datatransport","nonemacaddr_select");
                                         }
 
-
-                                        Log.e("Datatransport",dataget+"");
 
                                         break;
                                     default:

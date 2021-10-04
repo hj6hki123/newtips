@@ -85,8 +85,8 @@ public class page1 extends Fragment {
 //TODO:UI 宣告
     Spinner spinner;
     GaugeView gaugeView_Vupp,gaugeView_Vdown,gaugeView_Iupp,gaugeView_Idown;
-    TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1;
-    TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2;
+    TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1,textView_PF1;
+    TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2,textView_PF2;
     Button switch1,switch2;
 
     public page1() {
@@ -126,12 +126,14 @@ public class page1 extends Fragment {
         textView_WATT1 = (TextView)root.findViewById(R.id.textViewWATT1);
         textView_FREQ1 = (TextView)root.findViewById(R.id.textViewFREQ1);
         textView_KHW1 = (TextView)root.findViewById(R.id.textViewKWH1);
+        textView_PF1 = (TextView)root.findViewById(R.id.textViewPF1);
 
         textView_VOLT2 = (TextView)root.findViewById(R.id.textViewVOLT2);
         textView_CURRENT2 = (TextView)root.findViewById(R.id.textViewCURRENT2);
         textView_WATT2 = (TextView)root.findViewById(R.id.textViewWATT2);
         textView_FREQ2 = (TextView)root.findViewById(R.id.textViewFREQ2);
         textView_KHW2 = (TextView)root.findViewById(R.id.textViewKWH2);
+        textView_PF2 = (TextView)root.findViewById(R.id.textViewPF2);
 
         spinner=(Spinner) root.findViewById(R.id.spinner2);
 
@@ -152,7 +154,7 @@ public class page1 extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String sPos=String.valueOf(position);
                 String sInfo=parent.getItemAtPosition(position).toString();
-
+                GlobalData.macaddress_select=sInfo;
                 Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
             }
 
@@ -246,12 +248,14 @@ public class page1 extends Fragment {
                                 textView_WATT1.setText(GlobalData.datamap_getserver.get("Watt1"));
                                 textView_FREQ1.setText(GlobalData.datamap_getserver.get("Freq1"));
                                 textView_KHW1.setText(GlobalData.datamap_getserver.get("Kwh1"));
+                                textView_PF1.setText(GlobalData.datamap_getserver.get("Pf1"));
 
                                 textView_VOLT2.setText(GlobalData.datamap_getserver.get("Volt2"));
                                 textView_CURRENT2.setText(GlobalData.datamap_getserver.get("Current2"));
                                 textView_WATT2.setText(GlobalData.datamap_getserver.get("Watt2"));
                                 textView_FREQ2.setText(GlobalData.datamap_getserver.get("Freq2"));
                                 textView_KHW2.setText(GlobalData.datamap_getserver.get("Kwh2"));
+                                textView_PF2.setText(GlobalData.datamap_getserver.get("Pf2"));
 
                                 if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
                                 {
