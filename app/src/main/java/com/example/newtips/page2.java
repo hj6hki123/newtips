@@ -3,11 +3,13 @@ package com.example.newtips;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -30,6 +32,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
@@ -45,12 +50,21 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+
 import android.graphics.Color;
 
 public class page2 extends Fragment {
-    private ServiceConnection sc;
-    public SocketService socketService;
+    private LinkedList<String> Alist=new LinkedList<String>();
+    private RecyclerView mRecyclerView;
+    private WordListAdapter mAdapter;
+    MyBroadcast myBroadcast = new MyBroadcast();
+    SharedPreferences pref ;
+    Set<String> sett_mask;
 
     public page2() {
         // Required empty public constructor
@@ -61,25 +75,84 @@ public class page2 extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_page2, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        DATAinit();
+        // Get a handle to the RecyclerView.
+        mRecyclerView = view.findViewById(R.id.recycleview);
+
+        // Create an adapter and supply the data to be displayed.
+        mAdapter = new WordListAdapter(getActivity(), Alist);
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        IntentFilter intentFilter = new IntentFilter(UDP.RECEIVE_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter);
+        IntentFilter intentFilter2 = new IntentFilter(WordListAdapter.RECEIVE_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter2);
+
+
         super.onCreate(savedInstanceState);
-        bindSocketService();
+
+
+    }
+    private void DATAinit()
+    {
+        pref =getActivity().getPreferences(Context.MODE_PRIVATE);
+        sett_mask=new HashSet<String>(pref.getStringSet("Macaddress", new HashSet<>()));//!!new一個set防止sett引用sp變數
+        Alist.addAll(sett_mask);
+    }
+    private class MyBroadcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String mAction = intent.getAction();
+            assert mAction != null;
+            switch (mAction) {
+                /**接收來自UDP回傳之訊息*/
+                case UDP.RECEIVE_ACTION:
+                    String msg = intent.getStringExtra(UDP.RECEIVE_STRING);
+                    byte[] bytes = intent.getByteArrayExtra(UDP.RECEIVE_BYTES);
+                    if(msg.length()>0)
+                    {
+                        boolean samelist=false;
+                        for(String s:sett_mask)//檢查有無重複
+                        {
+                            if (msg.equals(s)) {
+                                samelist = true;
+                                break;
+                            }
+                        }
+                        if(!samelist)
+                        {
+                            sett_mask.add(msg);
+                            Alist.add(msg);
+                            mAdapter.notifyDataSetChanged();
+
+                        }
+
+                    }
+                    break;
+                case WordListAdapter.RECEIVE_ACTION:
+                    String delete_str = intent.getStringExtra(WordListAdapter.RECEIVE_STRING);
+                    sett_mask.remove(delete_str);
+                    Alist.remove(delete_str);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+
+
+
+            }
+        }
     }
 
-    private void bindSocketService() {
 
-        sc = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                SocketService.SocketBinder binder = (SocketService.SocketBinder) service;
-                socketService = binder.getService();
-            }
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-            }
-        };
-        Intent intent = new Intent(getActivity(), SocketService.class);
-        getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
-    }
 }

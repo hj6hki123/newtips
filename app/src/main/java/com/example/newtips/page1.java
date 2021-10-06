@@ -55,6 +55,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -82,6 +83,7 @@ public class page1 extends Fragment {
     StringBuffer stringBuffer = new StringBuffer();
     ArrayAdapter<String> spinnerAdapter;
     Set<String> sett;
+    HashMap<String,HashSet<String>> haspw=new HashMap<>();
 
 //TODO:UI 宣告
     Spinner spinner,spinner_guage1,spinner_guage2;
@@ -156,9 +158,12 @@ public class page1 extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String sPos=String.valueOf(position);
-                String sInfo=parent.getItemAtPosition(position).toString();
+                String sInfo=parent.getSelectedItem().toString();
+
                 GlobalData.macaddress_select=sInfo;
                 Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
@@ -177,6 +182,7 @@ public class page1 extends Fragment {
         spinner_guage1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 String sPos=String.valueOf(position);
                 String sInfo=parent.getItemAtPosition(position).toString();
                 switch (sInfo)
@@ -278,6 +284,8 @@ public class page1 extends Fragment {
         //註冊廣播器，使回傳能夠從其他類別內傳回此Activity
         IntentFilter intentFilter = new IntentFilter(UDP.RECEIVE_ACTION);
         getActivity().registerReceiver(myBroadcast, intentFilter);
+        IntentFilter intentFilter2 = new IntentFilter(WordListAdapter.RECEIVE_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter2);
         //UDP_setting
         udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
         udpServer.setPort(31999);
@@ -361,7 +369,7 @@ public class page1 extends Fragment {
             };
         }
 
-        timer.schedule(task, 0, 500);
+        timer.schedule(task, 0, 1000);
 
     }
 
@@ -397,15 +405,47 @@ public class page1 extends Fragment {
                     stringBuffer.append("收到： ").append(msg).append("\n");
                     if(msg.length()>0)
                     {
+                        /*
                         spinnerAdapter.clear();
                         sett.add(msg);
                         spinnerAdapter.addAll(sett);
                         pref.edit().putStringSet("Macaddress",sett)
                                     .commit();
+                                    */
+                        for(String s : sett)
+                        {
+                            if(msg.equals(s))
+                            {
+                                return;
+                            }
+
+                        }
+                        sett.add(msg);
+                        pref.edit().putStringSet("Macaddress",sett)
+                                .commit();
+                        spinnerAdapter.add(msg);
+                        int position = spinnerAdapter.getPosition(msg);
+                        spinner.setSelection(position);
+
                         Toast.makeText(getActivity(),pref.getStringSet("Macaddress",sett).toString(),Toast.LENGTH_SHORT).show();
 
                     }
                     break;
+                case WordListAdapter.RECEIVE_ACTION:
+                    String delete_str = intent.getStringExtra(WordListAdapter.RECEIVE_STRING);
+
+                    sett.remove(delete_str);
+                    spinnerAdapter.remove(delete_str);
+                    spinnerAdapter.notifyDataSetChanged();
+
+                    pref.edit().remove("Macaddress").putStringSet("Macaddress",sett).commit();
+
+                    GlobalData.macaddress_select="none";
+
+                    Toast.makeText(getActivity(),pref.getStringSet("Macaddress",sett).toString(),Toast.LENGTH_SHORT).show();
+
+                    break;
+
             }
         }
     }
