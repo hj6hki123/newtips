@@ -102,7 +102,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     public void onBindViewHolder(WordViewHolder holder, int position) {
         final int currentPosition= holder.getAdapterPosition();
 
-        holder.macaddresstext.setText(mWordList.get(position));
+        holder.macaddresstext.setText(mWordList.get(currentPosition));
 
         holder.title.setText (pref.getString(mWordList.get(currentPosition),""));
 
