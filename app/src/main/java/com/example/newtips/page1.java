@@ -79,14 +79,12 @@ public class page1 extends Fragment {
     private TimerTask task;
     ExecutorService exec = Executors.newCachedThreadPool();
     UDP udpServer;
-    MyBroadcast myBroadcast = new MyBroadcast();
     StringBuffer stringBuffer = new StringBuffer();
     ArrayAdapter<String> spinnerAdapter;
-    Set<String> sett;
-    HashMap<String,HashSet<String>> haspw=new HashMap<>();
+
 
 //TODO:UI 宣告
-    Spinner spinner,spinner_guage1,spinner_guage2;
+    Spinner spinner_guage1,spinner_guage2;
     GaugeView gaugeView_Vupp,gaugeView_Vdown,gaugeView_Iupp,gaugeView_Idown;
     TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1,textView_PF1;
     TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2,textView_PF2;
@@ -138,7 +136,7 @@ public class page1 extends Fragment {
         textView_KHW2 = (TextView)root.findViewById(R.id.textViewKWH2);
         textView_PF2 = (TextView)root.findViewById(R.id.textViewPF2);
 
-        spinner=(Spinner) root.findViewById(R.id.spinner2);
+
         spinner_guage1=(Spinner) root.findViewById(R.id.spinner_gauge1);
         spinner_guage2=(Spinner) root.findViewById(R.id.spinner_gauge2);
     }
@@ -148,29 +146,7 @@ public class page1 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         pref =getActivity().getPreferences(Context.MODE_PRIVATE);
         initUI(view);//UI初始化
-        //macaddress_spinner初始化與事件
-        spinnerAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
-        sett=new HashSet<String>(pref.getStringSet("Macaddress", new HashSet<>()));//!!new一個set防止sett引用sp變數
-        spinnerAdapter.addAll(sett);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sPos=String.valueOf(position);
-                String sInfo=parent.getSelectedItem().toString();
 
-                GlobalData.macaddress_select=sInfo;
-                Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         //guage_spinner初始化與事件
         ArrayAdapter<CharSequence> adapter_guage =
                 ArrayAdapter.createFromResource(getActivity(),    //對應的Context
@@ -281,11 +257,6 @@ public class page1 extends Fragment {
         bindSocketService();
         timerUI();
 
-        //註冊廣播器，使回傳能夠從其他類別內傳回此Activity
-        IntentFilter intentFilter = new IntentFilter(UDP.RECEIVE_ACTION);
-        getActivity().registerReceiver(myBroadcast, intentFilter);
-        IntentFilter intentFilter2 = new IntentFilter(WordListAdapter.RECEIVE_ACTION);
-        getActivity().registerReceiver(myBroadcast, intentFilter2);
         //UDP_setting
         udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
         udpServer.setPort(31999);
@@ -392,63 +363,7 @@ public class page1 extends Fragment {
     }
 
 
-    private class MyBroadcast extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String mAction = intent.getAction();
-            assert mAction != null;
-            switch (mAction) {
-                /**接收來自UDP回傳之訊息*/
-                case UDP.RECEIVE_ACTION:
-                    String msg = intent.getStringExtra(UDP.RECEIVE_STRING);
-                    byte[] bytes = intent.getByteArrayExtra(UDP.RECEIVE_BYTES);
-                    stringBuffer.append("收到： ").append(msg).append("\n");
-                    if(msg.length()>0)
-                    {
-                        /*
-                        spinnerAdapter.clear();
-                        sett.add(msg);
-                        spinnerAdapter.addAll(sett);
-                        pref.edit().putStringSet("Macaddress",sett)
-                                    .commit();
-                                    */
-                        for(String s : sett)
-                        {
-                            if(msg.equals(s))
-                            {
-                                return;
-                            }
 
-                        }
-                        sett.add(msg);
-                        pref.edit().putStringSet("Macaddress",sett)
-                                .commit();
-                        spinnerAdapter.add(msg);
-                        int position = spinnerAdapter.getPosition(msg);
-                        spinner.setSelection(position);
-
-                        Toast.makeText(getActivity(),pref.getStringSet("Macaddress",sett).toString(),Toast.LENGTH_SHORT).show();
-
-                    }
-                    break;
-                case WordListAdapter.RECEIVE_ACTION:
-                    String delete_str = intent.getStringExtra(WordListAdapter.RECEIVE_STRING);
-
-                    sett.remove(delete_str);
-                    spinnerAdapter.remove(delete_str);
-                    spinnerAdapter.notifyDataSetChanged();
-
-                    pref.edit().remove("Macaddress").putStringSet("Macaddress",sett).commit();
-
-                    GlobalData.macaddress_select="none";
-
-                    Toast.makeText(getActivity(),pref.getStringSet("Macaddress",sett).toString(),Toast.LENGTH_SHORT).show();
-
-                    break;
-
-            }
-        }
-    }
 
 
 }

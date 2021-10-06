@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.icu.text.UFormat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +31,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     public static final String RECEIVE_ACTION = "GetRecycleReceive";
     public static final String RECEIVE_STRING = "RecycleString";
+    int currentIndex = 0;
 
     SharedPreferences pref;
 
@@ -45,6 +47,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             title=itemView.findViewById(R.id.title);
             delet_pic=itemView.findViewById(R.id.image_delete);
             add_pic=itemView.findViewById(R.id.image_add);
+
+
 
         }
     }
@@ -96,9 +100,12 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     @Override
     public void onBindViewHolder(WordViewHolder holder, int position) {
-        final int currentPosition= holder.getLayoutPosition();
+        final int currentPosition= holder.getAdapterPosition();
 
         holder.macaddresstext.setText(mWordList.get(position));
+
+        holder.title.setText (pref.getString(mWordList.get(currentPosition),""));
+
         holder.delet_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,10 +119,26 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
                 setEdittextCustomDialog(currentPosition,holder.title);
             }
         });
-        if(!pref.getString(mWordList.get(position),"").equals(""))
-        {
-            holder.title.setText(pref.getString(mWordList.get(position),""));
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int lastIndex = currentIndex;
+                currentIndex = currentPosition;
+                notifyItemChanged(currentIndex);
+                if (!(lastIndex<0)){
+                    notifyItemChanged(lastIndex);
+                }
+
+            }
+        });
+
+        if (currentIndex == position){
+            holder.title.setBackgroundColor(Color.rgb(144,255,186));
+            GlobalData.macaddress_select= mWordList.get(currentIndex);
+        }else {
+            holder.title.setBackgroundColor(Color.rgb(255,102,101));
         }
+
 
 
     }

@@ -134,6 +134,8 @@ public class page2 extends Fragment {
                         if(!samelist)
                         {
                             sett_mask.add(msg);
+                            pref.edit().putStringSet("Macaddress",sett_mask)
+                                    .commit();
                             Alist.add(msg);
                             mAdapter.notifyDataSetChanged();
 
@@ -146,6 +148,9 @@ public class page2 extends Fragment {
                     sett_mask.remove(delete_str);
                     Alist.remove(delete_str);
                     mAdapter.notifyDataSetChanged();
+                    pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).commit();
+                    GlobalData.macaddress_select="none";
+
                     break;
 
 
