@@ -43,7 +43,7 @@ public class SocketService extends Service {
 
     /*socket*/
     private Socket socket;
-    /*连接线程*/
+    /*連接線程*/
     private Thread connectThread;
     private Timer timer = new Timer();
     private OutputStream outputStream;
@@ -55,7 +55,7 @@ public class SocketService extends Service {
 
 
     HashMap<String,String> datamap= new HashMap();
-    /*默认重连*/
+    /*默認重連*/
     private boolean isReConnect = true;
 
     private Handler handler = new Handler();
@@ -68,7 +68,7 @@ public class SocketService extends Service {
 
 
     public class SocketBinder extends Binder {
-        /*返回SocketService 在需要的地方可以通过ServiceConnection获取到SocketService  */
+        /*返回SocketService 在需要的地方可以通過ServiceConnection獲取到SocketService */
         public SocketService getService() {
             return SocketService.this;
         }
@@ -84,7 +84,7 @@ public class SocketService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        /*拿到传递过来的ip和端口号*/
+        /*拿到傳遞過來的ip和端口號*/
         ip = intent.getStringExtra(Constants.INTENT_IP);
         port = intent.getStringExtra(Constants.INTENT_PORT);
 
@@ -105,13 +105,13 @@ public class SocketService extends Service {
                     socket = new Socket();
                     try {
 
-                        /*超时时间为2秒*/
+                        /*超時時間為5秒*/
                         socket.connect(new InetSocketAddress(ip, Integer.valueOf(port)), 5000);
 
 
                         if (socket.isConnected()) {
 
-                            toastMsg("socket已连接");
+                            toastMsg("socket已連接");
                             GlobalData.connectstate=true;
 
                             EventMsg msg = new EventMsg();
@@ -242,7 +242,7 @@ public class SocketService extends Service {
                 }
             });
 
-            /*启动连接线程*/
+            /*啟動連接線程*/
             connectThread.start();
 
         }
@@ -250,7 +250,7 @@ public class SocketService extends Service {
 
     }
 
-    /*因为Toast是要运行在主线程的   所以需要到主线程哪里去显示toast*/
+    /*因為Toast是要運行在主線程的   所以需要到主線程哪裡去顯示toast*/
     private void toastMsg(final String msg) {
 
         handler.post(new Runnable() {
@@ -331,7 +331,7 @@ public class SocketService extends Service {
     }
 
 
-    /*释放资源*/
+    /*釋放資源*/
     private void releaseSocket() {
 
         if (task != null) {

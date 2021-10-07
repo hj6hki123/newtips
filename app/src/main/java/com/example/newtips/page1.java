@@ -286,7 +286,6 @@ public class page1 extends Fragment {
                             @Override
                             public void run() {
                                 //TODO:updata UI
-
                                 if(Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Volt1")))<=230 && Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Volt2")))<=230 && Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Current1")))<=16&& Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Current2")))<=16)
                                 {
                                     gaugeView_Vupp.setTargetValue(Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Volt1"))));

@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(adapter);
-
         new TabLayoutMediator(tabLayout, viewPager2,
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
@@ -52,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 ).attach();
+        if(GlobalData.macaddress_select.equals("none"))
+            viewPager2.setCurrentItem(1);
     }
     //todo:返回鍵延遲
     private  Boolean isExit = false;

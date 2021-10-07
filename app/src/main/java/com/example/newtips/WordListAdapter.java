@@ -100,7 +100,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     @Override
     public void onBindViewHolder(WordViewHolder holder, int position) {
-        final int currentPosition= holder.getAdapterPosition();
+        final int currentPosition= holder.getLayoutPosition();
 
         holder.macaddresstext.setText(mWordList.get(currentPosition));
 
@@ -120,13 +120,17 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             }
         });
         holder.title.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 int lastIndex = currentIndex;
                 currentIndex = currentPosition;
                 notifyItemChanged(currentIndex);
+
                 if (!(lastIndex<0)){
                     notifyItemChanged(lastIndex);
+
                 }
 
             }
@@ -135,9 +139,12 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         if (currentIndex == position){
             holder.title.setBackgroundColor(Color.rgb(144,255,186));
             GlobalData.macaddress_select= mWordList.get(currentIndex);
+
+
         }else {
             holder.title.setBackgroundColor(Color.rgb(255,102,101));
         }
+
 
 
 

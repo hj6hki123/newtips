@@ -5,14 +5,6 @@
     android:gravity="center_horizontal"
     >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="請自訂名稱"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_marginBottom="10dp"
-        />
 
     <EditText
         android:id="@+id/editext_alert"
@@ -21,6 +13,8 @@
         android:gravity="center"
         android:inputType="text"
         android:lines="1"
-        android:maxLength="20"
+        android:maxLength="16"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         />
 </LinearLayout>
