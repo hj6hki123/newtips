@@ -3,28 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable-v21/buttonshap3.xml" value="0.4161458333333333" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable-v21/buttonshape.xml" value="0.4161458333333333" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable-v21/buttonshape2.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/buttonshap3.xml" value="0.4161458333333333" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/buttonshape.xml" value="0.12685185185185185" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/buttonshape2.xml" value="0.4161458333333333" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/ic_launcher_background.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/ic_main_backgrand.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/ic_welcome.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/round_border.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/wave.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/drawable/wavebg.xml" value="0.4197916666666667" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/activity_introdus.xml" value="0.264" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/activity_login.xml" value="0.27989821882951654" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/alert_edittext.xml" value="0.4" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/fragment_page1.xml" value="0.4" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/fragment_page2.xml" value="0.32065217391304346" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/fragment_page3.xml" value="0.19630192502532928" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/gs.xml" value="0.3763586956521739" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/recycle_item.xml" value="0.23846153846153847" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.4192708333333333" />
-        <entry key="..\:/Users/hj6hk/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.4" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.265625" />
         <entry key="..\:/android_projects/newtips/app/src/main/res/layout/fragment_page1.xml" value="0.25" />
       </map>
     </option>
