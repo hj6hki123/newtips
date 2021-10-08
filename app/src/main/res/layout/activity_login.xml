@@ -140,4 +140,16 @@
         app:layout_constraintTop_toTopOf="@+id/topview"
         app:layout_constraintVertical_bias="0.83" />
 
+    <TextView
+        android:id="@+id/text_socket_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textView_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_forgot"
+        app:layout_constraintVertical_bias="0.07"
+        android:textColor="#FD1100"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

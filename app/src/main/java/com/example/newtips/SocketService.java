@@ -41,6 +41,11 @@ import java.util.TimerTask;
 
 public class SocketService extends Service {
 
+
+
+    public static final String RECEIVE_SERVICE_ACTION="TCPSOCKET_ACTION";
+    public static final String RECEIVE_SERVICE_STRING="TCPSOCKET_ReceiveString";
+    public static final String RECEIVE_SERVICE_PROBLEM="TCPSOCKET_ReceiveProblem";
     /*socket*/
     private Socket socket;
     /*連接線程*/
@@ -210,34 +215,45 @@ public class SocketService extends Service {
                     } catch (IOException | InterruptedException | JSONException e) {
                         e.printStackTrace();
                         GlobalData.connectstate=false;//若連線狀態為否，登入按鈕無法動作
+                        String problem="";
                         if (e instanceof SocketTimeoutException) {
-                            toastMsg("連線超時!正在重新連線");
-
+                            problem="連線超時!正在重新連線";
+                            toastMsg(problem);
                             releaseSocket();
 
                         } else if (e instanceof NoRouteToHostException) {
-                            toastMsg("該地址錯誤!請重新檢查");
+                            problem="該地址錯誤!請重新檢查";
+                            toastMsg(problem);
                             releaseSocket();
 
                         } else if (e instanceof ConnectException) {
-                            toastMsg("連接異常或被拒絕!請重新檢查");
+                            problem="連接異常或被拒絕!請重新檢查";
+
                             releaseSocket();
                         }
                         else if(e instanceof SocketException)
                         {
-                            toastMsg("伺服器連接異常!請查看連線狀態");
+                            problem="伺服器連接異常!請查看連線狀態";
+
                             releaseSocket();
                         }
                         else if(e instanceof InterruptedException)
                         {
-                            toastMsg("延時崩潰");
+                            problem="延時崩潰";
+                            toastMsg(problem);
                             releaseSocket();
                         }
                         else if(e instanceof JSONException)
                         {
-                            toastMsg("JSON資料接收錯誤");
+                            problem="JSON資料接收錯誤";
+                            toastMsg(problem);
                             releaseSocket();
                         }
+                        Intent intent = new Intent();
+                        intent.setAction(RECEIVE_SERVICE_ACTION);
+                        intent.putExtra(RECEIVE_SERVICE_STRING,"false");
+                        intent.putExtra(RECEIVE_SERVICE_PROBLEM,problem);
+                        sendBroadcast(intent);
 
                     }
 
