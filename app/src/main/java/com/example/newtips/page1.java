@@ -67,7 +67,7 @@ import java.util.concurrent.Executors;
 
 import android.graphics.Color;
 
-
+//demo版
 
 public class page1 extends Fragment {
     SharedPreferences pref ;
