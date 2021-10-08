@@ -135,9 +135,11 @@ public class SocketService extends Service {
                                     case "Longin":
                                         //傳資料
                                         HashMap<String,String> logingmap= new HashMap();
+
                                         logingmap.put("Title","1");
                                         logingmap.put("User",GlobalData.Login_user);
                                         logingmap.put("Password",GlobalData.Login_password);
+
                                         JSONObject login_json=new JSONObject(logingmap);
                                         sendOrder(login_json.toString()+"");
                                         //收資料
