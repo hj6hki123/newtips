@@ -209,7 +209,7 @@ public class SocketService extends Service {
 
                     } catch (IOException | InterruptedException | JSONException e) {
                         e.printStackTrace();
-                        GlobalData.connectstate=false;
+                        GlobalData.connectstate=false;//若連線狀態為否，登入按鈕無法動作
                         if (e instanceof SocketTimeoutException) {
                             toastMsg("連線超時!正在重新連線");
 
