@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/activity_main.xml" value="0.12132725430597771" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page1.xml" value="0.12590579710144928" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page2.xml" value="0.1265625" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.265625" />
         <entry key="..\:/android_projects/newtips/app/src/main/res/layout/fragment_page1.xml" value="0.25" />
       </map>

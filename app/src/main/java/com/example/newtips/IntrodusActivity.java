@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -34,9 +35,9 @@ public class IntrodusActivity extends AppCompatActivity {
             }
         },1800);
 
-        String ip = "10.147.17.177".trim();
-        String port = "9998".trim();
-
+        String ip = getString(R.string.TCP_IP).trim();
+        String port = getString(R.string.TCP_PORT).trim();
+        Log.e("printIP&port",ip+port);
         if (TextUtils.isEmpty(ip) || TextUtils.isEmpty(port)) {
             Toast.makeText(this , "ip和端口號不能為空", Toast.LENGTH_SHORT).show();
             return;
