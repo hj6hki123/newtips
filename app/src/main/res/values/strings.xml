@@ -3,8 +3,8 @@
     <string name="tab1_name">主頁</string>
     <string name="tab2_name">設備管理</string>
     <string name="tab3_name">帳號</string>
-    <string name="TCP_PORT">9998</string>
-    <string name="TCP_IP">10.147.17.177</string>
+    <string name="TCP_PORT">9997</string>
+    <string name="TCP_IP">120.114.67.238</string>
 
 
 

@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/activity_main.xml" value="0.12132725430597771" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page1.xml" value="0.12590579710144928" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page1.xml" value="0.2" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page2.xml" value="0.1265625" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page3.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.265625" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/activity_introdus.xml" value="0.19630192502532928" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/smartsocket/app/src/main/res/layout/activity_login.xml" value="0.4" />
@@ -19,7 +20,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

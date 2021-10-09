@@ -180,8 +180,8 @@ public class SocketService extends Service {
                                         {
                                             datamap.put("Title","2");
                                             datamap.put("MacAddress",GlobalData.macaddress_select);//todo:添加全域macaddr_select
-                                            datamap.put("Device1",GlobalData.Deviceswitch1);
-                                            datamap.put("Device2",GlobalData.Deviceswitch2);
+                                            datamap.put("Switch1",GlobalData.Deviceswitch1);
+                                            datamap.put("Switch2",GlobalData.Deviceswitch2);
                                             JSONObject data_json=new JSONObject(datamap);
                                             sendOrder(data_json.toString()+"");
 
