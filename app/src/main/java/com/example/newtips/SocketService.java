@@ -179,7 +179,7 @@ public class SocketService extends Service {
                                         if(!GlobalData.macaddress_select.equals("none"))
                                         {
                                             datamap.put("Title","2");
-                                            datamap.put("MacAddress",GlobalData.macaddress_select);//todo:添加全域macaddr_select
+                                            datamap.put("MacAddress",GlobalData.macaddress_select);
                                             datamap.put("Switch1",GlobalData.Deviceswitch1);
                                             datamap.put("Switch2",GlobalData.Deviceswitch2);
                                             JSONObject data_json=new JSONObject(datamap);
@@ -188,9 +188,13 @@ public class SocketService extends Service {
                                             String dataget=br.readLine();
 
                                             JSONObject jsondataget=new JSONObject(dataget);
-                                            if(jsondataget.getString("Title").equals("2"))
+                                            if(jsondataget.getString("Title").equals("2"))//如果表頭是2
                                             {
                                                 GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                            }
+                                            else if(jsondataget.getString("Title").equals("Error"))
+                                            {
+
                                             }
 
 

@@ -54,7 +54,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 import android.graphics.Color;
 
@@ -129,10 +131,12 @@ public class page2 extends Fragment {
                             if (msg.equals(s)) {
                                 samelist = true;
                                 break;
+
                             }
                         }
                         if(!samelist)
                         {
+
                             sett_mask.add(msg);
                             pref.edit().putStringSet("Macaddress",sett_mask)
                                     .commit();

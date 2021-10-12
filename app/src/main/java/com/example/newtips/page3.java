@@ -43,7 +43,10 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
 import android.graphics.Color;
 
 public class page3 extends Fragment {
@@ -54,6 +57,7 @@ public class page3 extends Fragment {
 
 
     public page3() {
+
         // Required empty public constructor
     }
 
