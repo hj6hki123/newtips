@@ -278,23 +278,23 @@ public class page1 extends Fragment {
                                 textView_KHW2.setText(GlobalData.datamap_getserver.get("Kwh2"));
                                 textView_PF2.setText(GlobalData.datamap_getserver.get("Pf2"));
 
-                                if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
+                                if(GlobalData.datamap_getserver.get("Switch1").equals("0"))
                                 {
                                     switch1.setText("OFF");
                                     switch1.setBackgroundResource(R.drawable.buttonshape);
                                 }
-                                else if (GlobalData.datamap_getserver.get("Switch1").equals("ON"))
+                                else if (GlobalData.datamap_getserver.get("Switch1").equals("1"))
                                 {
                                     switch1.setText("ON");
                                     switch1.setBackgroundResource(R.drawable.buttonshap3);
                                 }
 
-                                if(GlobalData.datamap_getserver.get("Switch2").equals("OFF"))
+                                if(GlobalData.datamap_getserver.get("Switch2").equals("0"))
                                 {
                                     switch2.setText("OFF");
                                     switch2.setBackgroundResource(R.drawable.buttonshape);
                                 }
-                                else if (GlobalData.datamap_getserver.get("Switch2").equals("ON"))
+                                else if (GlobalData.datamap_getserver.get("Switch2").equals("1"))
                                 {
                                     switch2.setText("ON");
                                     switch2.setBackgroundResource(R.drawable.buttonshap3);

@@ -37,8 +37,8 @@ public class GlobalData {
             put("Kwh2","0");
             put("Pf1","0");
             put("Pf2","0");
-            put("Switch1","OFF");
-            put("Switch2","OFF");
+            put("Switch1","0");
+            put("Switch2","0");
         }
     };
 
