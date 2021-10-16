@@ -149,11 +149,11 @@ public class SocketService extends Service {
                                         sendOrder(login_json.toString()+"");
                                         //收資料
                                         String loginacess=br.readLine();
-                                        Log.e("get",loginacess);
+                                        Log.e("get",loginacess+"");
                                         JSONObject login_acess=new JSONObject(loginacess);
                                         if(login_acess.getString("Title").equals("1"))
                                         {
-                                            if(login_acess.getString("Loginacess").equals("true"))
+                                            if(login_acess.getString("Loginaccess").equals("true"))
                                             {
                                                 GlobalData.FSM="Datatransport";
                                                 Intent i=new Intent(getApplicationContext(), MainActivity.class);
@@ -184,6 +184,10 @@ public class SocketService extends Service {
                                             datamap.put("Switch2",GlobalData.Deviceswitch2);
                                             JSONObject data_json=new JSONObject(datamap);
                                             sendOrder(data_json.toString()+"");
+                                            if(data_json.getString("Switch1").equals("1"))
+                                                GlobalData.Deviceswitch1="0";
+                                            if(data_json.getString("Switch2").equals("1"))
+                                                GlobalData.Deviceswitch2="0";
 
                                             String dataget=br.readLine();
 

@@ -18,8 +18,8 @@ public class GlobalData {
     public static String Login_user="";
     public static String Login_password="";
 
-    public static String Deviceswitch1="OFF";
-    public static String Deviceswitch2="OFF";
+    public static String Deviceswitch1="0";
+    public static String Deviceswitch2="0";
 
 //server拿到的資料
     public static HashMap<String,String> datamap_getserver= new HashMap<String,String>()//正規化從server收到的資料

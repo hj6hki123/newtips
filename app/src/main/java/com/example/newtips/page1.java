@@ -213,37 +213,8 @@ public class page1 extends Fragment {
         switch1=view.findViewById(R.id.switch1);
         switch2=view.findViewById(R.id.switch2);
 
-        switch1.setOnClickListener(
-                (V)->
-                {
-                    if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
-                    {
-                        //todo:給server端開啟訊號
-                        GlobalData.Deviceswitch1="ON";
-                    }
-                    else if (GlobalData.datamap_getserver.get("Switch1").equals("ON"))
-                    {
-                        //todo:給server端關閉訊號
-                        GlobalData.Deviceswitch1="OFF";
-                    }
-
-                }
-        );
-        switch2.setOnClickListener(
-                (V)->
-                {
-                    if(GlobalData.datamap_getserver.get("Switch2").equals("OFF"))
-                    {
-                        //todo:給server端開啟訊號
-                        GlobalData.Deviceswitch2="ON";
-                    }
-                    else if (GlobalData.datamap_getserver.get("Switch2").equals("ON"))
-                    {
-                        //todo:給server端關閉訊號
-                        GlobalData.Deviceswitch2="OFF";
-                    }
-                }
-        );
+        switch1.setOnClickListener((V)->GlobalData.Deviceswitch1="1");
+        switch2.setOnClickListener((V)->GlobalData.Deviceswitch2="1");
 
 
 
@@ -310,7 +281,7 @@ public class page1 extends Fragment {
                                 if(GlobalData.datamap_getserver.get("Switch1").equals("OFF"))
                                 {
                                     switch1.setText("OFF");
-                                    switch1.setBackgroundResource(R.drawable.buttonshap3);
+                                    switch1.setBackgroundResource(R.drawable.buttonshape);
                                 }
                                 else if (GlobalData.datamap_getserver.get("Switch1").equals("ON"))
                                 {
@@ -329,7 +300,6 @@ public class page1 extends Fragment {
                                     switch2.setBackgroundResource(R.drawable.buttonshap3);
                                 }
 
-
                             }
                         });
                     } catch (Exception e) {
@@ -339,7 +309,7 @@ public class page1 extends Fragment {
             };
         }
 
-        timer.schedule(task, 0, 1000);
+        timer.schedule(task, 0, 2000);
 
     }
 

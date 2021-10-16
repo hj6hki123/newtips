@@ -88,11 +88,11 @@ class UDP implements Runnable {
                 Log.d(TAG, "UDP-Server收到資料： " + string);
                 //todo:針對UDP收到的資料去處理，將macaddress讀出來
                 String[] strs= string.split(",");//Strimg[0:MACADDR,1:x,2:CLIENTIP]
-                String strMAC=string.substring(0,17);
+
                 /**以Intent的方式建立廣播，將得到的值傳至主要Activity*/
                 Intent intent = new Intent();
                 intent.setAction(RECEIVE_ACTION);
-                intent.putExtra(RECEIVE_STRING,strMAC);
+                intent.putExtra(RECEIVE_STRING,strs[0]);
                 intent.putExtra(RECEIVE_BYTES, dpRcv.getData());
                 context.sendBroadcast(intent);
 
