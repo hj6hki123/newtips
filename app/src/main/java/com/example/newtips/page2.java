@@ -57,6 +57,10 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.graphics.Color;
 
@@ -67,6 +71,12 @@ public class page2 extends Fragment {
     MyBroadcast myBroadcast = new MyBroadcast();
     SharedPreferences pref ;
     Set<String> sett_mask;
+    boolean udp_flag=false;
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Timer timer = new Timer();
+    private TimerTask task;
+    ExecutorService exec = Executors.newCachedThreadPool();
+    UDP udpServer;
 
     public page2() {
         // Required empty public constructor
@@ -92,6 +102,27 @@ public class page2 extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        Button btn_udpstart=view.findViewById(R.id.btn_udpstart);
+        btn_udpstart.setOnClickListener( (view1 ->
+        {
+            if(!udp_flag)
+            {
+                start_UDP();
+                udp_flag=true;
+            }
+            else
+            {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exec.shutdown();
+                        udp_flag=false;
+                    }
+                },1800);
+            }
+
+        }));
 
     }
 
@@ -161,6 +192,17 @@ public class page2 extends Fragment {
 
             }
         }
+    }
+
+    private void start_UDP()
+    {
+        //UDP_setting
+        udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
+        udpServer.setPort(31999);
+        udpServer.changeServerStatus(true);
+        exec.execute(udpServer);
+
+
     }
 
 

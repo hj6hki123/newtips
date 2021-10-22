@@ -228,6 +228,11 @@ public class page1 extends Fragment {
         bindSocketService();
         timerUI();
 
+
+    }
+
+    private void start_UDP()
+    {
         //UDP_setting
         udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
         udpServer.setPort(31999);
@@ -235,11 +240,7 @@ public class page1 extends Fragment {
         exec.execute(udpServer);
 
 
-
-
     }
-
-
 
 
     private void timerUI()//每過0.5秒更新一次UI
