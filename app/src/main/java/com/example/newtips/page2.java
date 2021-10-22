@@ -71,10 +71,8 @@ public class page2 extends Fragment {
     MyBroadcast myBroadcast = new MyBroadcast();
     SharedPreferences pref ;
     Set<String> sett_mask;
-    boolean udp_flag=false;
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private Timer timer = new Timer();
-    private TimerTask task;
+
+
     ExecutorService exec = Executors.newCachedThreadPool();
     UDP udpServer;
 
@@ -106,22 +104,23 @@ public class page2 extends Fragment {
         Button btn_udpstart=view.findViewById(R.id.btn_udpstart);
         btn_udpstart.setOnClickListener( (view1 ->
         {
-            if(!udp_flag)
-            {
-                start_UDP();
-                udp_flag=true;
-            }
-            else
-            {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        exec.shutdown();
-                        udp_flag=false;
-                    }
-                },1800);
-            }
 
+            //開啟UDP 、關閉按鈕點擊
+            start_UDP();
+            btn_udpstart.setClickable(false);
+            btn_udpstart.setText("正在搜尋裝置...");
+
+
+            //關閉UDP 、 並開啟按鈕點擊
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    udpServer.changeServerStatus(false);
+                    btn_udpstart.setText("搜尋裝置");
+                    btn_udpstart.setClickable(true);
+                }
+            },5000);
         }));
 
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -98,6 +99,11 @@ class UDP implements Runnable {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                if(e instanceof SocketException)
+                {
+                    Log.w("UDPclass","UDP關閉連線");
+                }
+
             }
 
         }
