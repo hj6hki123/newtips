@@ -110,7 +110,6 @@ public class page2 extends Fragment {
             btn_udpstart.setClickable(false);
             btn_udpstart.setText("正在搜尋裝置...");
 
-
             //關閉UDP 、 並開啟按鈕點擊
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -120,7 +119,7 @@ public class page2 extends Fragment {
                     btn_udpstart.setText("搜尋裝置");
                     btn_udpstart.setClickable(true);
                 }
-            },5000);
+            },15000);
         }));
 
     }

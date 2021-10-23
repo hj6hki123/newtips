@@ -310,7 +310,7 @@ public class page1 extends Fragment {
             };
         }
 
-        timer.schedule(task, 0, 2000);
+        timer.schedule(task, 0, 1000);
 
     }
 

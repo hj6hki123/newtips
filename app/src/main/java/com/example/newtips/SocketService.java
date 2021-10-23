@@ -190,19 +190,23 @@ public class SocketService extends Service {
                                                 GlobalData.Deviceswitch2="0";
 
                                             String dataget=br.readLine();
-
-                                            JSONObject jsondataget=new JSONObject(dataget);
-                                            if(jsondataget.getString("Title").equals("2"))//如果表頭是2
-                                            {
-                                                GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
-                                            }
-                                            else if(jsondataget.getString("Title").equals("Error"))
-                                            {
-
-                                            }
-
-
                                             Log.e("Datatransport",dataget+"");
+                                            if(dataget!=null)
+                                            {
+                                                JSONObject jsondataget=new JSONObject(dataget);
+                                                if(jsondataget.getString("Title").equals("2"))//如果表頭是2
+                                                {
+                                                    GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                                }
+                                                else if(jsondataget.getString("Title").equals("Error"))
+                                                {
+
+                                                }
+                                            }
+
+
+
+
                                         }
                                         else
                                         {
@@ -305,6 +309,10 @@ public class SocketService extends Service {
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                        if(e instanceof SocketException)
+                        {
+                            releaseSocket();
+                        }
                         Log.e("sd",e.toString());
                     }
 
