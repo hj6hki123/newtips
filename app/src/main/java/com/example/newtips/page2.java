@@ -199,8 +199,6 @@ public class page2 extends Fragment {
         udpServer.setPort(31999);
         udpServer.changeServerStatus(true);
         exec.execute(udpServer);
-
-
     }
 
 
