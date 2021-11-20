@@ -17,7 +17,10 @@
         app:tabTextAppearance="@style/CustomTabWidgetText"
         app:tabTextColor="#000000"
         tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="373dp">
+        tools:layout_editor_absoluteY="373dp"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed">
 
     </com.google.android.material.tabs.TabLayout>
 
