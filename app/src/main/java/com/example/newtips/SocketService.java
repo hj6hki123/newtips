@@ -215,6 +215,15 @@ public class SocketService extends Service {
 
 
                                         break;
+
+
+                                    case "Deletmacaddress":
+                                        JSONObject delet_mac=new JSONObject();
+                                        delet_mac.put("Title","3");
+                                        delet_mac.put("MacAddress",GlobalData.dlt_mac);
+                                        sendOrder(delet_mac.toString()+"");
+                                        GlobalData.FSM="Datatransport";
+                                        break;
                                     default:
                                         break;
                                 }

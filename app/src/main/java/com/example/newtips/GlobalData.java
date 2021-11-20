@@ -14,6 +14,7 @@ public class GlobalData {
     public static String receivedata="";
     public static Boolean connectstate=false;
     public static String macaddress_select="none";
+    public static String dlt_mac="none";
 //傳給server的資料
     public static String Login_user="";
     public static String Login_password="";

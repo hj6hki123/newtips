@@ -47,9 +47,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             title=itemView.findViewById(R.id.title);
             delet_pic=itemView.findViewById(R.id.image_delete);
             add_pic=itemView.findViewById(R.id.image_add);
-
-
-
         }
     }
 

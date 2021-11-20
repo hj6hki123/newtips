@@ -6,6 +6,7 @@
     android:id="@+id/mDat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
      >
 
 
@@ -125,7 +126,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.6"
+        app:layout_constraintGuide_percent="0.55"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -140,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.73" />
 
     <TextView
         android:id="@+id/textV1"
@@ -471,15 +472,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/buttonshape"
         android:text="off"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gauge_view_Vupp"
-        app:layout_constraintVertical_bias="0.995"
-        android:background="@drawable/buttonshape"
-        android:textColor="@color/white"/>
+        app:layout_constraintVertical_bias="0.995" />
 
 
     <Button
@@ -489,12 +489,11 @@
         android:background="@drawable/buttonshape"
         android:text="off"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/gauge_view_Vdown"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.867" />
 
     <TextView
         android:id="@+id/textViewunitV1"
@@ -656,7 +655,7 @@
 
     <Spinner
         android:id="@+id/spinner_gauge1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vupp"
@@ -667,12 +666,11 @@
 
     <Spinner
         android:id="@+id/spinner_gauge2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vdown"
         app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vdown"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gauge_view_Vdown"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.724" />

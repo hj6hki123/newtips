@@ -182,6 +182,8 @@ public class page2 extends Fragment {
                     Alist.remove(delete_str);
                     mAdapter.notifyDataSetChanged();
                     pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).commit();
+                    GlobalData.dlt_mac=delete_str;
+                    GlobalData.FSM="Deletmacaddress";
                     GlobalData.macaddress_select="none";
 
                     break;

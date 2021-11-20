@@ -51,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 ).attach();
-        if(GlobalData.macaddress_select.equals("none"))
-            viewPager2.setCurrentItem(1);
+        viewPager2.setPageTransformer(new DepthPageTransformer());
+        //if(GlobalData.macaddress_select.equals("none"))
+          //  viewPager2.setCurrentItem(1);
     }
     //todo:返回鍵延遲
     private  Boolean isExit = false;

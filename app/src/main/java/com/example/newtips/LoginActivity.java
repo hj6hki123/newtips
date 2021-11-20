@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
 
 
-    final Uri uri_register=Uri.parse("https://mnya.tw/cc/word/1477.html");//註冊網址
+    final Uri uri_register=Uri.parse("http://120.114.68.132/sign-up/");//註冊網址
     MyBroadcast myBroadcast = new MyBroadcast();
     TextView textView_hint;
     @Override
