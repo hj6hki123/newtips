@@ -15,6 +15,7 @@ public class GlobalData {
     public static Boolean connectstate=false;
     public static String macaddress_select="none";
     public static String dlt_mac="none";
+    public static String[] device_name_change={"null","null"};
 //傳給server的資料
     public static String Login_user="";
     public static String Login_password="";
@@ -40,6 +41,8 @@ public class GlobalData {
             put("Pf2","0");
             put("Switch1","0");
             put("Switch2","0");
+            put("Name1","null");
+            put("Name2","null");
         }
     };
 

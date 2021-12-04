@@ -224,6 +224,16 @@ public class SocketService extends Service {
                                         sendOrder(delet_mac.toString()+"");
                                         GlobalData.FSM="Datatransport";
                                         break;
+                                    case "Changename":
+                                        JSONObject change_name=new JSONObject();
+                                        change_name.put("Title","4");
+                                        change_name.put("MacAddress",GlobalData.macaddress_select);
+                                        change_name.put("Name1",GlobalData.device_name_change[0]);
+                                        change_name.put("Name2",GlobalData.device_name_change[1]);
+                                        sendOrder(change_name.toString()+"");
+                                        GlobalData.FSM="Datatransport";
+                                        Log.e("changename","s11111111111");
+                                        break;
                                     default:
                                         break;
                                 }

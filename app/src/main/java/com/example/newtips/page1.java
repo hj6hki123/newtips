@@ -4,9 +4,11 @@ import static android.content.Context.BIND_AUTO_CREATE;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -89,6 +91,7 @@ public class page1 extends Fragment {
     TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1,textView_PF1;
     TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2,textView_PF2;
     Button switch1,switch2;
+    TextView devicename1,devicename2;
 
     public page1() {
         // Required empty public constructor
@@ -139,6 +142,9 @@ public class page1 extends Fragment {
 
         spinner_guage1=(Spinner) root.findViewById(R.id.spinner_gauge1);
         spinner_guage2=(Spinner) root.findViewById(R.id.spinner_gauge2);
+
+        devicename1=(TextView) root.findViewById(R.id.devicename1);
+        devicename2=(TextView) root.findViewById(R.id.devicename2);
     }
 
     @Override
@@ -206,6 +212,25 @@ public class page1 extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        devicename1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
+                    setEdittextCustomDialog(0);
+                else
+                    Toast.makeText(getActivity(),"需有device連線",Toast.LENGTH_SHORT).show();
+            }
+        });
+        devicename2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
+                    setEdittextCustomDialog(1);
+                else
+                    Toast.makeText(getActivity(),"需有device連線",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -279,6 +304,16 @@ public class page1 extends Fragment {
                                 textView_KHW2.setText(GlobalData.datamap_getserver.get("Kwh2"));
                                 textView_PF2.setText(GlobalData.datamap_getserver.get("Pf2"));
 
+                                if(GlobalData.datamap_getserver.get("Name1").equals(""))
+                                    devicename1.setText("null");
+                                else
+                                    devicename1.setText(GlobalData.datamap_getserver.get("Name1"));
+                                if(GlobalData.datamap_getserver.get("Name2").equals(""))
+                                    devicename2.setText("null");
+                                else
+                                    devicename2.setText(GlobalData.datamap_getserver.get("Name2"));
+
+
                                 if(GlobalData.datamap_getserver.get("Switch1").equals("0"))
                                 {
                                     switch1.setText("OFF");
@@ -330,7 +365,37 @@ public class page1 extends Fragment {
         };
         Intent intent = new Intent(getActivity(), SocketService.class);
         getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
+
     }
+
+    private void setEdittextCustomDialog(final int pos){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        View v =  inflater.inflate(R.layout.alert_edittext,null);
+        EditText editText = v.findViewById(R.id.editext_alert);
+        alertDialog.setTitle("設定名稱");
+        alertDialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                GlobalData.FSM="Changename";
+                GlobalData.device_name_change[pos]=editText.getText().toString();
+
+            }
+        });
+        alertDialog.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        alertDialog.setView(v);
+        alertDialog.show();
+
+
+    }
+
 
 
 
