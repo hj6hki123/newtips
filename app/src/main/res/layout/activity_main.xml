@@ -22,7 +22,7 @@
         app:tabTextColor="#000000"
         tools:layout_editor_absoluteX="182dp"
         tools:layout_editor_absoluteY="373dp"
-        android:background="@color/background_color">
+        android:background="#DCD5F3F4">
 
     </com.google.android.material.tabs.TabLayout>
 

@@ -16,6 +16,7 @@ public class GlobalData {
     public static String macaddress_select="none";
     public static String dlt_mac="none";
     public static String[] device_name_change={"null","null"};
+    public static String[] device_name_now={"device1","device2"};//only write in page3
 //傳給server的資料
     public static String Login_user="";
     public static String Login_password="";
@@ -33,6 +34,7 @@ public class GlobalData {
             put("Current1","0");
             put("Current2","0");
             put("Watt1","0");
+            put("Watt2","0");
             put("Freq1","0");
             put("Freq2","0");
             put("Kwh1","0");

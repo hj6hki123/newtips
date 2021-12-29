@@ -2,7 +2,7 @@
     <string name="app_name">SmartSocket</string> 
     <string name="tab1_name">主頁</string>
     <string name="tab2_name">設備管理</string>
-    <string name="tab3_name">帳號</string>
+    <string name="tab3_name">圖表</string>
     <string name="TCP_PORT">9997</string>
     <string name="TCP_IP">120.114.68.132</string>
 

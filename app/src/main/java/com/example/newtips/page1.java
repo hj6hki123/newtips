@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.text.StaticLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -307,12 +308,18 @@ public class page1 extends Fragment {
                                 if(GlobalData.datamap_getserver.get("Name1").equals(""))
                                     devicename1.setText("null");
                                 else
+                                {
                                     devicename1.setText(GlobalData.datamap_getserver.get("Name1"));
+                                    GlobalData.device_name_now[0]=GlobalData.datamap_getserver.get("Name1");
+                                }
+
                                 if(GlobalData.datamap_getserver.get("Name2").equals(""))
                                     devicename2.setText("null");
                                 else
+                                {
                                     devicename2.setText(GlobalData.datamap_getserver.get("Name2"));
-
+                                    GlobalData.device_name_now[1]=GlobalData.datamap_getserver.get("Name2");
+                                }
 
                                 if(GlobalData.datamap_getserver.get("Switch1").equals("0"))
                                 {
