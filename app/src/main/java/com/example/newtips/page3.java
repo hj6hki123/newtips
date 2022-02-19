@@ -89,7 +89,6 @@ public class page3 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bindSocketService();
         charts=view.findViewById(R.id.lineChart);
         initChart();
         startRun();
@@ -179,6 +178,7 @@ public class page3 extends Fragment {
             set = createSet(color,text);
             data.addDataSet(set);//如果是第一次跑則需要載入數據
         }
+        set.setLabel(text);
         data.addEntry(new Entry(set.getEntryCount(),inputData),index);//新增數據點
         //更新圖表
         data.notifyDataChanged();
@@ -194,9 +194,11 @@ public class page3 extends Fragment {
         //簡略寫法
         isRunning = true;
         Runnable runnable  = ()->{
-            //取亂數
-            addData(Float.parseFloat((Objects.requireNonNull(GlobalData.datamap_getserver.get("Watt1")))),0,Color.GREEN,GlobalData.device_name_now[0]);
-            addData(Float.parseFloat((Objects.requireNonNull(GlobalData.datamap_getserver.get("Watt2")))),1,Color.BLUE,GlobalData.device_name_now[1]);
+            if(!GlobalData.macaddress_select.equals("none"))
+            {
+                addData(Float.parseFloat((Objects.requireNonNull(GlobalData.datamap_getserver.get("Watt1")))),0,Color.GREEN,GlobalData.device_name_now[0]);
+                addData(Float.parseFloat((Objects.requireNonNull(GlobalData.datamap_getserver.get("Watt2")))),1,Color.BLUE,GlobalData.device_name_now[1]);
+            }
 
         };
 //            thread = new Thread(new Runnable()
