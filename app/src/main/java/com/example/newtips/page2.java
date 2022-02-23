@@ -101,7 +101,7 @@ public class page2 extends Fragment {
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Button btn_udpstart=view.findViewById(R.id.btn_udpstart);
+        /*Button btn_udpstart=view.findViewById(R.id.btn_udpstart);
         btn_udpstart.setOnClickListener( (view1 ->
         {
 
@@ -120,7 +120,31 @@ public class page2 extends Fragment {
                     btn_udpstart.setClickable(true);
                 }
             },15000);
-        }));
+        }));*/
+
+
+        LottieAnimationView lottie_addBtn=view.findViewById(R.id.lottie_addbutton);
+        lottie_addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //開啟UDP 、關閉按鈕點擊
+                start_UDP();
+                lottie_addBtn.playAnimation();
+                lottie_addBtn.setClickable(false);
+                Toast.makeText(getActivity(),"請與15秒內與裝置配對",Toast.LENGTH_LONG).show();
+
+                //關閉UDP 、 並開啟按鈕點擊
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        udpServer.changeServerStatus(false);
+                        lottie_addBtn.setClickable(true);
+                        lottie_addBtn.pauseAnimation();
+                    }
+                },15000);
+            }
+        });
 
     }
 
@@ -182,6 +206,8 @@ public class page2 extends Fragment {
                     Alist.remove(delete_str);
                     mAdapter.notifyDataSetChanged();
                     pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).commit();
+                    GlobalData.dlt_mac=delete_str;
+                    GlobalData.FSM="Deletmacaddress";
                     GlobalData.macaddress_select="none";
 
                     break;
@@ -199,8 +225,6 @@ public class page2 extends Fragment {
         udpServer.setPort(31999);
         udpServer.changeServerStatus(true);
         exec.execute(udpServer);
-
-
     }
 
 

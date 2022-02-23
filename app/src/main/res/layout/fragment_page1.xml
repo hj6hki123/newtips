@@ -12,19 +12,14 @@
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Vupp"
-        android:layout_width="153dp"
-        android:layout_height="249dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
+        app:layout_constraintHeight_percent="0.3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spi"
-        app:layout_constraintVertical_bias="0.662"
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/VoltageValues"
@@ -44,19 +39,14 @@
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Iupp"
-        android:layout_width="153dp"
-        android:layout_height="249dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
+        app:layout_constraintHeight_percent="0.3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spi"
-        app:layout_constraintVertical_bias="0.662"
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/CurrentValues"
@@ -77,19 +67,14 @@
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Vdown"
-        android:layout_width="153dp"
-        android:layout_height="249dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
+        app:layout_constraintHeight_percent="0.3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.547"
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/VoltageValues"
@@ -109,19 +94,14 @@
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Idown"
-        android:layout_width="153dp"
-        android:layout_height="249dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
+        app:layout_constraintHeight_percent="0.3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.547"
         app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/CurrentValues"
@@ -141,48 +121,26 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="172dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.55"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="365dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="241dp" />
-
-    <TextView
-        android:id="@+id/textView_devicename1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SHOWTEXT"
-        android:textSize="10pt"
-        app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vupp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spi"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView_devicename2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SHOWTEXT"
-        android:textSize="10pt"
-        app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vdown"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <TextView
         android:id="@+id/textV1"
@@ -192,8 +150,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         app:layout_constraintVertical_bias="0.0769" />
 
@@ -205,8 +161,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         app:layout_constraintVertical_bias="0.2307" />
 
@@ -218,8 +172,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         app:layout_constraintVertical_bias="0.3846" />
 
@@ -231,8 +183,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         app:layout_constraintVertical_bias="0.5383" />
 
@@ -244,8 +194,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         app:layout_constraintVertical_bias="0.864" />
 
@@ -253,12 +201,10 @@
         android:id="@+id/textC1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="千瓦/時:"
+        android:text="千瓦.時:"
         android:textSize="10pt"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         app:layout_constraintVertical_bias="0.705" />
 
@@ -270,8 +216,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.0769" />
 
@@ -283,8 +227,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.2307" />
 
@@ -296,8 +238,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.3846" />
 
@@ -309,8 +249,6 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.5383" />
 
@@ -318,14 +256,13 @@
         android:id="@+id/textC2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="千瓦/時:"
+        android:text="千瓦.時:"
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.705" />
+
     <TextView
         android:id="@+id/textP2"
         android:layout_width="wrap_content"
@@ -334,11 +271,8 @@
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.864"
-        />
+        app:layout_constraintVertical_bias="0.864" />
 
     <TextView
         android:id="@+id/textViewVOLT1"
@@ -537,15 +471,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/buttonshape"
         android:text="off"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gauge_view_Vupp"
-        app:layout_constraintVertical_bias="0.995"
-        android:background="@drawable/buttonshape"
-        android:textColor="@color/white"/>
+        app:layout_constraintVertical_bias="0.995" />
 
 
     <Button
@@ -555,12 +488,11 @@
         android:background="@drawable/buttonshape"
         android:text="off"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/gauge_view_Vdown"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.867" />
 
     <TextView
         android:id="@+id/textViewunitV1"
@@ -578,7 +510,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="I"
+        android:text="A"
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCURRENT1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -643,7 +575,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="I"
+        android:text="A
+"
         android:textSize="10pt"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCURRENT2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -707,41 +640,60 @@
         android:layout_marginEnd="20dp"/>
 
     <View
+        android:layout_marginTop="10dp"
         android:id="@+id/spi"
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="#1A000000"
-        app:layout_constraintBottom_toTopOf="@+id/textView_devicename1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_gauge1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/gauge_view_Vupp"
-        app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vupp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/gauge_view_Vupp"
-        app:layout_constraintTop_toTopOf="@+id/gauge_view_Vupp"
-        app:layout_constraintVertical_bias="0.062"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vupp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <Spinner
         android:id="@+id/spinner_gauge2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vdown"
+        app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vdown"
+        app:layout_constraintStart_toStartOf="@+id/gauge_view_Vdown"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.847" />
+
+    <TextView
+        android:id="@+id/devicename1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/gauge_view_Vdown"
-        app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vdown"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/gauge_view_Vdown"
-        app:layout_constraintTop_toTopOf="@+id/gauge_view_Vdown"
-        app:layout_constraintVertical_bias="0.062"
-        android:gravity="center_vertical"
-        />
+        android:gravity="center"
+        android:text="null"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/devicename2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="null"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

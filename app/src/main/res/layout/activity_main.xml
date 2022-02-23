@@ -4,20 +4,26 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_color">
 
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        app:tabSelectedTextColor="#7B3BED"
+        android:layout_height="69dp"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#223FE4"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
         app:tabRippleColor="#6DBF9BFD"
-        app:tabIndicatorColor="#B4EAD30C"
+        app:tabUnboundedRipple="true"
+        app:tabSelectedTextColor="#7B3BED"
         app:tabTextAppearance="@style/CustomTabWidgetText"
         app:tabTextColor="#000000"
         tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="373dp">
+        tools:layout_editor_absoluteY="373dp"
+        android:background="#00FFFFFF">
 
     </com.google.android.material.tabs.TabLayout>
 
