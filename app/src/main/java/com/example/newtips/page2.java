@@ -133,6 +133,8 @@ public class page2 extends Fragment {
                 lottie_addBtn.setClickable(false);
                 Toast.makeText(getActivity(),"請與15秒內與裝置配對",Toast.LENGTH_LONG).show();
 
+
+
                 //關閉UDP 、 並開啟按鈕點擊
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -184,12 +186,10 @@ public class page2 extends Fragment {
                             if (msg.equals(s)) {
                                 samelist = true;
                                 break;
-
                             }
                         }
-                        if(!samelist)
+                        if(!samelist)//若無重複將資料添加到sett_mask和Alist中，並通知mAdapter更新資料
                         {
-
                             sett_mask.add(msg);
                             pref.edit().putStringSet("Macaddress",sett_mask)
                                     .commit();

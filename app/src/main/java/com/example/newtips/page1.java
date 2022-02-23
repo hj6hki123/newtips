@@ -86,7 +86,7 @@ public class page1 extends Fragment {
     ArrayAdapter<String> spinnerAdapter;
 
 
-//TODO:UI 宣告
+
     Spinner spinner_guage1,spinner_guage2;
     GaugeView gaugeView_Vupp,gaugeView_Vdown,gaugeView_Iupp,gaugeView_Idown;
     TextView textView_VOLT1,textView_CURRENT1,textView_WATT1,textView_FREQ1,textView_KHW1,textView_PF1;
@@ -253,6 +253,7 @@ public class page1 extends Fragment {
 
         bindSocketService();
         timerUI();
+
 
 
     }
