@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable-v21/buttonshap3.xml" value="0.2361111111111111" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2361111111111111" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable/background_color.xml" value="0.2361111111111111" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable/baseline_add_circle_24.xml" value="0.12685185185185185" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable/buttonshap3.xml" value="0.2361111111111111" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable/buttonshape.xml" value="0.2361111111111111" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/drawable/buttonshape2.xml" value="0.2361111111111111" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/activity_introdus.xml" value="0.17844202898550723" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/activity_login.xml" value="0.1265625" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/activity_main.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/alert_edittext.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page1.xml" value="0.264" />
-        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page2.xml" value="0.1265625" />
+        <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page2.xml" value="0.6127167630057804" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/fragment_page3.xml" value="0.21557971014492755" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/gs.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/hj6hk/AndroidStudioProjects/SmartSocket/app/src/main/res/layout/recycle_item.xml" value="0.22175925925925927" />

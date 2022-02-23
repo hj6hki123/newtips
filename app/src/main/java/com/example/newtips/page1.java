@@ -181,7 +181,7 @@ public class page1 extends Fragment {
                     default:
                         break;
                 }
-                Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -207,7 +207,7 @@ public class page1 extends Fragment {
                     default:
                         break;
                 }
-                Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),sInfo,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -222,7 +222,7 @@ public class page1 extends Fragment {
                 if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
                     setEdittextCustomDialog(0);
                 else
-                    Toast.makeText(getActivity(),"需有device連線",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
             }
         });
         devicename2.setOnClickListener(new View.OnClickListener() {
@@ -352,7 +352,7 @@ public class page1 extends Fragment {
             };
         }
 
-        timer.schedule(task, 0, 600);
+        timer.schedule(task, 0, 300);
 
     }
 
