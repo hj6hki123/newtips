@@ -1,234 +1,163 @@
 package com.example.newtips;
 
+import static android.content.Context.BIND_AUTO_CREATE;
+
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.airbnb.lottie.Lottie;
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.newtips.R;
+import com.example.newtips.common.Constants;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import android.graphics.Color;
 
 public class page2 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private boolean conditionerFlag = false;
-    private boolean dehumidifierFlag = false;
-    MyBroadcastReceiver mMyReceiver;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private LinkedList<String> Alist=new LinkedList<String>();
+    private RecyclerView mRecyclerView;
+    private WordListAdapter mAdapter;
+    MyBroadcast myBroadcast = new MyBroadcast();
+    SharedPreferences pref ;
+    Set<String> sett_mask;
 
     public page2() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment page2.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static page2 newInstance(String param1, String param2) {
-        page2 fragment = new page2();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_page2, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //---------------------------------------------------------------------------
-        Button curtain_on=(Button)getView().findViewById(R.id.angry1_btn1);
-        Button curtain_off=(Button)getView().findViewById(R.id.angry1_btn2);
-        Button curtain_stop=(Button)getView().findViewById(R.id.angry1_btn3);
-        curtain_on.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                curtain_on.setBackgroundResource(R.drawable.buttonshape2);
-                curtain_off.setBackgroundResource(R.drawable.buttonshape);
-                curtain_stop.setBackgroundResource(R.drawable.buttonshape);
 
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x01);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        curtain_off.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                curtain_on.setBackgroundResource(R.drawable.buttonshape);
-                curtain_off.setBackgroundResource(R.drawable.buttonshape2);
-                curtain_stop.setBackgroundResource(R.drawable.buttonshape);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x02);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        curtain_stop.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                curtain_on.setBackgroundResource(R.drawable.buttonshape);
-                curtain_off.setBackgroundResource(R.drawable.buttonshape);
-                curtain_stop.setBackgroundResource(R.drawable.buttonshape2);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "curtain");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x00);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        //---------------------------------------------------------------------------
-        //---------------------------------------------------------------------------
-        Button window_on=(Button)getView().findViewById(R.id.angry2_btn1);
-        Button window_off=(Button)getView().findViewById(R.id.angry2_btn2);
-        Button window_stop=(Button)getView().findViewById(R.id.angry2_btn3);
-        window_on.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                window_on.setBackgroundResource(R.drawable.buttonshape2);
-                window_off.setBackgroundResource(R.drawable.buttonshape);
-                window_stop.setBackgroundResource(R.drawable.buttonshape);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "window");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x01);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        window_off.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                window_on.setBackgroundResource(R.drawable.buttonshape);
-                window_off.setBackgroundResource(R.drawable.buttonshape2);
-                window_stop.setBackgroundResource(R.drawable.buttonshape);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "window");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x02);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        window_stop.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                window_on.setBackgroundResource(R.drawable.buttonshape);
-                window_off.setBackgroundResource(R.drawable.buttonshape);
-                window_stop.setBackgroundResource(R.drawable.buttonshape2);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "window");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x00);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        //---------------------------------------------------------------------------
-        //---------------------------------------------------------------------------
-        Button fan_on=(Button)getView().findViewById(R.id.angry3_btn1);
-        Button fan_off=(Button)getView().findViewById(R.id.angry3_btn2);
-        fan_on.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fan_on.setBackgroundResource(R.drawable.buttonshape2);
-                fan_off.setBackgroundResource(R.drawable.buttonshape);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "fan");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x01);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
-        fan_off.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fan_on.setBackgroundResource(R.drawable.buttonshape);
-                fan_off.setBackgroundResource(R.drawable.buttonshape2);
-                Intent it = new Intent("KEY"); //設定廣播識別碼
-                it.putExtra("iuforon", "fan");//設定廣播夾帶參數
-                it.putExtra("stream3",(byte)0x00);
-                getActivity().sendBroadcast(it); //發送廣播訊息
-            }
-        });
+        DATAinit();
+        // Get a handle to the RecyclerView.
+        mRecyclerView = view.findViewById(R.id.recycleview);
 
-        //---------------------------------------------------------------------------
-        //---------------------------------------------------------------------------
-        Button conditioner_switch=(Button)getView().findViewById(R.id.angry4_btn1);
-        Button dehumidifier_switch=(Button)getView().findViewById(R.id.angry4_btn2);
+        // Create an adapter and supply the data to be displayed.
+        mAdapter = new WordListAdapter(getActivity(), Alist);
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        conditioner_switch.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!(conditionerFlag)) {
-                    conditionerFlag = true;
-                    Intent it = new Intent("KEY"); //設定廣播識別碼
-                    it.putExtra("iuforon", "conditioner");//設定廣播夾帶參數
-                    it.putExtra("stream3",(byte)0x01);
-                    getActivity().sendBroadcast(it); //發送廣播訊息
-                    conditioner_switch.setBackgroundResource(R.drawable.buttonshape2);
-                } else {
-                    conditionerFlag = false;
-                    Intent it = new Intent("KEY"); //設定廣播識別碼
-                    it.putExtra("iuforon", "conditioner");//設定廣播夾帶參數
-                    it.putExtra("stream3",(byte)0x00);
-                    getActivity().sendBroadcast(it); //發送廣播訊息
-                    conditioner_switch.setBackgroundResource(R.drawable.buttonshape);
-                }
-
-
-            }
-        });
-        dehumidifier_switch.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!(dehumidifierFlag)) {
-                    dehumidifierFlag = true;
-                    Intent it = new Intent("KEY"); //設定廣播識別碼
-                    it.putExtra("iuforon", "dehumidifier");//設定廣播夾帶參數
-                    it.putExtra("stream3",(byte)0x01);
-                    getActivity().sendBroadcast(it); //發送廣播訊息
-                    dehumidifier_switch.setBackgroundResource(R.drawable.buttonshape2);
-                } else {
-                    dehumidifierFlag = false;
-                    Intent it = new Intent("KEY"); //設定廣播識別碼
-                    it.putExtra("iuforon", "dehumidifier");//設定廣播夾帶參數
-                    it.putExtra("stream3",(byte)0x00);
-                    getActivity().sendBroadcast(it); //發送廣播訊息
-                    dehumidifier_switch.setBackgroundResource(R.drawable.buttonshape);
-                }
-
-            }
-        });
-
-        //---------------------------------------------------------------------------
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        IntentFilter intentFilter = new IntentFilter(UDP.RECEIVE_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter);
+        IntentFilter intentFilter2 = new IntentFilter(WordListAdapter.RECEIVE_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter2);
+
+
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+
+    }
+    private void DATAinit()
+    {
+        pref =getActivity().getPreferences(Context.MODE_PRIVATE);
+        sett_mask=new HashSet<String>(pref.getStringSet("Macaddress", new HashSet<>()));//!!new一個set防止sett引用sp變數
+        Alist.addAll(sett_mask);
+    }
+    private class MyBroadcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String mAction = intent.getAction();
+            assert mAction != null;
+            switch (mAction) {
+                /**接收來自UDP回傳之訊息*/
+                case UDP.RECEIVE_ACTION:
+                    String msg = intent.getStringExtra(UDP.RECEIVE_STRING);
+                    byte[] bytes = intent.getByteArrayExtra(UDP.RECEIVE_BYTES);
+                    if(msg.length()>0)
+                    {
+                        boolean samelist=false;
+                        for(String s:sett_mask)//檢查有無重複
+                        {
+                            if (msg.equals(s)) {
+                                samelist = true;
+                                break;
+                            }
+                        }
+                        if(!samelist)
+                        {
+                            sett_mask.add(msg);
+                            pref.edit().putStringSet("Macaddress",sett_mask)
+                                    .commit();
+                            Alist.add(msg);
+                            mAdapter.notifyDataSetChanged();
+
+                        }
+
+                    }
+                    break;
+                case WordListAdapter.RECEIVE_ACTION:
+                    String delete_str = intent.getStringExtra(WordListAdapter.RECEIVE_STRING);
+                    sett_mask.remove(delete_str);
+                    Alist.remove(delete_str);
+                    mAdapter.notifyDataSetChanged();
+                    pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).commit();
+                    GlobalData.macaddress_select="none";
+
+                    break;
+
+
+
+            }
         }
-        IntentFilter itFilter = new IntentFilter("KEY");//KEY為廣播辨識碼
-        mMyReceiver = new MyBroadcastReceiver();
-        getActivity().registerReceiver(mMyReceiver, itFilter); //註冊廣播接收器
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.e("created","page2");
-        return inflater.inflate(R.layout.fragment_page2, container, false);
-    }
+
 }

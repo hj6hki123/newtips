@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="speedTestRangeValues">
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+    </string-array>
+
+    <string-array name="HPRangeValues">
+        <item>0</item>
+        <item>3</item>
+        <item>6</item>
+        <item>9</item>
+        <item>12</item>
+        <item>15</item>
+        <item>18</item>
+        <item>21</item>
+        <item>25</item>
+    </string-array>
+
+    <string-array name="HFRangeValues">
+        <item>0</item>
+        <item>200</item>
+        <item>400</item>
+        <item>600</item>
+        <item>800</item>
+        <item>1000</item>
+        <item>1200</item>
+        <item>1400</item>
+        <item>1600</item>
+    </string-array>
+
+    <string-array name="WFRangeValues">
+        <item>0</item>
+        <item>12</item>
+        <item>24</item>
+        <item>36</item>
+        <item>48</item>
+        <item>60</item>
+        <item>72</item>
+        <item>84</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="WaterTemperatureValues">
+        <item>0</item>
+        <item>12</item>
+        <item>24</item>
+        <item>36</item>
+        <item>48</item>
+        <item>60</item>
+        <item>72</item>
+        <item>84</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="CurrentValues">
+        <item>0</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+    </string-array>
+    <string-array name="VoltageValues">
+        <item>0</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+        <item>120</item>
+        <item>150</item>
+        <item>180</item>
+        <item>210</item>
+        <item>230</item>
+    </string-array>
+
+
+
+</resources>

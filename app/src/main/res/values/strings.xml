@@ -1,8 +1,20 @@
 <resources>
-    <string name="app_name">RasPyClient</string>
-    <string name="tab1_name">感測器</string>
-    <string name="tab2_name">電器</string>
-    <string name="tab3_name">燈光</string>
-    <string name="PORT">2005</string>
+    <string name="app_name">SmartSocket</string>
+    <string name="tab1_name">主頁</string>
+    <string name="tab2_name">設備管理</string>
+    <string name="tab3_name">帳號</string>
+    <string name="PORT">9998</string>
     <string name="IP">192.168.1.1</string>
+
+
+    <string-array name="planets_array">
+        <item>ANDAMAN NICOBAR ISLANDS</item>
+    </string-array>
+
+
+    <string-array name="gauge_array">
+        <item>電壓表</item>
+        <item>電流表</item>
+
+    </string-array>
 </resources>

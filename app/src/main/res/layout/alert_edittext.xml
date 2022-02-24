@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+
+
+    <EditText
+        android:id="@+id/editext_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLength="16"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        />
+</LinearLayout>

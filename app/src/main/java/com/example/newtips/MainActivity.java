@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.example.newtips.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         //< get elements >
         TabLayout tabLayout = findViewById(R.id.tabs);
         ViewPager2 viewPager2 = findViewById(R.id.view_pager);
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(adapter);
-
         new TabLayoutMediator(tabLayout, viewPager2,
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
@@ -50,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 ).attach();
+        if(GlobalData.macaddress_select.equals("none"))
+            viewPager2.setCurrentItem(1);
     }
     //todo:返回鍵延遲
-    private static Boolean isExit = false;
-    private static Boolean hasTask = false;
+    private  Boolean isExit = false;
+    private  Boolean hasTask = false;
     Timer timerExit = new Timer();
     TimerTask task = new TimerTask()
     {
@@ -72,15 +75,15 @@ public class MainActivity extends AppCompatActivity {
             if(isExit == false )
             {
                 isExit = true; //記錄下一次要退出
-                Toast.makeText(this, "再按一次Back重啟", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "再按一次Back登出", Toast.LENGTH_SHORT).show();
                 if (!hasTask) {
                     timerExit.schedule(task, 2000);
                 }
             }
             else
             {
+                GlobalData.FSM="IDLE";
                 finish(); // 離開程式
-                System.exit(0);
             }
 
 
