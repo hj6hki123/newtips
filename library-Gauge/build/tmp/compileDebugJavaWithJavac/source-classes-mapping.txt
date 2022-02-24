@@ -1,0 +1,4 @@
+com/ntt/customgaugeview/library/BuildConfig.java
+ com.ntt.customgaugeview.library.BuildConfig
+com/ntt/customgaugeview/library/GaugeView.java
+ com.ntt.customgaugeview.library.GaugeView

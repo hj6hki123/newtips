@@ -1,0 +1,36 @@
+com.ntt.customgaugeview.library
+attr divisions
+attr innerCircleColor
+attr innerRimBorderWidth
+attr innerRimWidth
+attr needleHeight
+attr needleWidth
+attr outerBorderWidth
+attr outerCircleColor
+attr outerRimWidth
+attr outerShadowWidth
+attr rangeColors
+attr rangeValues
+attr scaleEndAngle
+attr scaleEndValue
+attr scalePosition
+attr scaleStartAngle
+attr scaleStartValue
+attr showInnerRim
+attr showNeedle
+attr showOuterBorder
+attr showOuterRim
+attr showOuterShadow
+attr showRangeText
+attr showRanges
+attr showScale
+attr subdivisions
+attr textShadowColor
+attr textUnit
+attr textUnitColor
+attr textUnitSize
+attr textValue
+attr textValueColor
+attr textValueSize
+string app_name
+styleable GaugeView divisions innerCircleColor innerRimBorderWidth innerRimWidth needleHeight needleWidth outerBorderWidth outerCircleColor outerRimWidth outerShadowWidth rangeColors rangeValues scaleEndAngle scaleEndValue scalePosition scaleStartAngle scaleStartValue showInnerRim showNeedle showOuterBorder showOuterRim showOuterShadow showRangeText showRanges showScale subdivisions textShadowColor textUnit textUnitColor textUnitSize textValue textValueColor textValueSize

@@ -1,0 +1,37 @@
+R_DEF: Internal format may change without notice
+local
+attr? divisions
+attr? innerCircleColor
+attr? innerRimBorderWidth
+attr? innerRimWidth
+attr? needleHeight
+attr? needleWidth
+attr? outerBorderWidth
+attr? outerCircleColor
+attr? outerRimWidth
+attr? outerShadowWidth
+attr? rangeColors
+attr? rangeValues
+attr? scaleEndAngle
+attr? scaleEndValue
+attr? scalePosition
+attr? scaleStartAngle
+attr? scaleStartValue
+attr? showInnerRim
+attr? showNeedle
+attr? showOuterBorder
+attr? showOuterRim
+attr? showOuterShadow
+attr? showRangeText
+attr? showRanges
+attr? showScale
+attr? subdivisions
+attr? textShadowColor
+attr? textUnit
+attr? textUnitColor
+attr? textUnitSize
+attr? textValue
+attr? textValueColor
+attr? textValueSize
+string app_name
+styleable GaugeView showOuterShadow showOuterBorder showOuterRim showInnerRim showNeedle showScale showRanges showRangeText outerShadowWidth outerBorderWidth outerRimWidth innerRimWidth innerRimBorderWidth needleWidth needleHeight scalePosition scaleStartValue scaleEndValue scaleStartAngle scaleEndAngle divisions subdivisions rangeValues rangeColors textValue textValueColor textValueSize textUnit textUnitColor textUnitSize textShadowColor innerCircleColor outerCircleColor
