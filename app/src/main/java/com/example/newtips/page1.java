@@ -5,6 +5,7 @@ import static android.content.Context.BIND_AUTO_CREATE;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.ColorSpace;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -32,8 +34,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,6 +62,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -93,6 +98,8 @@ public class page1 extends Fragment {
     TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2,textView_PF2;
     Button switch1,switch2;
     TextView devicename1,devicename2;
+    ImageView editdevucename1,editdevucename2;
+    ImageView clockedit1,clockedit2;
 
     public page1() {
         // Required empty public constructor
@@ -146,6 +153,12 @@ public class page1 extends Fragment {
 
         devicename1=(TextView) root.findViewById(R.id.devicename1);
         devicename2=(TextView) root.findViewById(R.id.devicename2);
+
+        editdevucename1=(ImageView) root.findViewById(R.id.editdevucename1);
+        editdevucename2=(ImageView) root.findViewById(R.id.editdevucename2);
+
+        clockedit1=(ImageView) root.findViewById(R.id.clockedit1);
+        clockedit2=(ImageView) root.findViewById(R.id.clockedit2);
     }
 
     @Override
@@ -216,7 +229,7 @@ public class page1 extends Fragment {
             }
         });
 
-        devicename1.setOnClickListener(new View.OnClickListener() {
+        /*devicename1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
@@ -233,8 +246,47 @@ public class page1 extends Fragment {
                 else
                     Toast.makeText(getActivity(),"需有device連線",Toast.LENGTH_SHORT).show();
             }
+        });*/
+        editdevucename1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
+                    setEdittextCustomDialog(0);
+                else
+                    Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
+            }
         });
+        editdevucename2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
+                    setEdittextCustomDialog(0);
+                else
+                    Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
+            }
+        });
+        clockedit1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,1,0);
+                tpf.show(getActivity().getFragmentManager(),"timePicker");
 
+            }
+
+        });
+        clockedit2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,2,0);
+                tpf.show(getActivity().getFragmentManager(),"timePicker");
+            }
+        });
 
         switch1=view.findViewById(R.id.switch1);
         switch2=view.findViewById(R.id.switch2);

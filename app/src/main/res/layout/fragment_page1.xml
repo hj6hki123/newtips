@@ -696,4 +696,46 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/editdevucename1"
+        android:layout_width="33dp"
+        android:layout_height="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
+        app:layout_constraintStart_toStartOf="@+id/devicename1"
+        app:layout_constraintTop_toTopOf="@+id/devicename1"
+        gauge:srcCompat="@drawable/edit" />
+
+    <ImageView
+        android:id="@+id/editdevucename2"
+        android:layout_width="33dp"
+        android:layout_height="31dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
+        app:layout_constraintStart_toStartOf="@+id/devicename2"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        gauge:srcCompat="@drawable/edit" />
+
+    <ImageView
+        android:id="@+id/clockedit1"
+        android:layout_width="43dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/devicename1"
+        app:layout_constraintTop_toTopOf="@+id/devicename1"
+        gauge:srcCompat="@drawable/chronometer" />
+
+    <ImageView
+        android:id="@+id/clockedit2"
+        android:layout_width="43dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/devicename2"
+        app:layout_constraintTop_toTopOf="@+id/devicename2"
+        gauge:srcCompat="@drawable/chronometer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
