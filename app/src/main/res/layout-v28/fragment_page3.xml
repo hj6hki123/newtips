@@ -102,7 +102,7 @@
             android:layout_marginLeft="36dp"
             android:layout_marginTop="48dp"
             android:text="02:10"
-            android:textSize="34sp"
+            android:textSize="40sp"
             app:layout_constraintStart_toEndOf="@+id/device1_enable"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,11 +110,11 @@
             android:id="@+id/device1_timeBegin2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
             android:layout_marginTop="52dp"
             android:text="12:10"
-            android:textSize="30sp"
+            android:textSize="34sp"
             app:layout_constraintStart_toEndOf="@+id/device1_timeBegin"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,11 +122,11 @@
             android:id="@+id/device1_timeBegin3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
             android:layout_marginTop="124dp"
             android:text="12:10"
-            android:textSize="30sp"
+            android:textSize="34sp"
             app:layout_constraintStart_toEndOf="@+id/device2_timeBegin"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,7 +138,7 @@
             android:layout_marginLeft="36dp"
             android:layout_marginTop="120dp"
             android:text="03:30"
-            android:textSize="34sp"
+            android:textSize="40sp"
             app:layout_constraintStart_toEndOf="@+id/device2_enable"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,7 +151,7 @@
             app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin"
             app:layout_constraintStart_toStartOf="@+id/device1_timeBegin"
             app:layout_constraintTop_toTopOf="parent"
-            android:alpha="0.4"/>
+            android:alpha="0.6"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -163,7 +163,7 @@
             app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin2"
             app:layout_constraintStart_toStartOf="@+id/device1_timeBegin2"
             app:layout_constraintTop_toTopOf="parent"
-            android:alpha="0.4"/>
+            android:alpha="0.6"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
