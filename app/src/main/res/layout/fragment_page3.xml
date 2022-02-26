@@ -33,9 +33,145 @@
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+
         >
 
     </com.github.mikephil.charting.charts.LineChart>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="時鐘設定"
+        android:textSize="30sp"
+        android:textColor="@color/black"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#3E0E0E0E"/>
+<androidx.cardview.widget.CardView
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="#17000000"
+    android:layout_marginTop="10dp"
+    android:outlineAmbientShadowColor="#3773EA"
+    android:outlineSpotShadowColor="#00000000"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/device1_enable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="device1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.342" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/device2_enable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="device2"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.789" />
+
+        <TextView
+            android:id="@+id/device1_timeBegin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="48dp"
+            android:text="02:10"
+            android:textSize="34sp"
+            app:layout_constraintStart_toEndOf="@+id/device1_enable"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/device1_timeBegin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="52dp"
+            android:text="12:10"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/device1_timeBegin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/device1_timeBegin3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="124dp"
+            android:text="12:10"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/device2_timeBegin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/device2_timeBegin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="120dp"
+            android:text="03:30"
+            android:textSize="34sp"
+            app:layout_constraintStart_toEndOf="@+id/device2_enable"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="開啟時間"
+            app:layout_constraintBottom_toTopOf="@+id/device1_timeBegin"
+            app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin"
+            app:layout_constraintStart_toStartOf="@+id/device1_timeBegin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="關閉時間"
+            app:layout_constraintBottom_toTopOf="@+id/device1_timeBegin2"
+            app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin2"
+            app:layout_constraintStart_toStartOf="@+id/device1_timeBegin2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+
+
 
     <TextView
         android:layout_width="match_parent"
