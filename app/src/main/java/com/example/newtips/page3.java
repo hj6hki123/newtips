@@ -328,6 +328,29 @@ private void initpref(){
         Calendar calendar = Calendar.getInstance();
         int hourOfDay = calendar.get(Calendar.HOUR);
         int minute = calendar.get(Calendar.MINUTE);
+        switch (DeviceID)
+        {
+            case 1:
+                String t1 =pref.getString("time1_begin","00:01");
+                hourOfDay=Integer.parseInt(t1.split(":")[0]);
+                minute=Integer.parseInt(t1.split(":")[1]);
+                break;
+            case 2:
+                String t2 =pref.getString("time2_begin","06:02");
+                hourOfDay=Integer.parseInt(t2.split(":")[0]);
+                minute=Integer.parseInt(t2.split(":")[1]);
+                break;
+            case 3:
+                String t3 =pref.getString("time1_end","12:03");
+                hourOfDay=Integer.parseInt(t3.split(":")[0]);
+                minute=Integer.parseInt(t3.split(":")[1]);
+                break;
+            case 4:
+                String t4 =pref.getString("time2_end","23:04");
+                hourOfDay=Integer.parseInt(t4.split(":")[0]);
+                minute=Integer.parseInt(t4.split(":")[1]);
+                break;
+        }
 
         new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -360,9 +383,6 @@ private void initpref(){
                         pref.edit().putString("time2_end",String.valueOf(hour)+":"+minute).commit();
                         break;
                 }
-
-
-
 
             }
         }, hourOfDay, minute,false).show();
