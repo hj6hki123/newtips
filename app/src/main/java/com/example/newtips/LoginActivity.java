@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -108,5 +109,12 @@ public class LoginActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) { //使字體不受系統所影響
+        super.attachBaseContext(newBase);
+        Configuration config = new Configuration(newBase.getResources().getConfiguration());
+        config.fontScale = 1.0f;
+        applyOverrideConfiguration(config);
     }
 }

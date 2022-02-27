@@ -2,6 +2,7 @@ package com.example.newtips;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,6 +24,9 @@ public class GlobalData {
 
     public static String Deviceswitch1="0";
     public static String Deviceswitch2="0";
+
+    public static String Device1_Timeenable="0";
+    public static String Device2_Timeenable="0";
 
 //server拿到的資料
     public static HashMap<String,String> datamap_getserver= new HashMap<String,String>()//正規化從server收到的資料
@@ -47,7 +51,22 @@ public class GlobalData {
             put("Name2","null");
         }
     };
-
+    public static  ArrayList<String> timeArray_clock=new ArrayList<String>(){
+        {
+            add("00:00");
+            add("00:00");
+            add("00:00");
+            add("00:00");
+        }
+    };
+    public static  ArrayList<String> timeArray_ampm=new ArrayList<String>(){
+        {
+            add("am");
+            add("am");
+            add("am");
+            add("am");
+        }
+    };
 
 
 

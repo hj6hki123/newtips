@@ -99,7 +99,6 @@ public class page1 extends Fragment {
     Button switch1,switch2;
     TextView devicename1,devicename2;
     ImageView editdevucename1,editdevucename2;
-    ImageView clockedit1,clockedit2;
 
     public page1() {
         // Required empty public constructor
@@ -157,8 +156,7 @@ public class page1 extends Fragment {
         editdevucename1=(ImageView) root.findViewById(R.id.editdevucename1);
         editdevucename2=(ImageView) root.findViewById(R.id.editdevucename2);
 
-        clockedit1=(ImageView) root.findViewById(R.id.clockedit1);
-        clockedit2=(ImageView) root.findViewById(R.id.clockedit2);
+
     }
 
     @Override
@@ -265,28 +263,7 @@ public class page1 extends Fragment {
                     Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
             }
         });
-        clockedit1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int hour = c.get(Calendar.HOUR_OF_DAY);
-                int minute = c.get(Calendar.MINUTE);
-                TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,1,0);
-                tpf.show(getActivity().getFragmentManager(),"timePicker");
 
-            }
-
-        });
-        clockedit2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int hour = c.get(Calendar.HOUR_OF_DAY);
-                int minute = c.get(Calendar.MINUTE);
-                TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,2,0);
-                tpf.show(getActivity().getFragmentManager(),"timePicker");
-            }
-        });
 
         switch1=view.findViewById(R.id.switch1);
         switch2=view.findViewById(R.id.switch2);
@@ -455,6 +432,9 @@ public class page1 extends Fragment {
 
 
     }
+
+
+
 
 
 

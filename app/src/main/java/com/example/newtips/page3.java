@@ -4,11 +4,13 @@ import static android.content.Context.BIND_AUTO_CREATE;
 
 
 import android.annotation.SuppressLint;
+import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -24,13 +26,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.Lottie;
@@ -45,7 +50,13 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -71,10 +82,16 @@ public class page3 extends Fragment {
     private Thread thread;
 
 
+
+    SharedPreferences pref ;
+
+
     private ServiceConnection sc;
     public SocketService socketService;
-
-
+    LinearLayout clock_LeftTop,clock_LeftBotton,clock_RightTop,clock_RightBotton;
+    TextView    time1_begin,time2_begin,time1_end,time2_end;
+    TextView    time1_begin_12H,time2_begin_12H,time1_end_12H,time2_end_12H;
+    SwitchCompat device1_enable,device2_enable;
     public page3() {
 
         // Required empty public constructor
@@ -89,17 +106,106 @@ public class page3 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initUI(view);
+        initpref();
         charts=view.findViewById(R.id.lineChart);
         initChart();
         startRun();
 
+        clock_LeftTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(v,1);
+            }
+        });
+        clock_LeftBotton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(v,2);
+            }
+        });
+        clock_RightTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(v,3);
+            }
+        });
+        clock_RightBotton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(v,4);
+            }
+        });
+
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
+private void initpref(){
+    pref =getActivity().getPreferences(Context.MODE_PRIVATE);
+    /*
+    GlobalData.timeArray_clock.set(0,pref.getString("device1_timeBegin","00:00"));
+    GlobalData.timeArray_clock.set(1,pref.getString("device2_timeBegin","00:00"));
+    GlobalData.timeArray_clock.set(2,pref.getString("device1_timeEnd","00:00"));
+    GlobalData.timeArray_clock.set(3,pref.getString("device2_timeEnd","00:00"));
+    GlobalData.Device1_Timeenable=pref.getString("Device1_Timeenable","0");
+    GlobalData.Device2_Timeenable=pref.getString("Device1_Timeenable","0");
+    time1_begin.setText(GlobalData.timeArray_clock.get(0));
+    time2_begin.setText(GlobalData.timeArray_clock.get(1));
+    time1_end.setText(GlobalData.timeArray_clock.get(2));
+    time2_end.setText(GlobalData.timeArray_clock.get(3));
+    */
+    String t1 =pref.getString("time1_begin","00:01");
+    String t2 =pref.getString("time2_begin","06:02");
+    String t3 =pref.getString("time1_end","12:03");
+    String t4 =pref.getString("time2_end","23:04");
+
+    String[] currenttime= _24Hto12H(t1,t2,t3,t4);//轉換為12小時制 ex(23:04 > pm--11:04)
+    time1_begin_12H.setText((currenttime[0].split("--"))[0]);
+    time1_begin.setText((currenttime[0].split("--"))[1]);
+    time2_begin_12H.setText((currenttime[1].split("--"))[0]);
+    time2_begin.setText((currenttime[1].split("--"))[1]);
+    time1_end_12H.setText((currenttime[2].split("--"))[0]);
+    time1_end.setText((currenttime[2].split("--"))[1]);
+    time2_end_12H.setText((currenttime[3].split("--"))[0]);
+    time2_end.setText((currenttime[3].split("--"))[1]);
+}
+
+
+
+    private void initUI(View root)
+    {
+        clock_LeftTop=(LinearLayout) root.findViewById(R.id.device1_timeBegin);
+        clock_LeftBotton=(LinearLayout) root.findViewById(R.id.device2_timeBegin);
+        clock_RightTop=(LinearLayout) root.findViewById(R.id.device1_timeEnd);
+        clock_RightBotton=(LinearLayout) root.findViewById(R.id.device2_timeEnd);
+        time1_begin=(TextView) root.findViewById(R.id.time1_Begin);
+        time2_begin=(TextView) root.findViewById(R.id.time2_Begin);
+        time1_end=(TextView) root.findViewById(R.id.time1_End);
+        time2_end=(TextView) root.findViewById(R.id.time2_End);
+        time1_begin_12H=(TextView) root.findViewById(R.id.time1_Begin_12H);
+        time2_begin_12H=(TextView) root.findViewById(R.id.time2_Begin_12H);
+        time1_end_12H=(TextView) root.findViewById(R.id.time1_End_12H);
+        time2_end_12H=(TextView) root.findViewById(R.id.time2_End_12H);
+        device1_enable=(SwitchCompat) root.findViewById(R.id.device1_enable);
+        device2_enable=(SwitchCompat) root.findViewById(R.id.device2_enable);
+    }
+    private  void timepickManager(int deviceID,int targetResld1,int targetResld2)
+    {
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,deviceID,targetResld1,targetResld2);
+        tpf.show(getActivity().getFragmentManager(),"timePicker");
+    }
+
+
 
     private void bindSocketService()
     {
@@ -217,5 +323,65 @@ public class page3 extends Fragment {
         });
         thread.start();
     }
+
+    public void timePicker(View v,int DeviceID) {
+        Calendar calendar = Calendar.getInstance();
+        int hourOfDay = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hour, int minute) {
+                int currenthour = (hour>12) ? hour-12 : ((hour==0) ? 12 : hour);
+                String _am_pm=(hour>=12) ? "下午" : "上午";
+                String _12Hour=String.format("%02d",currenthour);
+                String _12minute=String.format("%02d",minute);
+                String _12HourTime=_12Hour+":"+_12minute;
+                switch (DeviceID)
+                {
+                    case 1:
+                        time1_begin.setText(_12HourTime);
+                        time1_begin_12H.setText(_am_pm);
+                        pref.edit().putString("time1_begin",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                    case 2:
+                        time2_begin.setText(_12HourTime);
+                        time2_begin_12H.setText(_am_pm);
+                        pref.edit().putString("time2_begin",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                    case 3:
+                        time1_end.setText(_12HourTime);
+                        time1_end_12H.setText(_am_pm);
+                        pref.edit().putString("time1_end",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                    case 4:
+                        time2_end.setText(_12HourTime);
+                        time2_end_12H.setText(_am_pm);
+                        pref.edit().putString("time2_end",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                }
+
+
+
+
+            }
+        }, hourOfDay, minute,false).show();
+    }
+    private String[] _24Hto12H(String...time)
+    {
+            try {
+                for(int i=0;i<time.length;i++) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    Date dateObj = sdf.parse(time[i]);
+                    time[i] = new SimpleDateFormat("aa--hh:mm").format(dateObj);
+                }
+            } catch (final ParseException e) {
+                e.printStackTrace();
+            }
+
+        return time;
+    }
+
+
 
 }

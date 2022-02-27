@@ -54,10 +54,10 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    app:cardCornerRadius="20dp"
-    app:cardBackgroundColor="#1E132A3C"
+    app:cardCornerRadius="25dp"
+    app:cardBackgroundColor="#1D6BB1E8"
     android:layout_marginTop="10dp"
-    android:outlineAmbientShadowColor="#27233DCF"
+    android:outlineAmbientShadowColor="#59233DCF"
     android:outlineSpotShadowColor="#00E60C0C"
     >
 
@@ -65,6 +65,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <LinearLayout
+            android:id="@+id/device1_timeEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintStart_toEndOf="@+id/device1_timeBegin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.375">
+
+            <TextView
+                android:id="@+id/time1_End_12H"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="mmaa"
+                android:text="下午"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/time1_End"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02:10"
+                android:textSize="30sp" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/device1_enable"
@@ -75,7 +103,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.342" />
@@ -89,81 +117,121 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.789" />
+            app:layout_constraintVertical_bias="0.855" />
 
-        <TextView
+
+        <LinearLayout
             android:id="@+id/device1_timeBegin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="48dp"
-            android:text="02:10"
-            android:textSize="40sp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toEndOf="@+id/device1_enable"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.319">
 
-        <TextView
-            android:id="@+id/device1_timeBegin2"
+            <TextView
+                android:id="@+id/time1_Begin_12H"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="mmaa"
+                android:text="上午"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/time1_Begin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02:10"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/device2_timeEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="52dp"
-            android:text="12:10"
-            android:textSize="34sp"
-            app:layout_constraintStart_toEndOf="@+id/device1_timeBegin"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/device1_timeBegin3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="124dp"
-            android:text="12:10"
-            android:textSize="34sp"
+            android:layout_marginStart="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/device2_timeBegin"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.812">
 
-        <TextView
+            <TextView
+                android:id="@+id/time2_End_12H"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="mmaa"
+                android:text="下午"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/time2_End"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="02:10"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/device2_timeBegin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="120dp"
-            android:text="03:30"
-            android:textSize="40sp"
-            app:layout_constraintStart_toEndOf="@+id/device2_enable"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toEndOf="@+id/device1_enable"
+            app:layout_constraintTop_toBottomOf="@+id/device1_timeBegin"
+            app:layout_constraintVertical_bias="0.477">
+
+            <TextView
+                android:id="@+id/time2_Begin_12H"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="mmaa"
+                android:text="上午"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/time2_Begin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02:10"
+                android:textSize="40sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:alpha="0.6"
             android:text="開啟時間"
             app:layout_constraintBottom_toTopOf="@+id/device1_timeBegin"
             app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin"
+            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="@+id/device1_timeBegin"
             app:layout_constraintTop_toTopOf="parent"
-            android:alpha="0.6"/>
+            app:layout_constraintVertical_bias="0.4" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:alpha="0.6"
             android:text="關閉時間"
-            app:layout_constraintBottom_toTopOf="@+id/device1_timeBegin2"
-            app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin2"
-            app:layout_constraintStart_toStartOf="@+id/device1_timeBegin2"
-            app:layout_constraintTop_toTopOf="parent"
-            android:alpha="0.6"/>
+
+            app:layout_constraintBottom_toTopOf="@+id/device1_timeEnd"
+            app:layout_constraintEnd_toEndOf="@+id/device1_timeEnd"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

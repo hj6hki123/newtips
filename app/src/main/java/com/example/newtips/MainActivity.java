@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -91,5 +93,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return  false;
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {  //使字體不受系統所影響
+        super.attachBaseContext(newBase);
+        Configuration config = new Configuration(newBase.getResources().getConfiguration());
+        config.fontScale = 1.0f;
+        applyOverrideConfiguration(config);
     }
 }
