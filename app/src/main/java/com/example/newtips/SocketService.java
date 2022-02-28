@@ -246,7 +246,7 @@ public class SocketService extends Service {
                                         clockeditor.put("Macaddress",GlobalData.macaddress_select=="null");
                                         sendOrder(clockeditor.toString()+"");
                                         GlobalData.FSM="Datatransport";
-                                        Log.e("changename","s11111111111");
+                                        Log.e("ClockeditSender",clockeditor.toString()+"");
                                         break;
                                     default:
                                         break;

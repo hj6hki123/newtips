@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -138,6 +139,19 @@ public class page3 extends Fragment {
             }
         });
 
+        device1_enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getdataFrompref();
+            }
+        });
+        device2_enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getdataFrompref();
+            }
+        });
+
     }
 
 
@@ -150,18 +164,7 @@ public class page3 extends Fragment {
 
 private void initpref(){
     pref =getActivity().getPreferences(Context.MODE_PRIVATE);
-    /*
-    GlobalData.timeArray_clock.set(0,pref.getString("device1_timeBegin","00:00"));
-    GlobalData.timeArray_clock.set(1,pref.getString("device2_timeBegin","00:00"));
-    GlobalData.timeArray_clock.set(2,pref.getString("device1_timeEnd","00:00"));
-    GlobalData.timeArray_clock.set(3,pref.getString("device2_timeEnd","00:00"));
-    GlobalData.Device1_Timeenable=pref.getString("Device1_Timeenable","0");
-    GlobalData.Device2_Timeenable=pref.getString("Device1_Timeenable","0");
-    time1_begin.setText(GlobalData.timeArray_clock.get(0));
-    time2_begin.setText(GlobalData.timeArray_clock.get(1));
-    time1_end.setText(GlobalData.timeArray_clock.get(2));
-    time2_end.setText(GlobalData.timeArray_clock.get(3));
-    */
+
     String t1 =pref.getString("time1_begin","00:01");
     String t2 =pref.getString("time2_begin","06:02");
     String t3 =pref.getString("time1_end","12:03");
@@ -387,13 +390,7 @@ private void initpref(){
 
 
                 }
-                GlobalData.timeArray_clock.set(0,pref.getString("time1_begin","00:01"));
-                GlobalData.timeArray_clock.set(1,pref.getString("time2_begin","00:02"));
-                GlobalData.timeArray_clock.set(2,pref.getString("time1_end","00:03"));
-                GlobalData.timeArray_clock.set(3,pref.getString("time2_end","00:04"));
-                GlobalData.Device1_Timeenable=device1_enable.isChecked() ? "1":"0";
-                GlobalData.Device2_Timeenable=device2_enable.isChecked() ? "1":"0";
-                GlobalData.FSM="Clockedit";
+                getdataFrompref();
 
             }
         }, hourOfDay, minute,false).show();
@@ -411,6 +408,17 @@ private void initpref(){
             }
 
         return time;
+    }
+
+    private void getdataFrompref()
+    {
+        GlobalData.timeArray_clock.set(0,pref.getString("time1_begin","00:01"));
+        GlobalData.timeArray_clock.set(1,pref.getString("time2_begin","00:02"));
+        GlobalData.timeArray_clock.set(2,pref.getString("time1_end","00:03"));
+        GlobalData.timeArray_clock.set(3, pref.getString("time2_end","00:04"));
+        GlobalData.Device1_Timeenable=device1_enable.isChecked() ? "1":"0";
+        GlobalData.Device2_Timeenable=device2_enable.isChecked() ? "1":"0";
+        GlobalData.FSM="Clockedit";
     }
 
 
