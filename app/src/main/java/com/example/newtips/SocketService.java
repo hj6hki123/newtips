@@ -234,6 +234,20 @@ public class SocketService extends Service {
                                         GlobalData.FSM="Datatransport";
                                         Log.e("changename","s11111111111");
                                         break;
+                                    case "Clockedit":
+                                        JSONObject clockeditor=new JSONObject();
+                                        clockeditor.put("Title","5");
+                                        clockeditor.put("Device1Enable",GlobalData.Device1_Timeenable);
+                                        clockeditor.put("Device2Enable",GlobalData.Device2_Timeenable);
+                                        clockeditor.put("Device1ClockBegin",GlobalData.timeArray_clock.get(0));
+                                        clockeditor.put("Device2ClockBegin",GlobalData.timeArray_clock.get(1));
+                                        clockeditor.put("Device1ClockEnd",GlobalData.timeArray_clock.get(2));
+                                        clockeditor.put("Device2ClockEnd",GlobalData.timeArray_clock.get(3));
+                                        clockeditor.put("Macaddress",GlobalData.macaddress_select=="null");
+                                        sendOrder(clockeditor.toString()+"");
+                                        GlobalData.FSM="Datatransport";
+                                        Log.e("changename","s11111111111");
+                                        break;
                                     default:
                                         break;
                                 }

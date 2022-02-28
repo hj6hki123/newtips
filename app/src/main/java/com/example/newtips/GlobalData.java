@@ -59,14 +59,7 @@ public class GlobalData {
             add("00:00");
         }
     };
-    public static  ArrayList<String> timeArray_ampm=new ArrayList<String>(){
-        {
-            add("am");
-            add("am");
-            add("am");
-            add("am");
-        }
-    };
+
 
 
 

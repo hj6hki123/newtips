@@ -116,6 +116,7 @@ public class page3 extends Fragment {
             @Override
             public void onClick(View v) {
                 timePicker(v,1);
+                Log.e("11111","222");
             }
         });
         clock_LeftBotton.setOnClickListener(new View.OnClickListener() {
@@ -291,6 +292,7 @@ private void initpref(){
         charts.notifyDataSetChanged();
         charts.setVisibleXRange(0,50);//設置可見範圍
         charts.moveViewToX(data.getEntryCount());//將可視焦點放在最新一個數據，使圖表可移動
+
     }
 
     private void startRun(){
@@ -382,7 +384,16 @@ private void initpref(){
                         time2_end_12H.setText(_am_pm);
                         pref.edit().putString("time2_end",String.valueOf(hour)+":"+minute).commit();
                         break;
+
+
                 }
+                GlobalData.timeArray_clock.set(0,pref.getString("time1_begin","00:01"));
+                GlobalData.timeArray_clock.set(1,pref.getString("time2_begin","00:02"));
+                GlobalData.timeArray_clock.set(2,pref.getString("time1_end","00:03"));
+                GlobalData.timeArray_clock.set(3,pref.getString("time2_end","00:04"));
+                GlobalData.Device1_Timeenable=device1_enable.isChecked() ? "1":"0";
+                GlobalData.Device2_Timeenable=device2_enable.isChecked() ? "1":"0";
+                GlobalData.FSM="Clockedit";
 
             }
         }, hourOfDay, minute,false).show();
