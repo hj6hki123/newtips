@@ -243,7 +243,7 @@ public class SocketService extends Service {
                                         clockeditor.put("Device2ClockBegin",GlobalData.timeArray_clock.get(1));
                                         clockeditor.put("Device1ClockEnd",GlobalData.timeArray_clock.get(2));
                                         clockeditor.put("Device2ClockEnd",GlobalData.timeArray_clock.get(3));
-                                        clockeditor.put("Macaddress",GlobalData.macaddress_select=="null");
+                                        clockeditor.put("Macaddress",GlobalData.macaddress_select);
                                         sendOrder(clockeditor.toString()+"");
                                         GlobalData.FSM="Datatransport";
                                         Log.e("ClockeditSender",clockeditor.toString()+"");
