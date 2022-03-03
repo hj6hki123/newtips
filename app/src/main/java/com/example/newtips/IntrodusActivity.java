@@ -39,7 +39,7 @@ public class IntrodusActivity extends AppCompatActivity {
         String port = getString(R.string.TCP_PORT).trim();
         Log.e("printIP&port",ip+port);
         if (TextUtils.isEmpty(ip) || TextUtils.isEmpty(port)) {
-            Toast.makeText(this , "ip和端口號不能為空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this , "ip和阜號不能為空", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(this.getApplicationContext(), SocketService.class);
