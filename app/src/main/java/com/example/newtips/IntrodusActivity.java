@@ -41,7 +41,8 @@ public class IntrodusActivity extends AppCompatActivity {
         this.startService(intent);
 
 
-        Intent ITn=new Intent();
+        Intent ITn=getIntent();
+        String scheme = intent.getScheme();
         Uri getData_fromWeb=ITn.getData();
         if(getData_fromWeb != null) {
             String host = getData_fromWeb.getHost();
