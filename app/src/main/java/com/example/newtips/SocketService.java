@@ -90,8 +90,8 @@ public class SocketService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         /*拿到傳遞過來的ip和端口號*/
-        ip = intent.getStringExtra(Constants.INTENT_IP);
-        port = intent.getStringExtra(Constants.INTENT_PORT);
+        ip = getString(R.string.TCP_IP).trim();
+        port = getString(R.string.TCP_PORT).trim();
 
         /*初始化socket*/
         initSocket();

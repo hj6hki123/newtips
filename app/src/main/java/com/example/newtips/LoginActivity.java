@@ -32,18 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         //註冊廣播器
         IntentFilter intentFilter = new IntentFilter(SocketService.RECEIVE_SERVICE_ACTION);
         registerReceiver(myBroadcast, intentFilter);
-        Intent ITn=new Intent();
-        Uri getData_fromWeb=ITn.getData();
-        if(getData_fromWeb != null) {
-            String host = getData_fromWeb.getHost();
-            String dataString = ITn.getDataString();
-            String id = getData_fromWeb.getQueryParameter("d");
-            String path = getData_fromWeb.getPath();
-            String path1 = getData_fromWeb.getEncodedPath();
-            String queryString = getData_fromWeb.getQuery();
-            Log.e("URL","host:" + host+"dataString:" + dataString+"id:" + id+"path:" + path+"path1:" + path1+"queryString:" + queryString);
 
-        }
 
         textView_hint=findViewById(R.id.text_socket_hint);
 

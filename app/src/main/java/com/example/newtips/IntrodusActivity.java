@@ -3,6 +3,7 @@ package com.example.newtips;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -35,17 +36,25 @@ public class IntrodusActivity extends AppCompatActivity {
             }
         },1800);
 
-        String ip = getString(R.string.TCP_IP).trim();
-        String port = getString(R.string.TCP_PORT).trim();
-        Log.e("printIP&port",ip+port);
-        if (TextUtils.isEmpty(ip) || TextUtils.isEmpty(port)) {
-            Toast.makeText(this , "ip和阜號不能為空", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
         Intent intent = new Intent(this.getApplicationContext(), SocketService.class);
-        intent.putExtra(Constants.INTENT_IP, ip);
-        intent.putExtra(Constants.INTENT_PORT, port);
         this.startService(intent);
+
+
+        Intent ITn=new Intent();
+        Uri getData_fromWeb=ITn.getData();
+        if(getData_fromWeb != null) {
+            String host = getData_fromWeb.getHost();
+            String dataString = ITn.getDataString();
+            String id = getData_fromWeb.getQueryParameter("d");
+            String path = getData_fromWeb.getPath();
+            String path1 = getData_fromWeb.getEncodedPath();
+            String queryString = getData_fromWeb.getQuery();
+            Log.e("URL","host:" + host+"dataString:" + dataString+"id:" + id+"path:" + path+"path1:" + path1+"queryString:" + queryString);
+
+        }
+        else
+            Log.e("URL" , "URL is null");
 
     }
 
