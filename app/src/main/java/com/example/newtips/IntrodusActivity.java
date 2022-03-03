@@ -52,7 +52,7 @@ public class IntrodusActivity extends AppCompatActivity {
             String path1 = getData_fromWeb.getEncodedPath();
             String queryString = getData_fromWeb.getQuery();
             Log.e("URL","host:" + host+"dataString:" + dataString+"id:" + id+"path:" + path+"path1:" + path1+"queryString:" + queryString);
-
+            Log.e("URL",queryString);
         }
         else
             Log.e("URL" , "URL is null");
