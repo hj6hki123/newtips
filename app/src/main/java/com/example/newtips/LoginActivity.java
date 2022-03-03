@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             IntrodusActivity.introdusActivity.finish();
         }
 
-        SharedPreferences pref =getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences pref =getSharedPreferences("login",Context.MODE_PRIVATE);
 
 
         EditText editText_user=findViewById(R.id.editextuser);
