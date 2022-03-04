@@ -98,7 +98,7 @@ public class page1 extends Fragment {
     TextView textView_VOLT2,textView_CURRENT2,textView_WATT2,textView_FREQ2,textView_KHW2,textView_PF2;
     Button switch1,switch2;
     TextView devicename1,devicename2;
-    ImageView editdevucename1,editdevucename2;
+    ImageView editdevucename1,editdevucename2,clock_view1,clock_view2;
 
 
 
@@ -158,10 +158,8 @@ public class page1 extends Fragment {
         editdevucename1=(ImageView) root.findViewById(R.id.editdevucename1);
         editdevucename2=(ImageView) root.findViewById(R.id.editdevucename2);
 
-
-
-
-
+        clock_view1=(ImageView) root.findViewById(R.id.clockedit1);
+        clock_view2=(ImageView) root.findViewById(R.id.clockedit2);
 
     }
 
@@ -233,24 +231,7 @@ public class page1 extends Fragment {
             }
         });
 
-        /*devicename1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
-                    setEdittextCustomDialog(0);
-                else
-                    Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
-            }
-        });
-        devicename2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
-                    setEdittextCustomDialog(1);
-                else
-                    Toast.makeText(getActivity(),"需有device連線",Toast.LENGTH_SHORT).show();
-            }
-        });*/
+
         editdevucename1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -277,6 +258,8 @@ public class page1 extends Fragment {
         switch1.setOnClickListener((V)->GlobalData.Deviceswitch1="1");
         switch2.setOnClickListener((V)->GlobalData.Deviceswitch2="1");
 
+        clock_view1.setOnClickListener((V)->MainActivity.viewPager2.setCurrentItem(2,true));
+        clock_view2.setOnClickListener((V)->MainActivity.viewPager2.setCurrentItem(2,true));
 
 
     }
@@ -388,7 +371,7 @@ public class page1 extends Fragment {
             };
         }
 
-        timer.schedule(task, 0, 300);
+        timer.schedule(task, 0, 500);
 
     }
 

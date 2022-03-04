@@ -378,7 +378,7 @@ private void initpref(){
         //簡略寫法
         isRunning = true;
         Runnable runnable  = ()->{
-            if(!GlobalData.macaddress_select.equals("none"))
+            if(!GlobalData.macaddress_select.equals("none") && !GlobalData.datamap_getserver.get("Status").equals("Offline"))
             {
                 addData(Float.parseFloat((Objects.requireNonNull(GlobalData.datamap_getserver.get("Watt1")))),0,Color.GREEN,GlobalData.device_name_now[0]);
                 addData(Float.parseFloat((Objects.requireNonNull(GlobalData.datamap_getserver.get("Watt2")))),1,Color.BLUE,GlobalData.device_name_now[1]);

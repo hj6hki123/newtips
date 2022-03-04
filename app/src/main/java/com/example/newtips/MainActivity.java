@@ -19,6 +19,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    public  static ViewPager2 viewPager2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         //< get elements >
         TabLayout tabLayout = findViewById(R.id.tabs);
-        ViewPager2 viewPager2 = findViewById(R.id.view_pager);
+        viewPager2 = findViewById(R.id.view_pager);
         //</ get elements >
 
 
@@ -53,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 ).attach();
+        viewPager2.setOffscreenPageLimit(3);
         viewPager2.setPageTransformer(new DepthPageTransformer());
         if(GlobalData.macaddress_select.equals("none"))
-            viewPager2.setCurrentItem(1);
+            viewPager2.setCurrentItem(1,false);
     }
     //todo:返回鍵延遲
     private  Boolean isExit = false;

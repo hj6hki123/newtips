@@ -28,15 +28,25 @@
         android:layout_height="1dp"
         android:background="#3E0E0E0E"
         android:layout_marginTop="3dp"/>
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_marginTop="3dp"
-        android:id="@+id/lineChart"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="#2568B0E8"
+        android:layout_marginTop="10dp"
+        android:outlineAmbientShadowColor="#59233DCF"
+        android:outlineSpotShadowColor="#00E60C0C"
         >
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_marginTop="3dp"
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
 
-    </com.github.mikephil.charting.charts.LineChart>
+            >
+        </com.github.mikephil.charting.charts.LineChart>
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -55,7 +65,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     app:cardCornerRadius="25dp"
-    app:cardBackgroundColor="#1D6BB1E8"
+    app:cardBackgroundColor="#2568B0E8"
     android:layout_marginTop="10dp"
     android:outlineAmbientShadowColor="#59233DCF"
     android:outlineSpotShadowColor="#00E60C0C"
@@ -257,112 +267,124 @@
         android:background="#3E0E0E0E"
 
         android:layout_marginTop="3dp"/>
-    <TableLayout
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="1">
-        <TableRow>
-
-            <TextView
-                android:padding="3dip"
-                android:text="使用者帳號"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/user_text"
-                android:gravity="right"
-                android:padding="3dip"
-                android:text="test123"
-                android:textSize="20sp" />
-        </TableRow>
-        <View
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="#2568B0E8"
+        android:layout_marginTop="10dp"
+        android:outlineAmbientShadowColor="#59233DCF"
+        android:outlineSpotShadowColor="#00E60C0C"
+        >
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#0F0E0E0E"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="3dp"/>
-        <TableRow>
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+            <TableRow>
 
-            <TextView
-                android:padding="3dip"
-                android:text="IP"
-                android:textSize="20sp" />
+                <TextView
+                    android:padding="3dip"
+                    android:text="使用者帳號"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/ip_text"
-                android:gravity="right"
-                android:padding="3dip"
-                android:text="114.27.52.154"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/user_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="test123"
+                    android:textSize="20sp" />
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+            <TableRow>
 
-        </TableRow>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#0F0E0E0E"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="3dp"/>
-        <TableRow>
+                <TextView
+                    android:padding="3dip"
+                    android:text="IP"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:padding="3dip"
-                android:text="MAC位址"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/ip_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="114.27.52.154"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/mac_text"
-                android:gravity="right"
-                android:padding="3dip"
-                android:text="F4:5A:46:9D:25:75"
-                android:textSize="20sp" />
-        </TableRow>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#0F0E0E0E"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="3dp"/>
-        <TableRow>
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+            <TableRow>
 
-            <TextView
-                android:padding="3dip"
-                android:text="連接狀態"
-                android:textSize="20sp" />
+                <TextView
+                    android:padding="3dip"
+                    android:text="MAC位址"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/state_text"
-                android:gravity="right"
-                android:padding="3dip"
-                android:text="ONLINE"
-                android:textSize="20sp"
-                android:textColor="@color/green"/>
-        </TableRow>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#0F0E0E0E"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="3dp"/>
+                <TextView
+                    android:id="@+id/mac_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="F4:5A:46:9D:25:75"
+                    android:textSize="20sp" />
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+            <TableRow>
 
-        <TableRow>
+                <TextView
+                    android:padding="3dip"
+                    android:text="連接狀態"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:padding="3dip"
-                android:text="版本號碼"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/state_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="ONLINE"
+                    android:textSize="20sp"
+                    android:textColor="@color/green"/>
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
 
-            <TextView
-                android:id="@+id/ver_text"
-                android:gravity="right"
-                android:padding="3dip"
-                android:text="V2.0"
-                android:textSize="20sp" />
-        </TableRow>
-    </TableLayout>
+            <TableRow>
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="版本號碼"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/ver_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="V2.0"
+                    android:textSize="20sp" />
+            </TableRow>
+        </TableLayout>
+    </androidx.cardview.widget.CardView>
+
 
 
 
