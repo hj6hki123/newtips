@@ -379,7 +379,7 @@
                     android:id="@+id/ver_text"
                     android:gravity="right"
                     android:padding="3dip"
-                    android:text="V2.0"
+                    android:text="V4.1"
                     android:textSize="20sp" />
             </TableRow>
         </TableLayout>

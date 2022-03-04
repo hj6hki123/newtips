@@ -392,7 +392,14 @@ private void initpref(){
         //簡略寫法
         thread =  new Thread(()->{
             while (isRunning) {
-                getActivity().runOnUiThread(runnable);
+                try {
+                    getActivity().runOnUiThread(runnable);
+                }
+                catch (NullPointerException e)
+                {
+                    Log.e("NullPointerException",Log.getStackTraceString(e));
+                    isRunning=false;
+                }
                 if (!isRunning)break;
                 try {
                     Thread.sleep(200);
