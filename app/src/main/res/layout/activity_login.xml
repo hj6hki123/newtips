@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:ignore="HardcodedText">
 
-    <EditText
+    <android.widget.EditText
         android:id="@+id/editextuser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,9 +32,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.328" />
+        app:layout_constraintVertical_bias="0.328"
+        android:textColor="@color/black"/>
 
-    <EditText
+    <android.widget.EditText
         android:id="@+id/editTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -55,9 +56,10 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editextuser"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.076"
+        android:textColor="@color/black"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/button_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -28,15 +28,7 @@
         android:layout_height="1dp"
         android:background="#3E0E0E0E"
         android:layout_marginTop="3dp"/>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp"
-        app:cardBackgroundColor="#2568B0E8"
-        android:layout_marginTop="10dp"
-        android:outlineAmbientShadowColor="#59233DCF"
-        android:outlineSpotShadowColor="#00E60C0C"
-        >
+
         <com.github.mikephil.charting.charts.LineChart
             android:layout_marginTop="3dp"
             android:id="@+id/lineChart"
@@ -45,7 +37,7 @@
 
             >
         </com.github.mikephil.charting.charts.LineChart>
-    </androidx.cardview.widget.CardView>
+
 
 
     <TextView
@@ -83,7 +75,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintHorizontal_bias="0.935"
             app:layout_constraintStart_toEndOf="@+id/device1_timeBegin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.375">
@@ -165,11 +157,13 @@
             android:id="@+id/device2_timeEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
             app:layout_constraintStart_toEndOf="@+id/device2_timeBegin"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.843">
+            app:layout_constraintVertical_bias="0.82">
 
             <TextView
                 android:id="@+id/time2_End_12H"

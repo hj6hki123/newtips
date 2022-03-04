@@ -10,4 +10,15 @@
     <color name="green">#B51AFA23</color>
     <color name="red">#FF1100</color>
     <color name="background_color">#FFFFFF</color>
+
+
+    <color name="primaryColor">#90caf9</color>
+    <color name="primaryLightColor">#c3fdff</color>
+    <color name="primaryDarkColor">#5d99c6</color>
+    <color name="secondaryColor">#00acc1</color>
+    <color name="secondaryLightColor">#5ddef4</color>
+    <color name="secondaryDarkColor">#007c91</color>
+    <color name="primaryTextColor">#212121</color>
+    <color name="secondaryTextColor">#f5f5f5</color>
+
 </resources>

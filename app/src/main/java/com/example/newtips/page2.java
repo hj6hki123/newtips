@@ -195,7 +195,6 @@ public class page2 extends Fragment {
                                     .commit();
                             Alist.add(msg);
                             mAdapter.notifyDataSetChanged();
-
                         }
 
                     }

@@ -245,7 +245,7 @@ public class page1 extends Fragment {
             @Override
             public void onClick(View v) {
                 if(GlobalData.FSM.equals("Datatransport") && !GlobalData.macaddress_select.equals("none"))
-                    setEdittextCustomDialog(0);
+                    setEdittextCustomDialog(1);
                 else
                     Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
             }

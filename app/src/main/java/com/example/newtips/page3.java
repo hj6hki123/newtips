@@ -37,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
@@ -74,6 +75,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.android.material.timepicker.MaterialTimePicker;
 
 public class page3 extends Fragment {
 
@@ -121,25 +123,25 @@ public class page3 extends Fragment {
         clock_LeftTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePicker(v,1);
+                MaterialTimePicker(v,1);
             }
         });
         clock_LeftBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePicker(v,2);
+                MaterialTimePicker(v,2);
             }
         });
         clock_RightTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePicker(v,3);
+                MaterialTimePicker(v,3);
             }
         });
         clock_RightBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePicker(v,4);
+                MaterialTimePicker(v,4);
             }
         });
 
@@ -249,13 +251,12 @@ private void initpref(){
                                     state_text.setTextColor(Color.GREEN);
                                     device1_enable.setClickable(true);
                                     device2_enable.setClickable(true);
-                                    mac_text.setText(GlobalData.macaddress_select);
-                                    device1_enable.setClickable(true);
-                                    device2_enable.setClickable(true);
                                     clock_LeftBotton.setClickable(true);
                                     clock_LeftTop.setClickable(true);
                                     clock_RightBotton.setClickable(true);
                                     clock_RightTop.setClickable(true);
+                                    device1_enable.setText(GlobalData.device_name_now[0]);
+                                    device2_enable.setText(GlobalData.device_name_now[1]);
                                 }
                                 else
                                 {
@@ -267,8 +268,9 @@ private void initpref(){
                                     clock_RightBotton.setClickable(false);
                                     clock_RightTop.setClickable(false);
                                 }
-                                ip_text.setText(CommendFun.getLocalIP(getActivity()));
+                                ip_text.setText(CommendFun.getIpAddress(getActivity()));
                                 state_text.setText(GlobalData.datamap_getserver.get("Status"));
+                                mac_text.setText(GlobalData.macaddress_select);
                             }
                         });
                     } catch (Exception e) {
@@ -278,7 +280,7 @@ private void initpref(){
             };
         }
 
-        timer.schedule(task, 0, 1000);
+        timer.schedule(task, 0, 2000);
 
     }
 
@@ -430,6 +432,7 @@ private void initpref(){
                 break;
         }
 
+
         new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hour, int minute) {
@@ -467,6 +470,87 @@ private void initpref(){
 
             }
         }, hourOfDay, minute,false).show();
+    }
+
+    public void MaterialTimePicker(View v,int DeviceID) {
+        Calendar calendar = Calendar.getInstance();
+        int hourOfDay = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        switch (DeviceID)
+        {
+            case 1:
+                String t1 =pref.getString("time1_begin","00:01");
+                hourOfDay=Integer.parseInt(t1.split(":")[0]);
+                minute=Integer.parseInt(t1.split(":")[1]);
+                break;
+            case 2:
+                String t2 =pref.getString("time2_begin","06:02");
+                hourOfDay=Integer.parseInt(t2.split(":")[0]);
+                minute=Integer.parseInt(t2.split(":")[1]);
+                break;
+            case 3:
+                String t3 =pref.getString("time1_end","12:03");
+                hourOfDay=Integer.parseInt(t3.split(":")[0]);
+                minute=Integer.parseInt(t3.split(":")[1]);
+                break;
+            case 4:
+                String t4 =pref.getString("time2_end","23:04");
+                hourOfDay=Integer.parseInt(t4.split(":")[0]);
+                minute=Integer.parseInt(t4.split(":")[1]);
+                break;
+        }
+        MaterialTimePicker picker
+                =new MaterialTimePicker.Builder()
+                .setHour(hourOfDay)
+                .setMinute(minute)
+                .setTitleText("Select Appointment time")
+                .build();
+
+
+        picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hour=picker.getHour();
+                int minute=picker.getMinute();
+
+                int currenthour = (hour>12) ? hour-12 : ((hour==0) ? 12 : hour);
+                String _am_pm=(hour>=12) ? "下午" : "上午";
+                String _12Hour=String.format("%02d",currenthour);
+                String _12minute=String.format("%02d",minute);
+                String _12HourTime=_12Hour+":"+_12minute;
+                switch (DeviceID)
+                {
+                    case 1:
+                        time1_begin.setText(_12HourTime);
+                        time1_begin_12H.setText(_am_pm);
+                        pref.edit().putString("time1_begin",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                    case 2:
+                        time2_begin.setText(_12HourTime);
+                        time2_begin_12H.setText(_am_pm);
+                        pref.edit().putString("time2_begin",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                    case 3:
+                        time1_end.setText(_12HourTime);
+                        time1_end_12H.setText(_am_pm);
+                        pref.edit().putString("time1_end",String.valueOf(hour)+":"+minute).commit();
+                        break;
+                    case 4:
+                        time2_end.setText(_12HourTime);
+                        time2_end_12H.setText(_am_pm);
+                        pref.edit().putString("time2_end",String.valueOf(hour)+":"+minute).commit();
+                        break;
+
+
+                }
+                getdataFrompref();
+            }
+        });
+
+
+        picker.show(getActivity().getSupportFragmentManager(),"pi");
+
+
     }
     private String[] _24Hto12H(String...time)
     {
