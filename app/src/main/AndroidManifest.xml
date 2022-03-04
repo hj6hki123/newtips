@@ -39,7 +39,6 @@
                     android:scheme="crack"/>
             </intent-filter>
 
-
         </activity>
 
         <activity android:name=".LoginActivity"

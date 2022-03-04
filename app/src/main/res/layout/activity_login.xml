@@ -11,29 +11,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
         android:background="@drawable/round_border"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:drawableLeft="@drawable/userphoto"
         android:drawablePadding="16dp"
         android:drawingCacheQuality="auto"
         android:ems="10"
-        android:hint="帳號"
-        android:inputType="textEmailAddress"
-        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:windowSoftInputMode="adjustUnspecified|stateHidden"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:hint="帳號"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="16dp"
+        android:textColor="@color/black"
+        android:windowSoftInputMode="adjustUnspecified|stateHidden"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.328"
-        android:textColor="@color/black"/>
+        app:layout_constraintVertical_bias="0.327"
+        android:fontFamily="sans-serif"
+        />
+
 
     <android.widget.EditText
         android:id="@+id/editTextPassword"
@@ -57,7 +58,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editextuser"
         app:layout_constraintVertical_bias="0.076"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif"/>
 
     <android.widget.Button
         android:id="@+id/button_login"
