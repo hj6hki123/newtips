@@ -159,7 +159,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/device2_timeBegin"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.812">
+            app:layout_constraintVertical_bias="0.843">
 
             <TextView
                 android:id="@+id/time2_End_12H"
@@ -269,6 +269,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/user_text"
                 android:gravity="right"
                 android:padding="3dip"
                 android:text="test123"
@@ -289,6 +290,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/ip_text"
                 android:gravity="right"
                 android:padding="3dip"
                 android:text="114.27.52.154"
@@ -310,6 +312,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/mac_text"
                 android:gravity="right"
                 android:padding="3dip"
                 android:text="F4:5A:46:9D:25:75"
@@ -330,6 +333,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/state_text"
                 android:gravity="right"
                 android:padding="3dip"
                 android:text="ONLINE"
@@ -352,6 +356,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/ver_text"
                 android:gravity="right"
                 android:padding="3dip"
                 android:text="V2.0"

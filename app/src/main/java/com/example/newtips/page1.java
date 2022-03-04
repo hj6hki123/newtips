@@ -100,6 +100,8 @@ public class page1 extends Fragment {
     TextView devicename1,devicename2;
     ImageView editdevucename1,editdevucename2;
 
+
+
     public page1() {
         // Required empty public constructor
     }
@@ -155,6 +157,10 @@ public class page1 extends Fragment {
 
         editdevucename1=(ImageView) root.findViewById(R.id.editdevucename1);
         editdevucename2=(ImageView) root.findViewById(R.id.editdevucename2);
+
+
+
+
 
 
     }

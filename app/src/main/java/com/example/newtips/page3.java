@@ -3,7 +3,6 @@ package com.example.newtips;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 
-import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -62,6 +61,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.graphics.Color;
 import com.github.mikephil.charting.charts.LineChart;
@@ -82,7 +83,9 @@ public class page3 extends Fragment {
     private LineChart chart;
     private Thread thread;
 
-
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Timer timer = new Timer();
+    private TimerTask task;
 
     SharedPreferences pref ;
 
@@ -93,6 +96,7 @@ public class page3 extends Fragment {
     TextView    time1_begin,time2_begin,time1_end,time2_end;
     TextView    time1_begin_12H,time2_begin_12H,time1_end_12H,time2_end_12H;
     SwitchCompat device1_enable,device2_enable;
+    TextView user_text,ip_text,mac_text,state_text;
     public page3() {
 
         // Required empty public constructor
@@ -112,12 +116,12 @@ public class page3 extends Fragment {
         charts=view.findViewById(R.id.lineChart);
         initChart();
         startRun();
+        timerUI();
 
         clock_LeftTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 timePicker(v,1);
-                Log.e("11111","222");
             }
         });
         clock_LeftBotton.setOnClickListener(new View.OnClickListener() {
@@ -143,12 +147,15 @@ public class page3 extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 getdataFrompref();
+                pref.edit().putBoolean("device1_enable",isChecked).apply();
+
             }
         });
         device2_enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 getdataFrompref();
+                pref.edit().putBoolean("device2_enable",isChecked).apply();
             }
         });
 
@@ -164,6 +171,11 @@ public class page3 extends Fragment {
 
 private void initpref(){
     pref =getActivity().getPreferences(Context.MODE_PRIVATE);
+
+    boolean S1 =pref.getBoolean("device1_enable",false);
+    boolean S2 =pref.getBoolean("device2_enable",false);
+    device1_enable.setChecked(S1);
+    device2_enable.setChecked(S2);
 
     String t1 =pref.getString("time1_begin","00:01");
     String t2 =pref.getString("time2_begin","06:02");
@@ -199,6 +211,13 @@ private void initpref(){
         time2_end_12H=(TextView) root.findViewById(R.id.time2_End_12H);
         device1_enable=(SwitchCompat) root.findViewById(R.id.device1_enable);
         device2_enable=(SwitchCompat) root.findViewById(R.id.device2_enable);
+
+
+        user_text=(TextView) root.findViewById(R.id.user_text);
+        user_text.setText(GlobalData.Login_user);
+        ip_text =(TextView) root.findViewById(R.id.ip_text);
+        mac_text=(TextView) root.findViewById(R.id.mac_text);
+        state_text=(TextView) root.findViewById(R.id.state_text);
     }
     private  void timepickManager(int deviceID,int targetResld1,int targetResld2)
     {
@@ -207,6 +226,60 @@ private void initpref(){
         int minute = c.get(Calendar.MINUTE);
         TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,deviceID,targetResld1,targetResld2);
         tpf.show(getActivity().getFragmentManager(),"timePicker");
+    }
+
+    private void timerUI()//每過0.5秒更新一次UI
+    {
+        if (timer == null) {
+            timer = new Timer();
+        }
+
+        if (task == null) {
+            task = new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        handler.post(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                //TODO:updata UI
+                                if(!GlobalData.datamap_getserver.get("Status").equals("Offline") && !GlobalData.macaddress_select.equals("none"))
+                                {
+                                    state_text.setTextColor(Color.GREEN);
+                                    device1_enable.setClickable(true);
+                                    device2_enable.setClickable(true);
+                                    mac_text.setText(GlobalData.macaddress_select);
+                                    device1_enable.setClickable(true);
+                                    device2_enable.setClickable(true);
+                                    clock_LeftBotton.setClickable(true);
+                                    clock_LeftTop.setClickable(true);
+                                    clock_RightBotton.setClickable(true);
+                                    clock_RightTop.setClickable(true);
+                                }
+                                else
+                                {
+                                    state_text.setTextColor(Color.RED);
+                                    device1_enable.setClickable(false);
+                                    device2_enable.setClickable(false);
+                                    clock_LeftBotton.setClickable(false);
+                                    clock_LeftTop.setClickable(false);
+                                    clock_RightBotton.setClickable(false);
+                                    clock_RightTop.setClickable(false);
+                                }
+                                ip_text.setText(CommendFun.getLocalIP(getActivity()));
+                                state_text.setText(GlobalData.datamap_getserver.get("Status"));
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+        }
+
+        timer.schedule(task, 0, 1000);
+
     }
 
 

@@ -49,6 +49,7 @@ public class GlobalData {
             put("Switch2","0");
             put("Name1","null");
             put("Name2","null");
+            put("Status","Offline");
         }
     };
     public static  ArrayList<String> timeArray_clock=new ArrayList<String>(){
