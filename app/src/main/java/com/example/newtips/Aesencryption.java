@@ -16,6 +16,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 public  class Aesencryption {
 
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static String encrypt(String secretKey, String salt, String value) throws Exception {
         Cipher cipher = initCipher(secretKey, salt, Cipher.ENCRYPT_MODE);
@@ -44,10 +47,9 @@ public  class Aesencryption {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void startencode() throws Exception {
-        String secretKey = "Secret";
-        String fSalt = "tJHnN5b1i6wvXMwzYMRk";
-        String plainText = "England";
+    public static String  startencode(String plainText) throws Exception {
+        String secretKey = "Secret";//密文
+        String fSalt = "tJHnN5b1i6wvXMwzYMRk";//鹽
 
         String cipherText = encrypt(secretKey, fSalt, plainText);
         System.out.println("Cipher: " + cipherText);
@@ -55,5 +57,6 @@ public  class Aesencryption {
         String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
         System.out.println(dcrCipherText);
 
+        return cipherText+"|"+dcrCipherText;
     }
 }
