@@ -1,6 +1,7 @@
 package com.example.newtips;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -16,47 +17,51 @@ import javax.crypto.spec.SecretKeySpec;
 
 public  class Aesencryption {
 
+    private static String sKey = "0123456789012345";
+    private static String ivParameter = "0123456789012345";
 
+    // 加密
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String encrypt(String sSrc) throws Exception {
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        byte[] raw = sKey.getBytes();
+        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+        IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());//使用CBC模式，需要一个向量iv，可增加加密算法的强度
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+        byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
+        return  Base64.getEncoder().encodeToString(encrypted);//此处使用BASE64做转码。
+    }
 
+    // 解密
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String decrypt(String sSrc) {
+        try {
+            byte[] raw = sKey.getBytes("ASCII");
+            SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
+            byte[] encrypted1 =  Base64.getDecoder().decode(sSrc);//先用base64解密
+            byte[] original = cipher.doFinal(encrypted1);
+            String originalString = new String(original, "utf-8");
+            return originalString;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private static String encrypt(String secretKey, String salt, String value) throws Exception {
-        Cipher cipher = initCipher(secretKey, salt, Cipher.ENCRYPT_MODE);
-        byte[] encrypted = cipher.doFinal(value.getBytes());
-        return Base64.getEncoder().encodeToString(encrypted);
+    public static String startencode(String str)
+    {
+        String output="";
+        try {
+            output = encrypt(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.e("aes",output);
+        return output;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private static String decrypt(String secretKey, String salt, String encrypted) throws Exception {
-        Cipher cipher = initCipher(secretKey, salt, Cipher.DECRYPT_MODE);
-        byte[] original = cipher.doFinal(Base64.getDecoder().decode(encrypted));
-        return new String(original);
-    }
 
-    private static Cipher initCipher(String secretKey, String salt, int mode) throws Exception {
-
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-
-        KeySpec spec = new PBEKeySpec(secretKey.toCharArray(), salt.getBytes(), 65536, 256);
-        SecretKey tmp = factory.generateSecret(spec);
-        SecretKeySpec skeySpec = new SecretKeySpec(tmp.getEncoded(), "AES");
-
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-        cipher.init(mode, skeySpec, new IvParameterSpec(new byte[16]));
-        return cipher;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String  startencode(String plainText) throws Exception {
-        String secretKey = "Secret";//密文
-        String fSalt = "tJHnN5b1i6wvXMwzYMRk";//鹽
-
-        String cipherText = encrypt(secretKey, fSalt, plainText);
-        System.out.println("Cipher: " + cipherText);
-//      cipherText = "6peDTxE1xgLE4hTGg0PKTnuuhFC1Vftsd7NH9DF/7WM="; // Cipher from python
-        String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
-        System.out.println(dcrCipherText);
-
-        return cipherText+"|"+dcrCipherText;
-    }
 }
