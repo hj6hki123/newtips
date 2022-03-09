@@ -54,7 +54,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.graphics.Color;
 
@@ -65,6 +71,10 @@ public class page2 extends Fragment {
     MyBroadcast myBroadcast = new MyBroadcast();
     SharedPreferences pref ;
     Set<String> sett_mask;
+
+
+    ExecutorService exec = Executors.newCachedThreadPool();
+    UDP udpServer;
 
     public page2() {
         // Required empty public constructor
@@ -90,6 +100,53 @@ public class page2 extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        /*Button btn_udpstart=view.findViewById(R.id.btn_udpstart);
+        btn_udpstart.setOnClickListener( (view1 ->
+        {
+
+            //開啟UDP 、關閉按鈕點擊
+            start_UDP();
+            btn_udpstart.setClickable(false);
+            btn_udpstart.setText("正在搜尋裝置...");
+
+            //關閉UDP 、 並開啟按鈕點擊
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    udpServer.changeServerStatus(false);
+                    btn_udpstart.setText("搜尋裝置");
+                    btn_udpstart.setClickable(true);
+                }
+            },15000);
+        }));*/
+
+
+        LottieAnimationView lottie_addBtn=view.findViewById(R.id.lottie_addbutton);
+        lottie_addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //開啟UDP 、關閉按鈕點擊
+                start_UDP();
+                lottie_addBtn.playAnimation();
+                lottie_addBtn.setClickable(false);
+                Toast.makeText(getActivity(),"請與15秒內與裝置配對",Toast.LENGTH_LONG).show();
+
+
+
+                //關閉UDP 、 並開啟按鈕點擊
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        udpServer.changeServerStatus(false);
+                        lottie_addBtn.setClickable(true);
+                        lottie_addBtn.pauseAnimation();
+                    }
+                },15000);
+            }
+        });
 
     }
 
@@ -131,14 +188,13 @@ public class page2 extends Fragment {
                                 break;
                             }
                         }
-                        if(!samelist)
+                        if(!samelist)//若無重複將資料添加到sett_mask和Alist中，並通知mAdapter更新資料
                         {
                             sett_mask.add(msg);
                             pref.edit().putStringSet("Macaddress",sett_mask)
                                     .commit();
                             Alist.add(msg);
                             mAdapter.notifyDataSetChanged();
-
                         }
 
                     }
@@ -149,6 +205,8 @@ public class page2 extends Fragment {
                     Alist.remove(delete_str);
                     mAdapter.notifyDataSetChanged();
                     pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).commit();
+                    GlobalData.dlt_mac=delete_str;
+                    GlobalData.FSM="Deletmacaddress";
                     GlobalData.macaddress_select="none";
 
                     break;
@@ -157,6 +215,15 @@ public class page2 extends Fragment {
 
             }
         }
+    }
+
+    private void start_UDP()
+    {
+        //UDP_setting
+        udpServer = new UDP(CommendFun.getLocalIP(getActivity()),getActivity());
+        udpServer.setPort(31999);
+        udpServer.changeServerStatus(true);
+        exec.execute(udpServer);
     }
 
 

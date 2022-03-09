@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "133510851820",
+    "project_id": "chirsocket",
+    "storage_bucket": "chirsocket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133510851820:android:a3943329f9be0b6ae949c9",
+        "android_client_info": {
+          "package_name": "com.smartsocket.SmartSocketksu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133510851820-90e0o1cd4fe0f8k9n5cec7ppgb75hdr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartsocket.SmartSocketksu",
+            "certificate_hash": "2b47b3478e56ed9d9f584cd63d7db5505e70f720"
+          }
+        },
+        {
+          "client_id": "133510851820-lkul6ka9u84sijo7d6d8dph328mhr2nn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIz2wM-WhbuQKC8ekVlB1o3PvEMGB_Du4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133510851820-lkul6ka9u84sijo7d6d8dph328mhr2nn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

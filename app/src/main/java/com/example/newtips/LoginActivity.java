@@ -1,10 +1,14 @@
 package com.example.newtips;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,19 +21,27 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
 
 
-    final Uri uri_register=Uri.parse("https://mnya.tw/cc/word/1477.html");//註冊網址
-
+    final Uri uri_register=Uri.parse("http://120.114.68.132/sign-up/");//註冊網址
+    MyBroadcast myBroadcast = new MyBroadcast();
+    TextView textView_hint;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //註冊廣播器
+        IntentFilter intentFilter = new IntentFilter(SocketService.RECEIVE_SERVICE_ACTION);
+        registerReceiver(myBroadcast, intentFilter);
+
+
+        textView_hint=findViewById(R.id.text_socket_hint);
 
         //關閉歡迎頁面
         if(IntrodusActivity.introdusActivity!=null){
             IntrodusActivity.introdusActivity.finish();
         }
 
-        SharedPreferences pref =getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences pref =getSharedPreferences("login",Context.MODE_PRIVATE);
 
 
         EditText editText_user=findViewById(R.id.editextuser);
@@ -50,12 +62,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     if (GlobalData.connectstate && GlobalData.FSM.equals("IDLE"))
+                    {
+                        textView_hint.setText("");
                         GlobalData.FSM = "Longin";
+                    }
                     else
-                        Toast.makeText(this, "須為連線狀態才能登入", Toast.LENGTH_SHORT).show();
+                        textView_hint.setText("須為連線狀態才可登入");
                 }
                 else
-                    Toast.makeText(this, "帳號密碼不能為空", Toast.LENGTH_SHORT).show();
+                    textView_hint.setText("帳號密碼不能為空");
             }
         );
 
@@ -66,11 +81,42 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);//開啟註冊網址
             });
 
+
+
+
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
         Intent intent = new Intent(getApplicationContext(), SocketService.class);
         stopService(intent);
+    }
+
+
+    private class MyBroadcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String mAction = intent.getAction();
+            assert mAction != null;
+            switch (mAction) {
+                /**接收來自UDP回傳之訊息*/
+                case SocketService.RECEIVE_SERVICE_ACTION:
+                    String msg = intent.getStringExtra(SocketService.RECEIVE_SERVICE_STRING);
+                    String msg_problem = intent.getStringExtra(SocketService.RECEIVE_SERVICE_PROBLEM);
+                    if(msg.equals("false"))
+                    {
+                        textView_hint.setText(msg_problem+"");
+                    }
+
+                    break;
+            }
+        }
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) { //使字體不受系統所影響
+        super.attachBaseContext(newBase);
+        Configuration config = new Configuration(newBase.getResources().getConfiguration());
+        config.fontScale = 1.0f;
+        applyOverrideConfiguration(config);
     }
 }

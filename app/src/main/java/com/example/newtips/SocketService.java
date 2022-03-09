@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.newtips.common.Constants;
 import com.example.newtips.common.EventMsg;
@@ -41,6 +44,11 @@ import java.util.TimerTask;
 
 public class SocketService extends Service {
 
+
+
+    public static final String RECEIVE_SERVICE_ACTION="TCPSOCKET_ACTION";
+    public static final String RECEIVE_SERVICE_STRING="TCPSOCKET_ReceiveString";
+    public static final String RECEIVE_SERVICE_PROBLEM="TCPSOCKET_ReceiveProblem";
     /*socket*/
     private Socket socket;
     /*連接線程*/
@@ -85,8 +93,8 @@ public class SocketService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         /*拿到傳遞過來的ip和端口號*/
-        ip = intent.getStringExtra(Constants.INTENT_IP);
-        port = intent.getStringExtra(Constants.INTENT_PORT);
+        ip = getString(R.string.TCP_IP).trim();
+        port = getString(R.string.TCP_PORT).trim();
 
         /*初始化socket*/
         initSocket();
@@ -99,6 +107,7 @@ public class SocketService extends Service {
     private void initSocket() {
         if (socket == null && connectThread == null) {
             connectThread = new Thread(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void run() {
 
@@ -141,14 +150,14 @@ public class SocketService extends Service {
                                         logingmap.put("Password",GlobalData.Login_password);
 
                                         JSONObject login_json=new JSONObject(logingmap);
-                                        sendOrder(login_json.toString()+"");
+                                        sendOrder(Aesencryption.startencode(login_json.toString()) +"");
                                         //收資料
                                         String loginacess=br.readLine();
-                                        Log.e("get",loginacess);
+                                        Log.e("get",loginacess+"");
                                         JSONObject login_acess=new JSONObject(loginacess);
                                         if(login_acess.getString("Title").equals("1"))
                                         {
-                                            if(login_acess.getString("Loginacess").equals("true"))
+                                            if(login_acess.getString("Loginaccess").equals("true"))
                                             {
                                                 GlobalData.FSM="Datatransport";
                                                 Intent i=new Intent(getApplicationContext(), MainActivity.class);
@@ -174,22 +183,34 @@ public class SocketService extends Service {
                                         if(!GlobalData.macaddress_select.equals("none"))
                                         {
                                             datamap.put("Title","2");
-                                            datamap.put("MacAddress",GlobalData.macaddress_select);//todo:添加全域macaddr_select
-                                            datamap.put("Device1",GlobalData.Deviceswitch1);
-                                            datamap.put("Device2",GlobalData.Deviceswitch2);
+                                            datamap.put("MacAddress",GlobalData.macaddress_select);
+                                            datamap.put("Switch1",GlobalData.Deviceswitch1);
+                                            datamap.put("Switch2",GlobalData.Deviceswitch2);
                                             JSONObject data_json=new JSONObject(datamap);
-                                            sendOrder(data_json.toString()+"");
+                                            sendOrder(Aesencryption.startencode(data_json.toString()) +"");
+                                            if(data_json.getString("Switch1").equals("1"))
+                                                GlobalData.Deviceswitch1="0";
+                                            if(data_json.getString("Switch2").equals("1"))
+                                                GlobalData.Deviceswitch2="0";
 
                                             String dataget=br.readLine();
-
-                                            JSONObject jsondataget=new JSONObject(dataget);
-                                            if(jsondataget.getString("Title").equals("2"))
+                                            Log.e("Datatransport",dataget+"");
+                                            if(dataget!=null)
                                             {
-                                                GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                                JSONObject jsondataget=new JSONObject(dataget);
+                                                if(jsondataget.getString("Title").equals("2"))//如果表頭是2
+                                                {
+                                                    GlobalData.datamap_getserver=new Gson().fromJson(jsondataget.toString(),HashMap.class);
+                                                }
+                                                else if(jsondataget.getString("Title").equals("Error"))
+                                                {
+
+                                                }
                                             }
 
 
-                                            Log.e("Datatransport",dataget+"");
+
+
                                         }
                                         else
                                         {
@@ -197,6 +218,39 @@ public class SocketService extends Service {
                                         }
 
 
+                                        break;
+
+
+                                    case "Deletmacaddress":
+                                        JSONObject delet_mac=new JSONObject();
+                                        delet_mac.put("Title","3");
+                                        delet_mac.put("MacAddress",GlobalData.dlt_mac);
+                                        sendOrder(Aesencryption.startencode(delet_mac.toString()) +"");
+                                        GlobalData.FSM="Datatransport";
+                                        break;
+                                    case "Changename":
+                                        JSONObject change_name=new JSONObject();
+                                        change_name.put("Title","4");
+                                        change_name.put("MacAddress",GlobalData.macaddress_select);
+                                        change_name.put("Name1",GlobalData.device_name_change[0]);
+                                        change_name.put("Name2",GlobalData.device_name_change[1]);
+                                        sendOrder(Aesencryption.startencode(change_name.toString()) +"");
+                                        GlobalData.FSM="Datatransport";
+                                        Log.e("changename","s11111111111");
+                                        break;
+                                    case "Clockedit":
+                                        JSONObject clockeditor=new JSONObject();
+                                        clockeditor.put("Title","5");
+                                        clockeditor.put("Device1Enable",GlobalData.Device1_Timeenable);
+                                        clockeditor.put("Device2Enable",GlobalData.Device2_Timeenable);
+                                        clockeditor.put("Device1ClockBegin",GlobalData.timeArray_clock.get(0));
+                                        clockeditor.put("Device2ClockBegin",GlobalData.timeArray_clock.get(1));
+                                        clockeditor.put("Device1ClockEnd",GlobalData.timeArray_clock.get(2));
+                                        clockeditor.put("Device2ClockEnd",GlobalData.timeArray_clock.get(3));
+                                        clockeditor.put("Macaddress",GlobalData.macaddress_select);
+                                        sendOrder(Aesencryption.startencode(clockeditor.toString()) +"");
+                                        GlobalData.FSM="Datatransport";
+                                        Log.e("ClockeditSender",clockeditor.toString()+"");
                                         break;
                                     default:
                                         break;
@@ -209,36 +263,49 @@ public class SocketService extends Service {
 
                     } catch (IOException | InterruptedException | JSONException e) {
                         e.printStackTrace();
-                        GlobalData.connectstate=false;
+                        GlobalData.connectstate=false;//若連線狀態為否，登入按鈕無法動作
+                        String problem="";
                         if (e instanceof SocketTimeoutException) {
-                            toastMsg("連線超時!正在重新連線");
-
+                            problem="連線超時!正在重新連線";
+                            toastMsg(problem);
                             releaseSocket();
 
                         } else if (e instanceof NoRouteToHostException) {
-                            toastMsg("該地址錯誤!請重新檢查");
+                            problem="該地址錯誤!請重新檢查";
+                            toastMsg(problem);
                             releaseSocket();
 
                         } else if (e instanceof ConnectException) {
-                            toastMsg("連接異常或被拒絕!請重新檢查");
+                            problem="連接異常或被拒絕!請重新檢查";
+
                             releaseSocket();
                         }
                         else if(e instanceof SocketException)
                         {
-                            toastMsg("伺服器連接異常!請查看連線狀態");
+                            problem="伺服器連接異常!請查看連線狀態";
+
                             releaseSocket();
                         }
                         else if(e instanceof InterruptedException)
                         {
-                            toastMsg("延時崩潰");
+                            problem="延時崩潰";
+                            toastMsg(problem);
                             releaseSocket();
                         }
                         else if(e instanceof JSONException)
                         {
-                            toastMsg("JSON資料接收錯誤");
+                            problem="JSON資料接收錯誤";
+                            toastMsg(problem);
                             releaseSocket();
                         }
+                        Intent intent = new Intent();
+                        intent.setAction(RECEIVE_SERVICE_ACTION);
+                        intent.putExtra(RECEIVE_SERVICE_STRING,"false");
+                        intent.putExtra(RECEIVE_SERVICE_PROBLEM,problem);
+                        sendBroadcast(intent);
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                 }
@@ -281,6 +348,10 @@ public class SocketService extends Service {
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                        if(e instanceof SocketException)
+                        {
+                            releaseSocket();
+                        }
                         Log.e("sd",e.toString());
                     }
 
