@@ -49,6 +49,8 @@ public class IntrodusActivity extends AppCompatActivity {
                         {
                             String queryString = deepLink.getQuery();
                             String[] accountdata=queryString.split("&");
+                            accountdata[1]=accountdata[1].replace("account=","");
+                            accountdata[2]=accountdata[2].replace("password=","");
                             Log.e("URL",accountdata[1]);
                             Log.e("URL",accountdata[2]);
                             SharedPreferences pref =getSharedPreferences("login",MODE_MULTI_PROCESS);

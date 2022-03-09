@@ -36,7 +36,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data
-                    android:host="gmattent.com"
+                    android:host="play.google.com"
                     android:scheme="https"/>
             </intent-filter>
 
