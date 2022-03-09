@@ -29,16 +29,14 @@
         android:background="#3E0E0E0E"
         android:layout_marginTop="3dp"/>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:layout_marginTop="3dp"
-            android:id="@+id/lineChart"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
 
-            >
-        </com.github.mikephil.charting.charts.LineChart>
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="3dp"
 
-
+        ></com.github.mikephil.charting.charts.LineChart>
 
     <TextView
         android:layout_width="match_parent"
@@ -52,16 +50,25 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#3E0E0E0E"/>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    app:cardCornerRadius="25dp"
-    app:cardBackgroundColor="#2568B0E8"
-    android:layout_marginTop="10dp"
-    android:outlineAmbientShadowColor="#59233DCF"
-    android:outlineSpotShadowColor="#00E60C0C"
-    >
+    android:background="#00FFFFFF"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/card_color"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    android:paddingBottom="10dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingTop="10dp"
+    android:clickable="true"
+    android:focusable="true"
+>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -246,7 +253,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
 
 
 
@@ -268,15 +275,7 @@
 
         android:layout_marginTop="3dp"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp"
-        app:cardBackgroundColor="#2568B0E8"
-        android:layout_marginTop="10dp"
-        android:outlineAmbientShadowColor="#59233DCF"
-        android:outlineSpotShadowColor="#00E60C0C"
-        >
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -383,7 +382,7 @@
                     android:textSize="20sp" />
             </TableRow>
         </TableLayout>
-    </androidx.cardview.widget.CardView>
+
 
 
 

@@ -10,7 +10,7 @@
     <color name="green">#B51AFA23</color>
     <color name="red">#FF1100</color>
     <color name="background_color">#FFFFFF</color>
-
+    <color name="card_color">#7CCCB9</color>
 
     <color name="primaryColor">#90caf9</color>
     <color name="primaryLightColor">#c3fdff</color>

@@ -3,6 +3,7 @@ package com.example.newtips;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 
+import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -62,6 +63,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -75,6 +77,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 
 public class page3 extends Fragment {
@@ -99,6 +102,7 @@ public class page3 extends Fragment {
     TextView    time1_begin_12H,time2_begin_12H,time1_end_12H,time2_end_12H;
     SwitchCompat device1_enable,device2_enable;
     TextView user_text,ip_text,mac_text,state_text;
+    MaterialCardView card_view;
     public page3() {
 
         // Required empty public constructor
@@ -113,13 +117,14 @@ public class page3 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         initUI(view);
         initpref();
         charts=view.findViewById(R.id.lineChart);
         initChart();
         startRun();
         timerUI();
-
+        randomcolor(card_view);
         clock_LeftTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +165,7 @@ public class page3 extends Fragment {
                 pref.edit().putBoolean("device2_enable",isChecked).apply();
             }
         });
+        card_view.setOnClickListener(v -> randomcolor(card_view));
 
     }
 
@@ -220,6 +226,8 @@ private void initpref(){
         ip_text =(TextView) root.findViewById(R.id.ip_text);
         mac_text=(TextView) root.findViewById(R.id.mac_text);
         state_text=(TextView) root.findViewById(R.id.state_text);
+
+        card_view=(MaterialCardView) root.findViewById(R.id.card_view);
     }
     private  void timepickManager(int deviceID,int targetResld1,int targetResld2)
     {
@@ -243,12 +251,14 @@ private void initpref(){
                     try {
                         handler.post(new Runnable() {
 
+                            @SuppressLint("SetTextI18n")
                             @Override
                             public void run() {
                                 //TODO:updata UI
                                 if(!GlobalData.datamap_getserver.get("Status").equals("Offline") && !GlobalData.macaddress_select.equals("none"))
                                 {
                                     state_text.setTextColor(Color.GREEN);
+                                    state_text.setText("Online");
                                     device1_enable.setClickable(true);
                                     device2_enable.setClickable(true);
                                     clock_LeftBotton.setClickable(true);
@@ -261,6 +271,7 @@ private void initpref(){
                                 else
                                 {
                                     state_text.setTextColor(Color.RED);
+                                    state_text.setText("Offline");
                                     device1_enable.setClickable(false);
                                     device2_enable.setClickable(false);
                                     clock_LeftBotton.setClickable(false);
@@ -269,7 +280,6 @@ private void initpref(){
                                     clock_RightTop.setClickable(false);
                                 }
                                 ip_text.setText(CommendFun.getIpAddress(getActivity()));
-                                state_text.setText(GlobalData.datamap_getserver.get("Status"));
                                 mac_text.setText(GlobalData.macaddress_select);
                             }
                         });
@@ -584,6 +594,16 @@ private void initpref(){
         GlobalData.Device2_Timeenable=device2_enable.isChecked() ? "1":"0";
         GlobalData.FSM="Clockedit";
     }
+
+    private void randomcolor(MaterialCardView card)
+    {
+        Random random = new Random();
+        int r = random.nextInt(55)+200;
+        int g = random.nextInt(55)+200;
+        int b = random.nextInt(55)+200;
+        card.setCardBackgroundColor(Color.rgb(r,g,b));
+    }
+
 
 
 

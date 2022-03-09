@@ -1,5 +1,6 @@
 package com.example.newtips;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -17,6 +18,10 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.newtips.common.Constants;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 public class IntrodusActivity extends AppCompatActivity {
     LottieAnimationView lottieAnimationView;
@@ -24,42 +29,75 @@ public class IntrodusActivity extends AppCompatActivity {
 
     public static IntrodusActivity introdusActivity;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        // Get deep link from result (may be null if no link is found)
+                        Uri deepLink = null;
+                        if (pendingDynamicLinkData != null) {
+                            deepLink = pendingDynamicLinkData.getLink();
+                        }
 
 
+                        if(deepLink != null)
+                        {
+                            String queryString = deepLink.getQuery();
+                            String[] accountdata=queryString.split("&");
+                            Log.e("URL",accountdata[1]);
+                            Log.e("URL",accountdata[2]);
+                            SharedPreferences pref =getSharedPreferences("login",MODE_MULTI_PROCESS);
+                            pref.edit()
+                                .putString("Duser", accountdata[1])
+                                .putString("Dpassword", accountdata[2])
+                                .apply();
+                        }
+                        else
+                        {
 
-        Intent ITn=getIntent();
-        String scheme = ITn.getScheme();
-        Uri getData_fromWeb=ITn.getData();
-        if(getData_fromWeb != null) {
-            String host = getData_fromWeb.getHost();
-            String dataString = ITn.getDataString();
-            String id = getData_fromWeb.getQueryParameter("d");
-            String path = getData_fromWeb.getPath();
-            String path1 = getData_fromWeb.getEncodedPath();
-            String queryString = getData_fromWeb.getQuery();
-            //Log.e("URL","host:" + host+"dataString:" + dataString+"id:" + id+"path:" + path+"path1:" + path1+"queryString:" + queryString);
-            Log.e("URL",queryString);
+                            Log.w("URLe", "deepLink=null");
+                        }
 
-            String[] accountdata=queryString.split("&");
-            Log.e("URL",accountdata[0]);
-            Log.e("URL",accountdata[1]);
-            SharedPreferences pref =getSharedPreferences("login",MODE_MULTI_PROCESS);
-            pref.edit()
-                    .putString("Duser", accountdata[0])
-                    .putString("Dpassword", accountdata[1])
-                    .apply();
-            Log.e("pref",pref.getString("Dpassword","error"));
-        }
-        else
-            Log.e("URL" , "URL is null");
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("URL", "getDynamicLink:onFailure", e);
+                    }
+                });
+
+
+//        Intent ITn=getIntent();
+//        String scheme = ITn.getScheme();
+//        Uri getData_fromWeb=ITn.getData();
+//        if(getData_fromWeb != null) {
+//            String host = getData_fromWeb.getHost();
+//            String dataString = ITn.getDataString();
+//            String id = getData_fromWeb.getQueryParameter("d");
+//            String path = getData_fromWeb.getPath();
+//            String path1 = getData_fromWeb.getEncodedPath();
+//            String queryString = getData_fromWeb.getQuery();
+//            Log.e("URL","host:" + host+"dataString:" + dataString+"id:" + id+"path:" + path+"path1:" + path1+"queryString:" + queryString);
+//            Log.e("URL",queryString);
+
+//            String[] accountdata=queryString.split("&");
+//            Log.e("URL",accountdata[0]);
+//            Log.e("URL",accountdata[1]);
+//            SharedPreferences pref =getSharedPreferences("login",MODE_MULTI_PROCESS);
+//            pref.edit()
+//                    .putString("Duser", accountdata[0])
+//                    .putString("Dpassword", accountdata[1])
+//                    .apply();
+//
+//        }
+//        else
+//            Log.e("URL" , "URL is null");
 
 
 
