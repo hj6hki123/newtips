@@ -61,6 +61,7 @@
     android:paddingBottom="10dp"
     android:clickable="true"
     android:focusable="true"
+    app:strokeWidth="0dp"
 >
 
 

@@ -319,8 +319,10 @@ private void initpref(){
     protected void initChart()
     {
         charts.getDescription().setEnabled(false);
+        charts.setTouchEnabled(false);//設置不可觸碰
+        charts.setDragEnabled(false);//設置不可互動
         LineData data=new LineData();
-        data.setValueTextColor(Color.BLACK);
+        data.setValueTextColor(isNightmode()?Color.WHITE:Color.BLACK);
         charts.setData(data);
 
 
@@ -330,8 +332,9 @@ private void initpref(){
         l.setTextColor(Color.BLACK);
         l.setTextSize(20);
         l.setFormSize(20);
+        l.setTextColor(isNightmode()?Color.WHITE:Color.BLACK);
         XAxis x =  charts.getXAxis();
-        x.setTextColor(Color.BLACK);
+        x.setTextColor(isNightmode()?Color.WHITE:Color.BLACK);
         x.setDrawGridLines(true);//畫X軸線
         x.setPosition(XAxis.XAxisPosition.BOTTOM);//把標籤放底部
         x.setLabelCount(5,true);//設置顯示5個標籤

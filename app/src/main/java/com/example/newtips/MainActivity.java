@@ -2,12 +2,17 @@ package com.example.newtips;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.newtips.R;
@@ -20,11 +25,16 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     public  static ViewPager2 viewPager2;
+    SharedPreferences pref ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        pref =getPreferences(Context.MODE_PRIVATE);
+        if(pref.getBoolean("darkmode",false))
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         //< get elements >
@@ -103,5 +113,37 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = new Configuration(newBase.getResources().getConfiguration());
         config.fontScale = 1.0f;
         applyOverrideConfiguration(config);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        menu.findItem(R.id.item1).setChecked(pref.getBoolean("darkmode", false));
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.item1:
+                if(item.isChecked()){
+                    // If item already checked then unchecked it
+                    item.setChecked(false);
+                    pref.edit().putBoolean("darkmode",false).apply();
+                }else {
+                    // If item is unchecked then checked it
+                    item.setChecked(true);
+                    pref.edit().putBoolean("darkmode",true).apply();
+                }
+                recreate();
+                break;
+            case R.id.item2:
+                break;
+            case R.id.item3:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

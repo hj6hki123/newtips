@@ -34,16 +34,19 @@
         gauge:subdivisions="1"
         gauge:textUnit="Volt"
         gauge:textUnitSize="0.06"
-        gauge:textValueSize="0.15" />
+        gauge:textValueSize="0.15"
+        app:textUnitColor="?android:textColorPrimary"/>
+
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Iupp"
-        app:layout_constraintHeight_percent="0.3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spi"
         gauge:divisions="8"
@@ -60,8 +63,8 @@
         gauge:subdivisions="1"
         gauge:textUnit="Current"
         gauge:textUnitSize="0.06"
-        gauge:textValueSize="0.15" />
-
+        gauge:textValueSize="0.15"
+        app:textUnitColor="?android:textColorPrimary"/>
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Vdown"
@@ -87,7 +90,8 @@
         gauge:subdivisions="1"
         gauge:textUnit="Volt"
         gauge:textUnitSize="0.06"
-        gauge:textValueSize="0.15" />
+        gauge:textValueSize="0.15"
+        app:textUnitColor="?android:textColorPrimary"/>
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Idown"
@@ -113,7 +117,9 @@
         gauge:subdivisions="1"
         gauge:textUnit="Current"
         gauge:textUnitSize="0.06"
-        gauge:textValueSize="0.15" />
+        gauge:textValueSize="0.15"
+        app:textUnitColor="?android:textColorPrimary"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -139,6 +145,7 @@
         app:layout_constraintGuide_percent="0.7" />
 
     <TextView
+        android:textColorHint="?android:textColorPrimary"
         android:id="@+id/textV1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -621,7 +628,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
-        android:background="#1AFFFFFF"
+        android:background="?strokeColor"
         app:layout_constraintBottom_toTopOf="@+id/textV2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -638,7 +645,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
-        android:background="#1AFFFFFF"
+        android:background="?strokeColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
