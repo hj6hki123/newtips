@@ -22,11 +22,11 @@
         android:gravity="center"
         android:text="設備之功率圖表"
         android:textSize="30sp"
-        android:textColor="@color/black"/>
+   />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#3E0E0E0E"
+        android:background="#52FFFFFF"
         android:layout_marginTop="3dp"/>
 
 
@@ -45,26 +45,20 @@
         android:gravity="center"
         android:text="時鐘設定"
         android:textSize="30sp"
-        android:textColor="@color/black"/>
+    />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#3E0E0E0E"/>
+        android:background="#52FFFFFF"/>
 <com.google.android.material.card.MaterialCardView
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#00FFFFFF"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/card_color"
     app:cardCornerRadius="12dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="false"
     android:paddingBottom="10dp"
-    android:paddingLeft="3dp"
-    android:paddingRight="3dp"
-    android:paddingTop="10dp"
     android:clickable="true"
     android:focusable="true"
 >
@@ -85,7 +79,8 @@
             app:layout_constraintHorizontal_bias="0.935"
             app:layout_constraintStart_toEndOf="@+id/device1_timeBegin"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.375">
+            app:layout_constraintVertical_bias="0.375"
+            >
 
             <TextView
                 android:id="@+id/time1_End_12H"
@@ -267,11 +262,11 @@
         android:gravity="center"
         android:text="基本資料"
         android:textSize="30sp"
-        android:textColor="@color/black"/>
+ />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#3E0E0E0E"
+        android:background="#52FFFFFF"
 
         android:layout_marginTop="3dp"/>
 
@@ -357,7 +352,7 @@
                     android:padding="3dip"
                     android:text="ONLINE"
                     android:textSize="20sp"
-                    android:textColor="@color/green"/>
+               />
             </TableRow>
             <View
                 android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -347,6 +349,7 @@ private void initpref(){
         y.setDrawGridLines(true);
         y.setAxisMaximum(100);//最高100
         y.setAxisMinimum(0);//最低0
+        y.setTextColor(isNightmode()?Color.WHITE:Color.BLACK);
         charts.getAxisRight().setEnabled(false);//右邊Y軸不可視
         charts.setVisibleXRange(0,50);//設置顯示範圍
 
@@ -598,10 +601,25 @@ private void initpref(){
     private void randomcolor(MaterialCardView card)
     {
         Random random = new Random();
-        int r = random.nextInt(55)+200;
-        int g = random.nextInt(55)+200;
-        int b = random.nextInt(55)+200;
+        int base=0;
+        base=isNightmode()?100:200;
+
+        int r = random.nextInt(55)+base;
+        int g = random.nextInt(55)+base;
+        int b = random.nextInt(55)+base;
         card.setCardBackgroundColor(Color.rgb(r,g,b));
+    }
+
+    private boolean isNightmode()
+    {
+        int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(mode == Configuration.UI_MODE_NIGHT_YES) {
+            return true;
+        } else if(mode == Configuration.UI_MODE_NIGHT_NO) {
+            return false;
+        }
+
+        return false;
     }
 
 

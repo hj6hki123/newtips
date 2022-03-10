@@ -20,7 +20,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spi"
-        app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/VoltageValues"
         gauge:scaleEndValue="230"
@@ -47,7 +46,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spi"
-        app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/CurrentValues"
         gauge:scaleEndValue="16"
@@ -75,7 +73,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/VoltageValues"
         gauge:scaleEndValue="230"
@@ -102,7 +99,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:textUnitColor="@color/black"
         gauge:divisions="8"
         gauge:rangeValues="@array/CurrentValues"
         gauge:scaleEndValue="16"
@@ -466,14 +462,12 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.862" />
 
-    <android.widget.Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/buttonshape"
         android:text="off"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -481,13 +475,11 @@
         app:layout_constraintVertical_bias="0.995" />
 
 
-    <android.widget.Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonshape"
         android:text="off"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -629,7 +621,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
-        android:background="#1A000000"
+        android:background="#1AFFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textV2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -646,7 +638,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
-        android:background="#1A000000"
+        android:background="#1AFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -705,13 +697,15 @@
         app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
         app:layout_constraintStart_toStartOf="@+id/devicename1"
         app:layout_constraintTop_toTopOf="@+id/devicename1"
-        gauge:srcCompat="@drawable/edit" />
+        app:layout_constraintVertical_bias="0.6"
+        gauge:srcCompat="@drawable/edit"
+        android:layout_marginLeft="5dp"/>
 
     <ImageView
         android:id="@+id/editdevucename2"
         android:layout_width="33dp"
         android:layout_height="31dp"
-
+        android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
         app:layout_constraintStart_toStartOf="@+id/devicename2"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
@@ -727,7 +721,9 @@
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="@+id/devicename1"
         app:layout_constraintTop_toTopOf="@+id/devicename1"
-        gauge:srcCompat="@drawable/chronometer" />
+        app:layout_constraintVertical_bias="0.6"
+        gauge:srcCompat="@drawable/chronometer"
+       />
 
     <ImageView
         android:id="@+id/clockedit2"
@@ -738,6 +734,7 @@
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="@+id/devicename2"
         app:layout_constraintTop_toTopOf="@+id/devicename2"
+        app:layout_constraintVertical_bias="0.71000004"
         gauge:srcCompat="@drawable/chronometer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
