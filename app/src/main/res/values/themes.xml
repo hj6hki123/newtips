@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Newtips" parent="Theme.Material3.Light">
+    <style name="Theme.Newtips" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
+
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColor">@color/black</item>
         <item name="strokeColor">#4B1C1B1B</item>

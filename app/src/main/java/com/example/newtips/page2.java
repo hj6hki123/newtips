@@ -208,11 +208,7 @@ public class page2 extends Fragment {
                     GlobalData.dlt_mac=delete_str;
                     GlobalData.FSM="Deletmacaddress";
                     GlobalData.macaddress_select="none";
-
                     break;
-
-
-
             }
         }
     }

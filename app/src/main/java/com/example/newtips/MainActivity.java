@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pref =getPreferences(Context.MODE_PRIVATE);
+        pref =getSharedPreferences("viewmode",MODE_MULTI_PROCESS);
         if(pref.getBoolean("darkmode",false))
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else

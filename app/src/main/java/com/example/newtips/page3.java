@@ -87,7 +87,6 @@ public class page3 extends Fragment {
 
     private LineChart charts;
     private boolean isRunning = false;
-    private LineChart chart;
     private Thread thread;
 
     private Handler handler = new Handler(Looper.getMainLooper());

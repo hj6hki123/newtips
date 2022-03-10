@@ -2,6 +2,7 @@ package com.example.newtips;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +35,12 @@ public class IntrodusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DynamicColors.applyToActivitiesIfAvailable(getApplication());
+        SharedPreferences pref =getSharedPreferences("viewmode",MODE_MULTI_PROCESS);
+        if(pref.getBoolean("darkmode",false))
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())

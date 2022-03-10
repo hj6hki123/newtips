@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Newtips" parent="Theme.Material3.DayNight">
+    <style name="Theme.Newtips" parent="Theme.MaterialComponents.DayNight">
+
         <!-- Primary brand color. -->
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColor">@color/white</item>
