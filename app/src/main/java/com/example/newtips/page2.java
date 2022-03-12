@@ -64,6 +64,10 @@ import java.util.concurrent.Executors;
 
 import android.graphics.Color;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class page2 extends Fragment {
     private LinkedList<String> Alist=new LinkedList<String>();
     private RecyclerView mRecyclerView;
@@ -156,6 +160,8 @@ public class page2 extends Fragment {
         getActivity().registerReceiver(myBroadcast, intentFilter);
         IntentFilter intentFilter2 = new IntentFilter(WordListAdapter.RECEIVE_ACTION);
         getActivity().registerReceiver(myBroadcast, intentFilter2);
+        IntentFilter intentFilter3 = new IntentFilter(SocketService.Init_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter3);
 
 
         super.onCreate(savedInstanceState);
@@ -169,6 +175,7 @@ public class page2 extends Fragment {
         Alist.addAll(sett_mask);
     }
     private class MyBroadcast extends BroadcastReceiver {
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         public void onReceive(Context context, Intent intent) {
             String mAction = intent.getAction();
@@ -192,7 +199,7 @@ public class page2 extends Fragment {
                         {
                             sett_mask.add(msg);
                             pref.edit().putStringSet("Macaddress",sett_mask)
-                                    .commit();
+                                    .apply();
                             Alist.add(msg);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -204,10 +211,32 @@ public class page2 extends Fragment {
                     sett_mask.remove(delete_str);
                     Alist.remove(delete_str);
                     mAdapter.notifyDataSetChanged();
-                    pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).commit();
+                    pref.edit().remove("Macaddress").putStringSet("Macaddress",sett_mask).apply();
                     GlobalData.dlt_mac=delete_str;
                     GlobalData.FSM="Deletmacaddress";
                     GlobalData.macaddress_select="none";
+                    break;
+                case SocketService.Init_ACTION:
+                    String init_DATA = intent.getStringExtra(SocketService.Init_DATA);
+                    try {
+                        JSONArray init_DATA_array = new JSONArray(init_DATA);
+                        for(int i = 0;i < init_DATA_array.length(); i++){
+                            //取出JSON物件
+                            JSONObject modFamily = init_DATA_array.getJSONObject(i);
+                            //取得物件內資料
+                            sett_mask.add(modFamily.getString("Macaddress"));
+                        }
+                        pref.edit().putStringSet("Macaddress",sett_mask)
+                                .apply();
+                        Alist.clear();  //清除
+                        Alist.addAll(sett_mask);
+                        mAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                     break;
             }
         }

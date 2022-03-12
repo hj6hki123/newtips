@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -19,11 +20,13 @@ import com.example.newtips.common.Constants;
 import com.example.newtips.common.EventMsg;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -51,6 +54,9 @@ public class SocketService extends Service {
     public static final String RECEIVE_SERVICE_PROBLEM="TCPSOCKET_ReceiveProblem";
     public static final String LoginAccess_ACTION="TCPSOCKET_LoginAccess";
     public static final String Loginvoke="Loginvoke";
+    public static final String Init_ACTION="Init_ACTION";
+    public static final String Init_DATA="Init_DATA";
+
     /*socket*/
     private Socket socket;
     /*連接線程*/
@@ -260,7 +266,18 @@ public class SocketService extends Service {
                                         sendOrder(Aesencryption.startencode(initdata.toString()) +"");
                                         String dataget=br.readLine();
                                         Log.e("Inituserdata",dataget+"");
-
+                                        if(dataget!=null)
+                                        {
+                                            JSONObject jsondataget=new JSONObject(dataget);
+                                            if(jsondataget.getString("Title").equals("6"))//如果表頭是6
+                                            {
+                                                JSONArray initdata_recv=jsondataget.getJSONArray("Initdata");
+                                                Intent intent = new Intent();
+                                                intent.setAction(Init_ACTION);
+                                                intent.putExtra(Init_DATA,initdata_recv.toString());
+                                                sendBroadcast(intent);
+                                            }
+                                        }
                                         GlobalData.FSM="Datatransport";
                                         break;
                                     default:

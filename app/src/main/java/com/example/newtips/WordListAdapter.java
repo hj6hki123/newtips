@@ -129,7 +129,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
                     notifyItemChanged(lastIndex);
 
                 }
-
+                GlobalData.FSM="Inituserdata";
             }
         });
 

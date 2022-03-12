@@ -9,5 +9,5 @@
     </group>
     <item android:id="@+id/item2" android:title="visit our website"></item>
     <item android:id="@+id/item3" android:title="關於"></item>
-    <item android:id="@+id/item4" android:title="初始化"></item>
+    <item android:id="@+id/item4" android:title="恢復資料"></item>
 </menu>

@@ -5,6 +5,7 @@ import static android.content.Context.BIND_AUTO_CREATE;
 
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -82,6 +83,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class page3 extends Fragment {
 
 
@@ -92,7 +97,7 @@ public class page3 extends Fragment {
     private Handler handler = new Handler(Looper.getMainLooper());
     private Timer timer = new Timer();
     private TimerTask task;
-
+    MyBroadcast myBroadcast = new MyBroadcast();
     SharedPreferences pref ;
 
     LinearLayout clock_LeftTop,clock_LeftBotton,clock_RightTop,clock_RightBotton;
@@ -171,6 +176,9 @@ public class page3 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        IntentFilter intentFilter3 = new IntentFilter(SocketService.Init_ACTION);
+        getActivity().registerReceiver(myBroadcast, intentFilter3);
 
     }
 
@@ -599,6 +607,74 @@ private void initpref(){
 
         return false;
     }
+
+    private class MyBroadcast extends BroadcastReceiver {
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String mAction = intent.getAction();
+            assert mAction != null;
+            switch (mAction) {
+                /**接收來自UDP回傳之訊息*/
+                case SocketService.Init_ACTION:
+                    String init_DATA = intent.getStringExtra(SocketService.Init_DATA);
+                    try {
+                        JSONArray init_DATA_array = new JSONArray(init_DATA);
+                        for(int i = 0;i < init_DATA_array.length(); i++){
+                            //取出JSON物件
+                            JSONObject modFamily = init_DATA_array.getJSONObject(i);
+                            if(GlobalData.macaddress_select.equals(modFamily.getString("Macaddress")))
+                            {
+                                String S_time1_begin=modFamily.getString("clockbegin1");
+                                String S_time1_end=modFamily.getString("clockend1");
+                                String S_time2_begin=modFamily.getString("clockbegin2");
+                                String S_time2_end=modFamily.getString("clockend2");
+                                pref.edit()
+                                        .putBoolean("device1_enable", modFamily.getInt("clockenable1") == 1)
+                                        .putBoolean("device2_enable", modFamily.getInt("clockenable2") == 1)
+                                        .putString("time1_begin",S_time1_begin)
+                                        .putString("time1_end",S_time1_end)
+                                        .putString("time2_begin",S_time2_begin)
+                                        .putString("time2_end",S_time2_end)
+                                        .apply();
+
+                                String[] time_12h=_24Hto12H(S_time1_begin,S_time1_end,S_time2_begin,S_time2_end);
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            device1_enable.setChecked(modFamily.getInt("clockenable1") == 1);
+                                            device2_enable.setChecked(modFamily.getInt("clockenable2") == 1);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        time1_begin_12H.setText((time_12h[0].split("--"))[0]);
+                                        time1_begin.setText((time_12h[0].split("--"))[1]);
+                                        time1_end_12H.setText((time_12h[1].split("--"))[0]);
+                                        time1_end.setText((time_12h[1].split("--"))[1]);
+                                        time2_begin_12H.setText((time_12h[2].split("--"))[0]);
+                                        time2_begin.setText((time_12h[2].split("--"))[1]);
+                                        time2_end_12H.setText((time_12h[3].split("--"))[0]);
+                                        time2_end.setText((time_12h[3].split("--"))[1]);
+
+                                    }
+                                });
+
+
+                                break;
+                            }
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    }
+
+
 
 
 
