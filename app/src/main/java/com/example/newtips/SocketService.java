@@ -49,6 +49,8 @@ public class SocketService extends Service {
     public static final String RECEIVE_SERVICE_ACTION="TCPSOCKET_ACTION";
     public static final String RECEIVE_SERVICE_STRING="TCPSOCKET_ReceiveString";
     public static final String RECEIVE_SERVICE_PROBLEM="TCPSOCKET_ReceiveProblem";
+    public static final String LoginAccess_ACTION="TCPSOCKET_LoginAccess";
+    public static final String Loginvoke="Loginvoke";
     /*socket*/
     private Socket socket;
     /*連接線程*/
@@ -159,10 +161,16 @@ public class SocketService extends Service {
                                         {
                                             if(login_acess.getString("Loginaccess").equals("true"))
                                             {
-                                                GlobalData.FSM="Datatransport";
-                                                Intent i=new Intent(getApplicationContext(), MainActivity.class);
-                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(i);
+//                                                GlobalData.FSM="Datatransport";
+//                                                Intent i=new Intent(getApplicationContext(), MainActivity.class);
+//                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                                startActivity(i);
+
+
+                                                Intent intent = new Intent();
+                                                intent.setAction(LoginAccess_ACTION);
+                                                intent.putExtra(Loginvoke,true);
+                                                sendBroadcast(intent);
                                             }
                                             else
                                             {
@@ -207,16 +215,11 @@ public class SocketService extends Service {
 
                                                 }
                                             }
-
-
-
-
                                         }
                                         else
                                         {
                                             Log.e("Datatransport","nonemacaddr_select");
                                         }
-
 
                                         break;
 
@@ -252,6 +255,22 @@ public class SocketService extends Service {
                                         GlobalData.FSM="Datatransport";
                                         Log.e("ClockeditSender",clockeditor.toString()+"");
                                         break;
+                                    case "Inituserdata":
+                                        JSONObject initdata=new JSONObject();
+                                        initdata.put("Title","6");
+                                        initdata.put("Title",GlobalData.Login_user);
+                                        String dataget=br.readLine();
+                                        Log.e("Inituserdata",dataget+"");
+                                        if(dataget!=null)
+                                        {
+                                            JSONObject jsondataget=new JSONObject(dataget);
+                                            if(jsondataget.getString("Title").equals("6"))//如果表頭是2
+                                            {
+
+                                            }
+
+                                        }
+                                        break;
                                     default:
                                         break;
                                 }
@@ -277,13 +296,13 @@ public class SocketService extends Service {
 
                         } else if (e instanceof ConnectException) {
                             problem="連接異常或被拒絕!請重新檢查";
-
+                            toastMsg(problem);
                             releaseSocket();
                         }
                         else if(e instanceof SocketException)
                         {
                             problem="伺服器連接異常!請查看連線狀態";
-
+                            toastMsg(problem);
                             releaseSocket();
                         }
                         else if(e instanceof InterruptedException)
@@ -376,13 +395,13 @@ public class SocketService extends Service {
                     try {
                         outputStream = socket.getOutputStream();
 
-                        /*这里的编码方式根据你的需求去改*/
+
                         outputStream.write(("test").getBytes("gbk"));
                         outputStream.flush();
                     } catch (Exception e) {
-                        /*发送失败说明socket断开了或者出现了其他错误*/
+
                         toastMsg("连接断开，正在重连");
-                        /*重连*/
+
                         releaseSocket();
                         e.printStackTrace();
 

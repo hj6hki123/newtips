@@ -80,8 +80,8 @@ import android.graphics.Color;
 public class page1 extends Fragment {
     SharedPreferences pref ;
 
-    private ServiceConnection sc;
-    public SocketService socketService;
+//    private ServiceConnection sc;
+//    public SocketService socketService;
     private Handler handler = new Handler(Looper.getMainLooper());
     private Timer timer = new Timer();
     private TimerTask task;
@@ -269,7 +269,7 @@ public class page1 extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-        bindSocketService();
+        //bindSocketService();
         timerUI();
 
 
@@ -376,23 +376,23 @@ public class page1 extends Fragment {
     }
 
 
-    private void bindSocketService()
-    {
-
-        sc = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                SocketService.SocketBinder binder = (SocketService.SocketBinder) service;
-                socketService = binder.getService();
-            }
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-            }
-        };
-        Intent intent = new Intent(getActivity(), SocketService.class);
-        getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
-
-    }
+//    private void bindSocketService()
+//    {
+//
+//        sc = new ServiceConnection() {
+//            @Override
+//            public void onServiceConnected(ComponentName name, IBinder service) {
+//                SocketService.SocketBinder binder = (SocketService.SocketBinder) service;
+//                socketService = binder.getService();
+//            }
+//            @Override
+//            public void onServiceDisconnected(ComponentName name) {
+//            }
+//        };
+//        Intent intent = new Intent(getActivity(), SocketService.class);
+//        getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
+//
+//    }
 
     private void setEdittextCustomDialog(final int pos){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());

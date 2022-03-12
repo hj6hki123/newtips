@@ -34,13 +34,15 @@ public class IntrodusActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         SharedPreferences pref =getSharedPreferences("viewmode",MODE_MULTI_PROCESS);
         if(pref.getBoolean("darkmode",false))
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        super.onCreate(savedInstanceState);
+
+
 
 
         FirebaseDynamicLinks.getInstance()

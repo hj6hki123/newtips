@@ -7,9 +7,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         pref =getSharedPreferences("viewmode",MODE_MULTI_PROCESS);
         if(pref.getBoolean("darkmode",false))
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        Log.e("onCreate","1122222222");
 
         //< get elements >
         TabLayout tabLayout = findViewById(R.id.tabs);
@@ -66,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 ).attach();
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.setPageTransformer(new DepthPageTransformer());
-        if(GlobalData.macaddress_select.equals("none"))
-            viewPager2.setCurrentItem(1,false);
+
+
     }
     //todo:返回鍵延遲
     private  Boolean isExit = false;
@@ -100,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 GlobalData.FSM="IDLE";
                 finish(); // 離開程式
             }
-
-
         }
         return  false;
 
@@ -138,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
                     pref.edit().putBoolean("darkmode",true).apply();
                 }
                 recreate();
+
+
                 break;
             case R.id.item2:
                 break;

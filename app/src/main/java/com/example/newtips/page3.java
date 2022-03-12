@@ -95,9 +95,6 @@ public class page3 extends Fragment {
 
     SharedPreferences pref ;
 
-
-    private ServiceConnection sc;
-    public SocketService socketService;
     LinearLayout clock_LeftTop,clock_LeftBotton,clock_RightTop,clock_RightBotton;
     TextView    time1_begin,time2_begin,time1_end,time2_end;
     TextView    time1_begin_12H,time2_begin_12H,time1_end_12H,time2_end_12H;
@@ -295,26 +292,6 @@ private void initpref(){
 
     }
 
-
-
-    private void bindSocketService()
-    {
-
-        sc = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                SocketService.SocketBinder binder = (SocketService.SocketBinder) service;
-                socketService = binder.getService();
-            }
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-            }
-        };
-        Intent intent = new Intent(getActivity(), SocketService.class);
-        getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
-    }
-
-
     protected void initChart()
     {
         charts.getDescription().setEnabled(false);
@@ -413,7 +390,7 @@ private void initpref(){
                 catch (NullPointerException e)
                 {
                     Log.e("NullPointerException",Log.getStackTraceString(e));
-                    isRunning=false;
+                   isRunning=false;
                 }
                 if (!isRunning)break;
                 try {
