@@ -151,16 +151,15 @@ public class page3 extends Fragment {
         device1_enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getdataFrompref();
                 pref.edit().putBoolean("device1_enable",isChecked).apply();
-
+                getdataFrompref();
             }
         });
         device2_enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getdataFrompref();
                 pref.edit().putBoolean("device2_enable",isChecked).apply();
+                getdataFrompref();
             }
         });
         card_view.setOnClickListener(v -> randomcolor(card_view));
@@ -553,15 +552,15 @@ private void initpref(){
     }
     private String[] _24Hto12H(String...time)
     {
-            try {
-                for(int i=0;i<time.length;i++) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date dateObj = sdf.parse(time[i]);
-                    time[i] = new SimpleDateFormat("aa--hh:mm").format(dateObj);
-                }
-            } catch (final ParseException e) {
-                e.printStackTrace();
+        try {
+            for(int i=0;i<time.length;i++) {
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                Date dateObj = sdf.parse(time[i]);
+                time[i] = new SimpleDateFormat("aa--hh:mm").format(dateObj);
             }
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
 
         return time;
     }
@@ -572,8 +571,8 @@ private void initpref(){
         GlobalData.timeArray_clock.set(1,pref.getString("time2_begin","00:02"));
         GlobalData.timeArray_clock.set(2,pref.getString("time1_end","00:03"));
         GlobalData.timeArray_clock.set(3, pref.getString("time2_end","00:04"));
-        GlobalData.Device1_Timeenable=device1_enable.isChecked() ? "1":"0";
-        GlobalData.Device2_Timeenable=device2_enable.isChecked() ? "1":"0";
+        GlobalData.Device1_Timeenable=pref.getBoolean("device1_enable",false) ? "1":"0";
+        GlobalData.Device2_Timeenable=pref.getBoolean("device2_enable",false) ? "1":"0";
         GlobalData.FSM="Clockedit";
     }
 

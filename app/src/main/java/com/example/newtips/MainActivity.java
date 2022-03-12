@@ -151,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item3:
                 break;
+            case R.id.item4:
+                //GlobalData.FSM="Inituserdata";
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

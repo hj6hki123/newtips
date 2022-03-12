@@ -164,7 +164,7 @@ public class page2 extends Fragment {
     }
     private void DATAinit()
     {
-        pref =getActivity().getPreferences(Context.MODE_PRIVATE);
+        pref =getActivity().getSharedPreferences("pref_macaddress",Context.MODE_PRIVATE);
         sett_mask=new HashSet<String>(pref.getStringSet("Macaddress", new HashSet<>()));//!!new一個set防止sett引用sp變數
         Alist.addAll(sett_mask);
     }

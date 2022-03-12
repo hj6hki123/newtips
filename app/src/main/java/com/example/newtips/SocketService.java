@@ -262,7 +262,7 @@ public class SocketService extends Service {
                                     case "Inituserdata":
                                         JSONObject initdata=new JSONObject();
                                         initdata.put("Title","6");
-                                        initdata.put("Title",GlobalData.Login_user);
+                                        initdata.put("User",GlobalData.Login_user);
                                         String dataget=br.readLine();
                                         Log.e("Inituserdata",dataget+"");
                                         if(dataget!=null)
