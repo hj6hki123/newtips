@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -144,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.item2:
+                final Uri uri=Uri.parse("http://120.114.68.132");//網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);//開啟註冊網址
                 break;
             case R.id.item3:
                 break;
