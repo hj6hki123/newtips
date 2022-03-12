@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bindSocketService();
+       // bindSocketService();
         setContentView(R.layout.activity_login);
 
         //註冊廣播器
@@ -98,8 +98,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Intent intent = new Intent(getApplicationContext(), SocketService.class);
-        stopService(intent);
+        //Intent intent = new Intent(getApplicationContext(), SocketService.class);
+        //stopService(intent);
     }
 
     private void bindSocketService()

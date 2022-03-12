@@ -58,7 +58,8 @@ public class SocketService extends Service {
     private Timer timer = new Timer();
     private OutputStream outputStream;
 
-    private SocketBinder sockerBinder = new SocketBinder();
+    //private SocketBinder sockerBinder = new SocketBinder();
+
     private String ip;
     private String port;
     private TimerTask task;
@@ -73,7 +74,8 @@ public class SocketService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return sockerBinder;
+        //return sockerBinder;
+        return null;
     }
 
 
@@ -101,7 +103,9 @@ public class SocketService extends Service {
         /*初始化socket*/
         initSocket();
 
-        return super.onStartCommand(intent, flags, startId);
+        //return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;//不重啟service
+
     }
 
 
@@ -382,7 +386,7 @@ public class SocketService extends Service {
         }
     }
 
-    /*定时发送数据*/
+
     private void sendBeatData() {
         if (timer == null) {
             timer = new Timer();
@@ -399,8 +403,6 @@ public class SocketService extends Service {
                         outputStream.write(("test").getBytes("gbk"));
                         outputStream.flush();
                     } catch (Exception e) {
-
-                        toastMsg("连接断开，正在重连");
 
                         releaseSocket();
                         e.printStackTrace();
