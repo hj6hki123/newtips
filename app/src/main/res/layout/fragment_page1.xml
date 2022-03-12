@@ -469,7 +469,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.862" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -479,10 +479,12 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gauge_view_Vupp"
-        app:layout_constraintVertical_bias="0.995" />
+        app:layout_constraintVertical_bias="0.995"
+        android:background="@drawable/buttonshape"
+        />
 
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -491,7 +493,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
-        app:layout_constraintVertical_bias="0.867" />
+        app:layout_constraintVertical_bias="0.867"
+        android:background="@drawable/buttonshape"/>
 
     <TextView
         android:id="@+id/textViewunitV1"
