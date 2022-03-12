@@ -165,12 +165,6 @@ public class SocketService extends Service {
                                         {
                                             if(login_acess.getString("Loginaccess").equals("true"))
                                             {
-//                                                GlobalData.FSM="Datatransport";
-//                                                Intent i=new Intent(getApplicationContext(), MainActivity.class);
-//                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                                startActivity(i);
-
-
                                                 Intent intent = new Intent();
                                                 intent.setAction(LoginAccess_ACTION);
                                                 intent.putExtra(Loginvoke,true);
@@ -263,17 +257,11 @@ public class SocketService extends Service {
                                         JSONObject initdata=new JSONObject();
                                         initdata.put("Title","6");
                                         initdata.put("User",GlobalData.Login_user);
+                                        sendOrder(Aesencryption.startencode(initdata.toString()) +"");
                                         String dataget=br.readLine();
                                         Log.e("Inituserdata",dataget+"");
-                                        if(dataget!=null)
-                                        {
-                                            JSONObject jsondataget=new JSONObject(dataget);
-                                            if(jsondataget.getString("Title").equals("6"))//如果表頭是2
-                                            {
 
-                                            }
-
-                                        }
+                                        GlobalData.FSM="Datatransport";
                                         break;
                                     default:
                                         break;

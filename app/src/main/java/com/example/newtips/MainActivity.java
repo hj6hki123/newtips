@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item3:
                 break;
             case R.id.item4:
-                //GlobalData.FSM="Inituserdata";
+                GlobalData.FSM="Inituserdata";
                 break;
         }
         return super.onOptionsItemSelected(item);

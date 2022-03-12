@@ -25,6 +25,7 @@
         <activity
             android:name=".IntrodusActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Newtips.NoActionBar"
            >
 
             <intent-filter>
@@ -46,6 +47,7 @@
 
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Newtips.NoActionBar"
             >
 
         </activity>
