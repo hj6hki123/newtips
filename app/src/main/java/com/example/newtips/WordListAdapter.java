@@ -136,6 +136,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         if (currentIndex == position){
             holder.title.setBackgroundColor(Color.rgb(41,187,68));
             GlobalData.macaddress_select= mWordList.get(currentIndex);
+            GlobalData.worldlist_pos=currentIndex;
 
 
         }else {

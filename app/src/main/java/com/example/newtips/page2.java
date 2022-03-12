@@ -202,6 +202,7 @@ public class page2 extends Fragment {
                                     .apply();
                             Alist.add(msg);
                             mAdapter.notifyDataSetChanged();
+                            GlobalData.FSM="Inituserdata";
                         }
 
                     }
