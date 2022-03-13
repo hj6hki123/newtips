@@ -622,118 +622,118 @@ private void initpref(){
 
                     try {
                         JSONArray init_DATA_array = new JSONArray(init_DATA);
-                        if(init_DATA_array.length()>0)
-                        {
-                            JSONObject modFamily = init_DATA_array.getJSONObject(GlobalData.worldlist_pos);
-                            GlobalData.macaddress_select=modFamily.getString("Macaddress");
-                            String S_time1_begin=modFamily.getString("clockbegin1");
-                                    String S_time1_end=modFamily.getString("clockend1");
-                                    String S_time2_begin=modFamily.getString("clockbegin2");
-                                    String S_time2_end=modFamily.getString("clockend2");
-                            pref.edit()
-                                    .putBoolean("device1_enable", modFamily.getInt("clockenable1") == 1)
-                                    .putBoolean("device2_enable", modFamily.getInt("clockenable2") == 1)
-                                    .putString("time1_begin",S_time1_begin)
-                                    .putString("time1_end",S_time1_end)
-                                    .putString("time2_begin",S_time2_begin)
-                                    .putString("time2_end",S_time2_end)
-                                    .apply();
-
-                            String[] time_12h=_24Hto12H(S_time1_begin,S_time1_end,S_time2_begin,S_time2_end);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        device1_enable.setChecked(modFamily.getInt("clockenable1") == 1);
-                                        device2_enable.setChecked(modFamily.getInt("clockenable2") == 1);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    time1_begin_12H.setText((time_12h[0].split("--"))[0]);
-                                    time1_begin.setText((time_12h[0].split("--"))[1]);
-                                    time1_end_12H.setText((time_12h[1].split("--"))[0]);
-                                    time1_end.setText((time_12h[1].split("--"))[1]);
-                                    time2_begin_12H.setText((time_12h[2].split("--"))[0]);
-                                    time2_begin.setText((time_12h[2].split("--"))[1]);
-                                    time2_end_12H.setText((time_12h[3].split("--"))[0]);
-                                    time2_end.setText((time_12h[3].split("--"))[1]);
-
-                                }
-                            });
-                        }
-                        else {
-                            pref.edit()
-                                    .putBoolean("device1_enable", false)
-                                    .putBoolean("device2_enable", false)
-                                    .putString("time1_begin","00:00")
-                                    .putString("time1_end","00:00")
-                                    .putString("time2_begin","00:00")
-                                    .putString("time2_end","00:00")
-                                    .apply();
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    device1_enable.setChecked(false);
-                                    device2_enable.setChecked(false);
-                                    time1_begin_12H.setText("上午");
-                                    time1_begin.setText("12:00");
-                                    time1_end_12H.setText("上午");
-                                    time1_end.setText("12:00");
-                                    time2_begin_12H.setText("上午");
-                                    time2_begin.setText("12:00");
-                                    time2_end_12H.setText("上午");
-                                    time2_end.setText("12:00");
-
-                                }
-                            });
-                        }
-//                        for(int i = 0;i < init_DATA_array.length(); i++){
-//                            //取出JSON物件
-//                            JSONObject modFamily = init_DATA_array.getJSONObject(i);
-//
-//                                if(GlobalData.macaddress_select.equals(modFamily.getString("Macaddress")))
-//                                {
-//                                    String S_time1_begin=modFamily.getString("clockbegin1");
+//                        if(init_DATA_array.length()>0)
+//                        {
+//                            JSONObject modFamily = init_DATA_array.getJSONObject(GlobalData.worldlist_pos);
+//                            GlobalData.macaddress_select=modFamily.getString("Macaddress");
+//                            String S_time1_begin=modFamily.getString("clockbegin1");
 //                                    String S_time1_end=modFamily.getString("clockend1");
 //                                    String S_time2_begin=modFamily.getString("clockbegin2");
 //                                    String S_time2_end=modFamily.getString("clockend2");
-//                                    pref.edit()
-//                                            .putBoolean("device1_enable", modFamily.getInt("clockenable1") == 1)
-//                                            .putBoolean("device2_enable", modFamily.getInt("clockenable2") == 1)
-//                                            .putString("time1_begin",S_time1_begin)
-//                                            .putString("time1_end",S_time1_end)
-//                                            .putString("time2_begin",S_time2_begin)
-//                                            .putString("time2_end",S_time2_end)
-//                                            .apply();
+//                            pref.edit()
+//                                    .putBoolean("device1_enable", modFamily.getInt("clockenable1") == 1)
+//                                    .putBoolean("device2_enable", modFamily.getInt("clockenable2") == 1)
+//                                    .putString("time1_begin",S_time1_begin)
+//                                    .putString("time1_end",S_time1_end)
+//                                    .putString("time2_begin",S_time2_begin)
+//                                    .putString("time2_end",S_time2_end)
+//                                    .apply();
 //
-//                                    String[] time_12h=_24Hto12H(S_time1_begin,S_time1_end,S_time2_begin,S_time2_end);
-//                                    handler.post(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            try {
-//                                                device1_enable.setChecked(modFamily.getInt("clockenable1") == 1);
-//                                                device2_enable.setChecked(modFamily.getInt("clockenable2") == 1);
-//                                            } catch (JSONException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                            time1_begin_12H.setText((time_12h[0].split("--"))[0]);
-//                                            time1_begin.setText((time_12h[0].split("--"))[1]);
-//                                            time1_end_12H.setText((time_12h[1].split("--"))[0]);
-//                                            time1_end.setText((time_12h[1].split("--"))[1]);
-//                                            time2_begin_12H.setText((time_12h[2].split("--"))[0]);
-//                                            time2_begin.setText((time_12h[2].split("--"))[1]);
-//                                            time2_end_12H.setText((time_12h[3].split("--"))[0]);
-//                                            time2_end.setText((time_12h[3].split("--"))[1]);
+//                            String[] time_12h=_24Hto12H(S_time1_begin,S_time1_end,S_time2_begin,S_time2_end);
+//                            handler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    try {
+//                                        device1_enable.setChecked(modFamily.getInt("clockenable1") == 1);
+//                                        device2_enable.setChecked(modFamily.getInt("clockenable2") == 1);
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                    time1_begin_12H.setText((time_12h[0].split("--"))[0]);
+//                                    time1_begin.setText((time_12h[0].split("--"))[1]);
+//                                    time1_end_12H.setText((time_12h[1].split("--"))[0]);
+//                                    time1_end.setText((time_12h[1].split("--"))[1]);
+//                                    time2_begin_12H.setText((time_12h[2].split("--"))[0]);
+//                                    time2_begin.setText((time_12h[2].split("--"))[1]);
+//                                    time2_end_12H.setText((time_12h[3].split("--"))[0]);
+//                                    time2_end.setText((time_12h[3].split("--"))[1]);
 //
-//                                        }
-//                                    });
-//
-//
-//                                    break;
 //                                }
-//
+//                            });
 //                        }
+//                        else {
+//                            pref.edit()
+//                                    .putBoolean("device1_enable", false)
+//                                    .putBoolean("device2_enable", false)
+//                                    .putString("time1_begin","00:00")
+//                                    .putString("time1_end","00:00")
+//                                    .putString("time2_begin","00:00")
+//                                    .putString("time2_end","00:00")
+//                                    .apply();
+//                            handler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+//                                    device1_enable.setChecked(false);
+//                                    device2_enable.setChecked(false);
+//                                    time1_begin_12H.setText("上午");
+//                                    time1_begin.setText("12:00");
+//                                    time1_end_12H.setText("上午");
+//                                    time1_end.setText("12:00");
+//                                    time2_begin_12H.setText("上午");
+//                                    time2_begin.setText("12:00");
+//                                    time2_end_12H.setText("上午");
+//                                    time2_end.setText("12:00");
+//
+//                                }
+//                            });
+//                        }
+                        for(int i = 0;i < init_DATA_array.length(); i++){
+                            //取出JSON物件
+                            JSONObject modFamily = init_DATA_array.getJSONObject(i);
+
+                                if(GlobalData.macaddress_select.equals(modFamily.getString("Macaddress")))
+                                {
+                                    String S_time1_begin=modFamily.getString("clockbegin1");
+                                    String S_time1_end=modFamily.getString("clockend1");
+                                    String S_time2_begin=modFamily.getString("clockbegin2");
+                                    String S_time2_end=modFamily.getString("clockend2");
+                                    pref.edit()
+                                            .putBoolean("device1_enable", modFamily.getInt("clockenable1") == 1)
+                                            .putBoolean("device2_enable", modFamily.getInt("clockenable2") == 1)
+                                            .putString("time1_begin",S_time1_begin)
+                                            .putString("time1_end",S_time1_end)
+                                            .putString("time2_begin",S_time2_begin)
+                                            .putString("time2_end",S_time2_end)
+                                            .apply();
+
+                                    String[] time_12h=_24Hto12H(S_time1_begin,S_time1_end,S_time2_begin,S_time2_end);
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                device1_enable.setChecked(modFamily.getInt("clockenable1") == 1);
+                                                device2_enable.setChecked(modFamily.getInt("clockenable2") == 1);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            time1_begin_12H.setText((time_12h[0].split("--"))[0]);
+                                            time1_begin.setText((time_12h[0].split("--"))[1]);
+                                            time1_end_12H.setText((time_12h[1].split("--"))[0]);
+                                            time1_end.setText((time_12h[1].split("--"))[1]);
+                                            time2_begin_12H.setText((time_12h[2].split("--"))[0]);
+                                            time2_begin.setText((time_12h[2].split("--"))[1]);
+                                            time2_end_12H.setText((time_12h[3].split("--"))[0]);
+                                            time2_end.setText((time_12h[3].split("--"))[1]);
+
+                                        }
+                                    });
+
+
+                                    break;
+                                }
+
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();

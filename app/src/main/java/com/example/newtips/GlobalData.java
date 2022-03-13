@@ -15,7 +15,6 @@ public class GlobalData {
     public static String receivedata="";
     public static Boolean connectstate=false;
     public static String macaddress_select="none";
-    public static int worldlist_pos=0;
     public static String dlt_mac="none";
     public static String[] device_name_change={"null","null"};
     public static String[] device_name_now={"device1","device2"};//only write in page3

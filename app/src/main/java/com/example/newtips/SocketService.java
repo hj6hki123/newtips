@@ -260,6 +260,10 @@ public class SocketService extends Service {
                                         Log.e("ClockeditSender",clockeditor.toString()+"");
                                         break;
                                     case "Inituserdata":
+                                        /*todo:須解決問題
+                                        1.使用者註冊新帳號並第一次配對後，因macaddress未及時被WordListAdapter賦值導致page3拿到廣播後也無法及時改變狀態
+                                        2.使用者在資料庫中以有配對插頭但手機本地端無資料情況下進行初始化，在page2拿到macaddress後與上述問題相同
+                                        */
                                         JSONObject initdata=new JSONObject();
                                         initdata.put("Title","6");
                                         initdata.put("User",GlobalData.Login_user);

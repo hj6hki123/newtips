@@ -132,16 +132,20 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
                 GlobalData.FSM="Inituserdata";
             }
         });
-
-        if (currentIndex == position){
+        if(GlobalData.macaddress_select.equals("none"))
+        {
+            GlobalData.macaddress_select=mWordList.get(currentIndex);
+            GlobalData.FSM="Inituserdata";
+        }
+        else if (currentIndex == position){
             holder.title.setBackgroundColor(Color.rgb(41,187,68));
             GlobalData.macaddress_select= mWordList.get(currentIndex);
-            GlobalData.worldlist_pos=currentIndex;
 
 
         }else {
             holder.title.setBackgroundColor(Color.rgb(255,102,101));
         }
+
 
 
 
