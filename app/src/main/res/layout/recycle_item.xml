@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:gauge="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     app:cardCornerRadius="25dp"
-    app:cardBackgroundColor="#D5BEE7FA"
     android:layout_marginTop="15dp"
-    android:outlineAmbientShadowColor="#E4233DCF"
-    android:outlineSpotShadowColor="#DD8750E8">
+    app:contentPadding="5dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="8dp"
+    style="@style/RecycleviewBackground"
+
+ >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

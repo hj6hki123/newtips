@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Newtips" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
-
+        <item name="backgroundColor">@color/white</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColor">@color/black</item>
         <item name="strokeColor">#4B1C1B1B</item>
@@ -52,6 +52,9 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+<style name="RecycleviewBackground" parent="Theme.AppCompat">
+    <item name="backgroundColor" >#FFFFFF</item>
+</style>
 
 
 
