@@ -562,7 +562,7 @@ private void initpref(){
     {
         try {
             for(int i=0;i<time.length;i++) {
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");//宣告時間格式為"HH:mm"
                 Date dateObj = sdf.parse(time[i]);
                 time[i] = new SimpleDateFormat("aa--hh:mm").format(dateObj);
             }
