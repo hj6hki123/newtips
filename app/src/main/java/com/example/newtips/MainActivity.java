@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setPageTransformer(new DepthPageTransformer());
 
 
+
+
     }
     //todo:返回鍵延遲
     private  Boolean isExit = false;

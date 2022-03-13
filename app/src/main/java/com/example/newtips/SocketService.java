@@ -273,15 +273,19 @@ public class SocketService extends Service {
                                         if(dataget!=null)
                                         {
                                             JSONObject jsondataget=new JSONObject(dataget);
+
                                             if(jsondataget.getString("Title").equals("6"))//如果表頭是6
                                             {
+
                                                 JSONArray initdata_recv=jsondataget.getJSONArray("Initdata");
                                                 Intent intent = new Intent();
                                                 intent.setAction(Init_ACTION);
                                                 intent.putExtra(Init_DATA,initdata_recv.toString());
                                                 sendBroadcast(intent);
+
+                                                toastMsg("資料恢復完成");
                                             }
-                                            toastMsg("資料初始化完成");
+
                                         }
                                         GlobalData.FSM="Datatransport";
                                         break;

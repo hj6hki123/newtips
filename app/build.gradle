@@ -15,15 +15,16 @@ android {
         applicationId "com.smartsocket.SmartSocketksu"
         minSdk 19
         targetSdkVersion 30
-        versionCode 10
-        versionName "4.6"
+        versionCode 11
+        versionName "4.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true //混淆檔案
+            shrinkResources true // 是否去除無效的资源文件
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         // add the code from below line.

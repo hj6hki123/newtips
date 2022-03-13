@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 9,
-      "versionName": "4.5",
+      "versionCode": 11,
+      "versionName": "4.7",
       "outputFile": "SmartSocket_demo.apk"
     }
   ],
