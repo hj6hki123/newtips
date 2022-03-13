@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item3:
                 break;
             case R.id.item4:
+                Toast.makeText(this,"恢復資料中",Toast.LENGTH_SHORT).show();
                 GlobalData.FSM="Inituserdata";
                 break;
         }
