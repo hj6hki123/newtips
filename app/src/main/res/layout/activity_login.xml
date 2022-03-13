@@ -7,69 +7,140 @@
     tools:ignore="HardcodedText"
     android:background="@color/white">
 
-    <android.widget.EditText
-        android:id="@+id/editextuser"
+<!--    <EditText-->
+<!--        android:id="@+id/editextuser"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:background="@drawable/round_border"-->
+<!--        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
+<!--        android:drawableLeft="@drawable/userphoto"-->
+<!--        android:drawablePadding="16dp"-->
+<!--        android:drawingCacheQuality="auto"-->
+<!--        android:ems="10"-->
+<!--        android:focusable="true"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        android:hint="帳號"-->
+<!--        android:inputType="text"-->
+<!--        android:minHeight="48dp"-->
+<!--        android:padding="16dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:windowSoftInputMode="adjustUnspecified|stateHidden"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.327"-->
+<!--        android:fontFamily="sans-serif"-->
+<!--        android:maxLines="1"-->
+
+<!--        />-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_acc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/round_border"
-        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:drawableLeft="@drawable/userphoto"
-        android:drawablePadding="16dp"
-        android:drawingCacheQuality="auto"
-        android:ems="10"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:hint="帳號"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:padding="16dp"
-        android:textColor="@color/black"
-        android:windowSoftInputMode="adjustUnspecified|stateHidden"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.327"
-        android:fontFamily="sans-serif"
-        />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="帳號"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editextuser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/userphoto"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <android.widget.EditText
-        android:id="@+id/editTextPassword"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/round_border"
-        android:drawableLeft="@drawable/lock"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="密碼"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:padding="16dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editextuser"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_acc"
         app:layout_constraintVertical_bias="0.076"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif"/>
+        app:passwordToggleEnabled="true"
+        android:hint="密碼"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+<!--        app:boxBackgroundMode="none"-->
+<!--        app:boxStrokeWidth="0dp"-->
+<!--        app:boxStrokeWidthFocused="0dp"-->
+<!--        app:boxStrokeColor="@android:color/transparent"-->
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/lock"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="16dp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+<!--    <EditText-->
+<!--        android:id="@+id/editTextPassword"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:background="@drawable/round_border"-->
+<!--        android:drawableLeft="@drawable/lock"-->
+<!--        android:drawablePadding="16dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="密碼"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:maxLines="1"-->
+<!--        android:minHeight="48dp"-->
+<!--        android:padding="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editextuser"-->
+<!--        app:layout_constraintVertical_bias="0.076"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:fontFamily="sans-serif"/>-->
 
     <android.widget.Button
         android:id="@+id/button_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginBottom="272dp"
         android:background="@drawable/buttonshape2"
         android:text="登入"
         android:textColor="#FFFFFF"
@@ -78,10 +149,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView_forgot"
@@ -125,7 +195,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/wavebg"
-        app:layout_constraintBottom_toTopOf="@+id/editextuser"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_acc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topview"
