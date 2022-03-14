@@ -52,7 +52,7 @@
 
         </activity>
 
-        <activity android:name=".Gsavtivity"
+        <activity android:name=".test.Gsavtivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
