@@ -2,6 +2,7 @@ package com.example.newtips.page;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -227,6 +229,7 @@ public class page1 extends Fragment {
                     Toast.makeText(getActivity(),"需有設備連線",Toast.LENGTH_SHORT).show();
             }
         });
+
         editdevucename2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,8 +244,16 @@ public class page1 extends Fragment {
         switch1=view.findViewById(R.id.switch1);
         switch2=view.findViewById(R.id.switch2);
 
-        switch1.setOnClickListener((V)->GlobalData.Deviceswitch1="1");
-        switch2.setOnClickListener((V)->GlobalData.Deviceswitch2="1");
+        switch1.setOnClickListener((V)->
+        {
+            GlobalData.Deviceswitch1="1";
+            setVibrate(100); // 震動
+        });
+        switch2.setOnClickListener((V)->
+        {
+            GlobalData.Deviceswitch2="1";
+            setVibrate(100); // 震動
+        });
 
         clock_view1.setOnClickListener((V)-> MainActivity.viewPager2.setCurrentItem(2,true));
         clock_view2.setOnClickListener((V)->MainActivity.viewPager2.setCurrentItem(2,true));
@@ -387,6 +398,11 @@ public class page1 extends Fragment {
 //        getActivity().bindService(intent, sc, BIND_AUTO_CREATE);
 //
 //    }
+
+    public void setVibrate(int time){
+        Vibrator myVibrator = (Vibrator) getActivity().getSystemService(Service.VIBRATOR_SERVICE);
+        myVibrator.vibrate(time);
+    }
 
     private void setEdittextCustomDialog(final int pos){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());

@@ -30,6 +30,8 @@
 
 
 
+
+
     <style name="CustomTabWidgetText"
         parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:textSize">8pt</item>

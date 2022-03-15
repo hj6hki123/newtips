@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -160,6 +161,7 @@ public class page2 extends Fragment {
                     byte[] bytes = intent.getByteArrayExtra(UDP.RECEIVE_BYTES);
                     if(msg.length()>0)
                     {
+                        Log.e("UDP","gotmsg");
                         boolean samelist=false;
                         for(String s:sett_mask)//檢查有無重複
                         {
