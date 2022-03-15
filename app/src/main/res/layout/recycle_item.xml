@@ -32,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="0.9"
-                android:background="#EA4A80"
+                android:background="#EA4552"
                 android:gravity="left|center"
                 android:inputType="text"
                 android:lines="1"
@@ -41,7 +41,6 @@
                 android:text="標題"
                 android:textColor="@color/white"
                 android:textSize="10pt"
-
                 />
 
             <ImageView

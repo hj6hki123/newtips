@@ -1,4 +1,4 @@
-package com.example.newtips;
+package com.example.newtips.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.newtips.GlobalData;
+import com.example.newtips.R;
 import com.example.newtips.adapter.ViewPagerAdapter;
 import com.example.newtips.common.DepthPageTransformer;
 import com.google.android.material.tabs.TabLayout;

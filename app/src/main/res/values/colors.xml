@@ -21,4 +21,7 @@
     <color name="primaryTextColor">#212121</color>
     <color name="secondaryTextColor">#f5f5f5</color>
 
+
+    <color name="text_shadow">#EA3939</color>
+
 </resources>

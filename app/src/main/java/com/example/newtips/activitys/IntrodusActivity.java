@@ -1,28 +1,23 @@
-package com.example.newtips;
+package com.example.newtips.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.newtips.common.Constants;
+import com.example.newtips.R;
+import com.example.newtips.SocketService;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.color.DynamicColors;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 

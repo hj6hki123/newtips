@@ -1,6 +1,5 @@
-package com.example.newtips;
+package com.example.newtips.activitys;
 
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,16 +11,16 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+
+import com.example.newtips.GlobalData;
+import com.example.newtips.R;
+import com.example.newtips.SocketService;
 
 public class LoginActivity extends AppCompatActivity {
     private ServiceConnection sc;

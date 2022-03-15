@@ -1,12 +1,16 @@
 package com.example.newtips.page;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +25,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.newtips.common.CommendFun;
 import com.example.newtips.GlobalData;
-import com.example.newtips.MainActivity;
+import com.example.newtips.activitys.MainActivity;
 import com.example.newtips.R;
 import com.example.newtips.common.UDP;
+import com.github.johnpersano.supertoasts.library.Style;
+import com.github.johnpersano.supertoasts.library.SuperActivityToast;
+import com.github.johnpersano.supertoasts.library.SuperToast;
+import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
+import com.google.android.material.snackbar.Snackbar;
 import com.ntt.customgaugeview.library.GaugeView;
 
 import java.util.Objects;
@@ -62,6 +72,8 @@ public class page1 extends Fragment {
     ImageView editdevucename1,editdevucename2,clock_view1,clock_view2;
 
 
+    Snackbar mysnackbar;
+    Boolean snackbarlock=false;
 
     public page1() {
         // Required empty public constructor
@@ -124,11 +136,24 @@ public class page1 extends Fragment {
 
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pref =getActivity().getPreferences(Context.MODE_PRIVATE);
-        initUI(view);//UI初始化
+        initUI(view);//UI初始
+
+        mysnackbar=Snackbar.make(getActivity().findViewById(android.R.id.content), "無設備連接，請於設備管理進行配對", Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.viewPager2.setCurrentItem(1,true);
+                        snackbarlock=true;
+                    }
+                });
+        mysnackbar.setTextColor(Color.BLACK);
+        mysnackbar.setActionTextColor(Color.RED);
+        mysnackbar.getView().setBackgroundColor(Color.WHITE);
 
         //guage_spinner初始化與事件
         ArrayAdapter<CharSequence> adapter_guage =
@@ -263,7 +288,14 @@ public class page1 extends Fragment {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                //TODO:updata UI
+
+                                if(GlobalData.macaddress_select.equals("none") ) {
+                                    if (!mysnackbar.isShown() && !snackbarlock)
+                                        mysnackbar.show();
+                                }
+                                else
+                                    mysnackbar.dismiss();
+
                                 if(Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Volt1")))<=230 && Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Volt2")))<=230 && Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Current1")))<=16&& Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Current2")))<=16)
                                 {
                                     gaugeView_Vupp.setTargetValue(Float.parseFloat(Objects.requireNonNull(GlobalData.datamap_getserver.get("Volt1"))));

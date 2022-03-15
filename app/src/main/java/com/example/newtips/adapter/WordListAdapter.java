@@ -136,7 +136,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
 
         }else {
-            holder.title.setBackgroundColor(Color.rgb(255,102,101));
+            holder.title.setBackgroundColor(Color.rgb(234,69,82));
         }
 
 
