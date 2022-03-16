@@ -1,5 +1,10 @@
 package com.example.newtips;
 
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -60,9 +65,6 @@ public class GlobalData {
             add("00:00");
         }
     };
-
-
-
 
 
 }

@@ -132,12 +132,7 @@ public class page2 extends Fragment {
         getActivity().registerReceiver(myBroadcast, intentFilter2);
         IntentFilter intentFilter3 = new IntentFilter(SocketService.Init_ACTION);
         getActivity().registerReceiver(myBroadcast, intentFilter3);
-        //todo:爛程式碼，易造成記憶體引用錯亂，欲改，暫放
-        if(GlobalData.macaddress_select.equals("none"))
-        {
-            Toast.makeText(getActivity(),"檢查到無設備連接，正在初始化",Toast.LENGTH_SHORT).show();
-            GlobalData.FSM="Inituserdata";
-        }
+
         super.onCreate(savedInstanceState);
 
 

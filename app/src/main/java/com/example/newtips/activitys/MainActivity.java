@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -75,10 +77,19 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setPageTransformer(new DepthPageTransformer());
 
 
-
+        Context meContext=this;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //todo:爛程式碼，易造成記憶體引用錯亂，欲改，暫放
+                Toast.makeText(meContext,"正在初始化",Toast.LENGTH_SHORT).show();
+                GlobalData.FSM="Inituserdata";
+                Log.e("haha","work1");
+            }
+        },1000);
 
     }
-    //todo:返回鍵延遲
+    //返回鍵延遲
     private  Boolean isExit = false;
     private  Boolean hasTask = false;
     Timer timerExit = new Timer();

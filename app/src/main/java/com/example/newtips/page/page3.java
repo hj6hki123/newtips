@@ -229,7 +229,7 @@ private void initpref(){
                             @SuppressLint("SetTextI18n")
                             @Override
                             public void run() {
-                                //TODO:updata UI
+                                //updata UI
                                 if(!GlobalData.datamap_getserver.get("Status").equals("Offline") && !GlobalData.macaddress_select.equals("none"))
                                 {
                                     state_text.setTextColor(Color.GREEN);
