@@ -153,7 +153,7 @@ public class SocketService extends Service {
                                         logingmap.put("Password",GlobalData.Login_password);
 
                                         JSONObject login_json=new JSONObject(logingmap);
-                                        sendOrder(Aesencryption.startencode(login_json.toString()) +"");
+                                        sendOrder(Aesencryption.startencode(login_json.toString()));
                                         //收資料
                                         String loginacess=br.readLine();
                                         Log.e("get",loginacess+"");

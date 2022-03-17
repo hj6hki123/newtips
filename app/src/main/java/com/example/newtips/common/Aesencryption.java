@@ -20,12 +20,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 public  class Aesencryption {
 
-    private static String sKey = "0123456789012345";
-    private static String ivParameter = "0123456789012345";
 
-    // 加密
+    // 加密  方法不能為靜態類，KEY&IV 不能為靜態變數
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String encrypt(String sSrc) throws Exception {
+    public  String encrypt(String sSrc,String sKey, String ivParameter) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         byte[] raw = sKey.getBytes();
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
@@ -39,7 +37,7 @@ public  class Aesencryption {
 
     // 解密
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String decrypt(String sSrc) {
+    public  String decrypt(String sSrc,String sKey, String ivParameter) {
         try {
             byte[] raw = sKey.getBytes("ASCII");
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
@@ -60,7 +58,7 @@ public  class Aesencryption {
     {
         String output="";
         try {
-            output = encrypt(str);
+            output = new Aesencryption().encrypt(str,"0123456789012345","0123456789012345");
         } catch (Exception e) {
             e.printStackTrace();
         }
