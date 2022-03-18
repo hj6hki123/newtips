@@ -50,9 +50,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-
+        app:endIconMode="clear_text"
         app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.17000002">
+        app:layout_constraintVertical_bias="0.17000002"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editextuser"
@@ -73,7 +74,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayout_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -87,7 +88,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout_acc"
         app:layout_constraintVertical_bias="0.22000003"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
+        >
         <!--        app:boxBackgroundMode="none"-->
         <!--        app:boxStrokeWidth="0dp"-->
         <!--        app:boxStrokeWidthFocused="0dp"-->
@@ -105,7 +108,8 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:padding="16dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            />
 
 
     </com.google.android.material.textfield.TextInputLayout>

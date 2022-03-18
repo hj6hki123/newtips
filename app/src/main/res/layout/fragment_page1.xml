@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
      >
-    
+
 
     <com.ntt.customgaugeview.library.GaugeView
         android:id="@+id/gauge_view_Vupp"
@@ -134,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -144,12 +144,14 @@
         app:layout_constraintGuide_percent="0.7" />
 
     <TextView
-        android:textColorHint="?android:textColorPrimary"
         android:id="@+id/textV1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
         android:text="電壓:"
+        android:textColorHint="?android:textColorPrimary"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
@@ -161,6 +163,7 @@
         android:layout_height="wrap_content"
         android:text="電流:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
@@ -172,6 +175,7 @@
         android:layout_height="wrap_content"
         android:text="功率:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
@@ -183,6 +187,7 @@
         android:layout_height="wrap_content"
         android:text="頻率:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
@@ -194,6 +199,7 @@
         android:layout_height="wrap_content"
         android:text="功率因數:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
@@ -205,6 +211,7 @@
         android:layout_height="wrap_content"
         android:text="千瓦.時:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
@@ -216,6 +223,7 @@
         android:layout_height="wrap_content"
         android:text="電壓:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
@@ -227,6 +235,7 @@
         android:layout_height="wrap_content"
         android:text="電流:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
@@ -238,6 +247,7 @@
         android:layout_height="wrap_content"
         android:text="功率:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
@@ -249,6 +259,7 @@
         android:layout_height="wrap_content"
         android:text="頻率:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
@@ -260,6 +271,7 @@
         android:layout_height="wrap_content"
         android:text="千瓦.時:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
@@ -271,6 +283,7 @@
         android:layout_height="wrap_content"
         android:text="功率因數:"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/guideline4"
@@ -284,6 +297,7 @@
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -299,6 +313,7 @@
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -314,6 +329,7 @@
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -334,7 +350,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/spi"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintVertical_bias="0.534"
+        app:autoSizeTextType="uniform" />
 
     <TextView
         android:id="@+id/textViewWATT1"
@@ -344,6 +361,7 @@
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -359,6 +377,7 @@
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -371,10 +390,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -387,10 +406,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -403,10 +422,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -419,10 +438,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -435,10 +454,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -451,10 +470,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="0"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -467,27 +486,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/buttonshape"
         android:text="off"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gauge_view_Vupp"
-        app:layout_constraintVertical_bias="0.995"
-        android:background="@drawable/buttonshape"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/gauge_view_Vupp"
+        app:layout_constraintVertical_bias="0.52" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/buttonshape"
         android:text="off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1"
-        app:layout_constraintVertical_bias="0.867"
-        android:background="@drawable/buttonshape"/>
+        app:layout_constraintTop_toBottomOf="@+id/gauge_view_Vdown" />
 
     <TextView
         android:id="@+id/textViewunitV1"
@@ -496,10 +514,12 @@
         android:gravity="center"
         android:text="V"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewVOLT1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewVOLT1"
         app:layout_constraintTop_toTopOf="@+id/textViewVOLT1" />
+
     <TextView
         android:id="@+id/textViewunitI1"
         android:layout_width="0dp"
@@ -507,10 +527,12 @@
         android:gravity="center"
         android:text="A"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCURRENT1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewCURRENT1"
         app:layout_constraintTop_toTopOf="@+id/textViewCURRENT1" />
+
     <TextView
         android:id="@+id/textViewunitW1"
         android:layout_width="0dp"
@@ -518,10 +540,12 @@
         android:gravity="center"
         android:text="W"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewWATT1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewWATT1"
         app:layout_constraintTop_toTopOf="@+id/textViewWATT1" />
+
     <TextView
         android:id="@+id/textViewunitFREQ1"
         android:layout_width="0dp"
@@ -529,10 +553,12 @@
         android:gravity="center"
         android:text="Hz"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFREQ1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewFREQ1"
         app:layout_constraintTop_toTopOf="@+id/textViewFREQ1" />
+
     <TextView
         android:id="@+id/textViewunitPF1"
         android:layout_width="0dp"
@@ -542,7 +568,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewPF1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewPF1"
-        app:layout_constraintTop_toTopOf="@+id/textViewPF1" />
+        app:layout_constraintTop_toTopOf="@+id/textViewPF1"
+        app:autoSizeTextType="uniform" />
+
     <TextView
         android:id="@+id/textViewunitkWh1"
         android:layout_width="0dp"
@@ -550,10 +578,12 @@
         android:gravity="center"
         android:text="kWh"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewKWH1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewKWH1"
         app:layout_constraintTop_toTopOf="@+id/textViewKWH1" />
+
     <TextView
         android:id="@+id/textViewunitV2"
         android:layout_width="0dp"
@@ -561,10 +591,12 @@
         android:gravity="center"
         android:text="V"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewVOLT2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewVOLT2"
         app:layout_constraintTop_toTopOf="@+id/textViewVOLT2" />
+
     <TextView
         android:id="@+id/textViewunitI2"
         android:layout_width="0dp"
@@ -573,10 +605,12 @@
         android:text="A
 "
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCURRENT2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewCURRENT2"
         app:layout_constraintTop_toTopOf="@+id/textViewCURRENT2" />
+
     <TextView
         android:id="@+id/textViewunitW2"
         android:layout_width="0dp"
@@ -584,10 +618,12 @@
         android:gravity="center"
         android:text="W"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewWATT2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewWATT2"
         app:layout_constraintTop_toTopOf="@+id/textViewWATT2" />
+
     <TextView
         android:id="@+id/textViewunitFREQ2"
         android:layout_width="0dp"
@@ -595,10 +631,12 @@
         android:gravity="center"
         android:text="Hz"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFREQ2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewFREQ2"
         app:layout_constraintTop_toTopOf="@+id/textViewFREQ2" />
+
     <TextView
         android:id="@+id/textViewunitkWh2"
         android:layout_width="0dp"
@@ -606,33 +644,35 @@
         android:gravity="center"
         android:text="kWh"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewKWH2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewKWH2"
         app:layout_constraintTop_toTopOf="@+id/textViewKWH2" />
+
     <TextView
         android:id="@+id/textViewunitPF2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:textSize="10pt"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textViewPF2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewPF2"
         app:layout_constraintTop_toTopOf="@+id/textViewPF2" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="?strokeColor"
-        app:layout_constraintBottom_toTopOf="@+id/textV2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textC1"
-        app:layout_constraintVertical_bias="0.69"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <View
         android:id="@+id/spi"
@@ -666,7 +706,7 @@
         app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vdown"
         app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vdown"
         app:layout_constraintStart_toStartOf="@+id/gauge_view_Vdown"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/devicename2"
         app:layout_constraintVertical_bias="0.847" />
 
     <TextView
@@ -676,6 +716,7 @@
         android:gravity="center"
         android:text="null"
         android:textSize="32sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
@@ -689,20 +730,21 @@
         android:gravity="center"
         android:text="null"
         android:textSize="32sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <ImageView
         android:id="@+id/editdevucename1"
         android:layout_width="33dp"
         android:layout_height="31dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/devicename1"
         app:layout_constraintStart_toStartOf="@+id/devicename1"
         app:layout_constraintTop_toTopOf="@+id/devicename1"
-        app:layout_constraintVertical_bias="0.6"
-        gauge:srcCompat="@drawable/edit"
-        android:layout_marginLeft="5dp"/>
+        gauge:srcCompat="@drawable/edit" />
 
     <ImageView
         android:id="@+id/editdevucename2"
@@ -718,15 +760,12 @@
         android:id="@+id/clockedit1"
         android:layout_width="43dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge1"
+        app:layout_constraintBottom_toBottomOf="@+id/devicename1"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/devicename1"
         app:layout_constraintTop_toTopOf="@+id/devicename1"
-        app:layout_constraintVertical_bias="0.6"
-        gauge:srcCompat="@drawable/chronometer"
-       />
+        gauge:srcCompat="@drawable/chronometer" />
 
     <ImageView
         android:id="@+id/clockedit2"
@@ -736,8 +775,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="@+id/devicename2"
-        app:layout_constraintTop_toTopOf="@+id/devicename2"
-        app:layout_constraintVertical_bias="0.71000004"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
         gauge:srcCompat="@drawable/chronometer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

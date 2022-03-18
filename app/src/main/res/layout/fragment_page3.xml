@@ -33,19 +33,179 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_marginTop="3dp"
+            />
 
-            ></com.github.mikephil.charting.charts.LineChart>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
+            android:text="電費預覽"
+            android:textSize="30sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_pay"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:strokeWidth="0dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/checkpaytext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="22dp"
+                    android:inputType="numberDecimal"
+                    android:text="平均一度電費用"
+                    android:textSize="20sp"
+                    app:autoSizeTextType="uniform" />
+
+                <EditText
+                    android:id="@+id/editText_payrat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@+id/checkpaytext"
+                    android:autofillHints="creditCardNumber"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:text="5.0" />
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_toEndOf="@+id/editText_payrat"
+                    android:text="TWD"
+                    android:textSize="20sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textofpay1"
+                    android:layout_alignBottom="@+id/textofpay1"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toEndOf="@+id/textofpay1"
+                    android:gravity="bottom"
+                    android:text="per month"
+                    android:textSize="11sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textofpay2"
+                    android:layout_alignBottom="@+id/textofpay2"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toEndOf="@+id/textofpay2"
+                    android:gravity="bottom"
+                    android:text="per month"
+                    android:textSize="11sp"
+                    app:autoSizeTextType="uniform"
+               />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Button_StartCul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="1dp"
+                    android:ellipsize="middle"
+                    android:text="計算"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textpay_device1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="83dp"
+                    android:text="device1"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textpay_device2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textpay_device1"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="17dp"
+                    android:text="device2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textofpay1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textpay_device1"
+                    android:layout_alignBottom="@+id/textpay_device1"
+                    android:layout_marginStart="38dp"
+                    android:layout_toEndOf="@+id/textpay_device1"
+                    android:text="0"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textofpay2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textpay_device2"
+                    android:layout_alignBottom="@+id/textpay_device2"
+                    android:layout_marginStart="38dp"
+                    android:layout_toEndOf="@+id/textpay_device2"
+                    android:text="0"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#52FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             android:text="時鐘設定"
-            android:textSize="30sp"
-            />
+            android:textSize="30sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.setPageTransformer(new DepthPageTransformer());
 
-
+        //等待畫面創建完畢後初始化資料
         Context meContext=this;
         new Handler().postDelayed(new Runnable() {
             @Override

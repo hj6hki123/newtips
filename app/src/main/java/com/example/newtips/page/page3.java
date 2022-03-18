@@ -17,10 +17,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +44,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 
@@ -48,8 +52,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -76,6 +82,13 @@ public class page3 extends Fragment {
     SwitchCompat device1_enable,device2_enable;
     TextView user_text,ip_text,mac_text,state_text;
     MaterialCardView card_view;
+    Button startpay;
+    TextView getpay1,getpay2,device1_payname,device2_payname;
+    EditText editText_payrat;
+    Boolean start_cul=false;
+    int tt=0;
+    float[] cul_kw1={0,0,0,0,0};
+    float[] cul_kw2={0,0,0,0,0};
     public page3() {
 
         // Required empty public constructor
@@ -138,6 +151,32 @@ public class page3 extends Fragment {
             }
         });
         card_view.setOnClickListener(v -> randomcolor(card_view));
+
+        startpay.setOnClickListener(v ->
+        {
+            if(!GlobalData.datamap_getserver.get("Status").equals("Offline") && !GlobalData.macaddress_select.equals("none"))
+            {
+                if(editText_payrat.getText().length()>0)
+                {
+                    Toast.makeText(getActivity(),"計算中",Toast.LENGTH_SHORT).show();
+                    tt=0;
+                    Arrays.fill(cul_kw1,0);//清空陣列
+                    Arrays.fill(cul_kw2,0);//清空陣列
+                    start_cul=true;
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"請正確輸入費率",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else
+            {
+                Toast.makeText(getActivity(),"裝置離線中，請連線後在計算",Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
 
     }
 
@@ -203,6 +242,14 @@ private void initpref(){
         state_text=(TextView) root.findViewById(R.id.state_text);
 
         card_view=(MaterialCardView) root.findViewById(R.id.card_view);
+
+
+        getpay1=(TextView) root.findViewById(R.id.textofpay1);
+        getpay2=(TextView) root.findViewById(R.id.textofpay2);
+        startpay=(MaterialButton) root.findViewById(R.id.Button_StartCul);
+        device1_payname=(TextView) root.findViewById(R.id.textpay_device1);
+        device2_payname=(TextView) root.findViewById(R.id.textpay_device2);
+        editText_payrat=(EditText)  root.findViewById(R.id.editText_payrat);
     }
     private  void timepickManager(int deviceID,int targetResld1,int targetResld2)
     {
@@ -212,7 +259,6 @@ private void initpref(){
         TimePickerFragment tpf=TimePickerFragment.newInstance(hour,minute,deviceID,targetResld1,targetResld2);
         tpf.show(getActivity().getFragmentManager(),"timePicker");
     }
-
     private void timerUI()//每過0.5秒更新一次UI
     {
         if (timer == null) {
@@ -224,12 +270,45 @@ private void initpref(){
                 @Override
                 public void run() {
                     try {
+                        //使用handler控制UI執行續
                         handler.post(new Runnable() {
 
                             @SuppressLint("SetTextI18n")
                             @Override
                             public void run() {
                                 //updata UI
+                                if(start_cul) //開始模擬用電費用
+                                {
+
+                                    tt+=1;
+                                    Log.e("ww",String.valueOf(tt));
+                                    if(tt>5)
+                                    {
+                                        Float kw1_sum=0f;
+                                        Float kw2_sum=0f;
+                                        for( Float i :cul_kw1)
+                                            kw1_sum+=i;
+                                        for( Float i :cul_kw2)
+                                            kw2_sum+=i;
+
+                                        Float payrat=Float.parseFloat(editText_payrat.getText().toString());
+                                        Float kwh1_abs=(kw1_sum/5000.0f)*24*30* payrat;
+                                        Float kwh2_abs=(kw2_sum/5000.0f)*24*30*payrat;
+                                        DecimalFormat df =new DecimalFormat("#0.000");
+                                        getpay1.setText(df.format(kwh1_abs)+"TWD");
+                                        getpay2.setText(df.format(kwh2_abs)+"TWD");
+                                        start_cul=false;
+                                        tt=0;
+                                    }
+                                    else
+                                    {
+                                        cul_kw1[tt-1]=Float.parseFloat(GlobalData.datamap_getserver.get("Watt1"));
+                                        cul_kw2[tt-1]=Float.parseFloat(GlobalData.datamap_getserver.get("Watt2"));
+                                        getpay1.setText("計算中");
+                                        getpay2.setText("計算中");
+                                    }
+
+                                }
                                 if(!GlobalData.datamap_getserver.get("Status").equals("Offline") && !GlobalData.macaddress_select.equals("none"))
                                 {
                                     state_text.setTextColor(Color.GREEN);
@@ -242,6 +321,8 @@ private void initpref(){
                                     clock_RightTop.setClickable(true);
                                     device1_enable.setText(GlobalData.device_name_now[0]);
                                     device2_enable.setText(GlobalData.device_name_now[1]);
+                                    device1_payname.setText(GlobalData.device_name_now[0]);
+                                    device2_payname.setText(GlobalData.device_name_now[1]);
                                 }
                                 else
                                 {
@@ -265,8 +346,7 @@ private void initpref(){
             };
         }
 
-        timer.schedule(task, 0, 2000);
-
+        timer.schedule(task, 0, 1500);
     }
 
     protected void initChart()

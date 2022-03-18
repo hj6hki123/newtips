@@ -11,6 +11,8 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.newtips.GlobalData;
 import com.example.newtips.R;
 import com.example.newtips.SocketService;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 
 public class LoginActivity extends AppCompatActivity {
     private ServiceConnection sc;
@@ -57,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
         EditText editText_password=findViewById(R.id.editTextPassword);
         editText_user.setText(pref.getString("Duser",""));
         editText_password.setText(pref.getString("Dpassword",""));
+        TextInputLayout textInputLayout_acc=findViewById(R.id.textInputLayout_acc);
+        TextInputLayout  textInputLayout_password=findViewById(R.id.textInputLayout_password);
 
         Button button_login=findViewById(R.id.button_login);
         button_login.setOnClickListener((V)->
@@ -65,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                     pref.edit()
                             .putString("Duser", editText_user.getText().toString())
                             .putString("Dpassword", editText_password.getText().toString())
-                            .commit();
+                            .apply();
                     GlobalData.Login_user=editText_user.getText().toString();
                     GlobalData.Login_password=editText_password.getText().toString();
 
@@ -78,10 +84,55 @@ public class LoginActivity extends AppCompatActivity {
                     else
                         textView_hint.setText("須為連線狀態才可登入");
                 }
-                else
-                    textView_hint.setText("帳號密碼不能為空");
+                else if(editText_user.getText().toString().length()==0)
+                    textInputLayout_acc.setError("帳號不可空白");
+                else if(editText_password.getText().toString().length()==0)
+                {
+                    textInputLayout_password.setError("密碼不可空白");
+                }
+
+
             }
         );
+
+
+
+            editText_user.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textInputLayout_acc.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editText_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textInputLayout_password.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+
 
         TextView textView_register=findViewById(R.id.textView_register);
         textView_register.setOnClickListener((V)->
