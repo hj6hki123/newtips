@@ -47,6 +47,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.timepicker.MaterialTimePicker;
+import com.github.johnpersano.supertoasts.library.Style;
+import com.github.johnpersano.supertoasts.library.SuperActivityToast;
+import com.github.johnpersano.supertoasts.library.SuperToast;
+import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,6 +167,13 @@ public class page3 extends Fragment {
                     Arrays.fill(cul_kw1,0);//清空陣列
                     Arrays.fill(cul_kw2,0);//清空陣列
                     start_cul=true;
+                    SuperActivityToast.create(getActivity(), new Style(), Style.TYPE_PROGRESS_BAR)
+                            .setProgressBarColor(Color.WHITE)
+                            .setText("請等待計算")
+                            .setDuration(Style.DURATION_VERY_LONG)
+                            .setFrame(Style.FRAME_LOLLIPOP)
+                            .setColor(PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_PURPLE))
+                            .setAnimations(Style.ANIMATIONS_POP).show();
                 }
                 else
                 {
@@ -346,7 +357,7 @@ private void initpref(){
             };
         }
 
-        timer.schedule(task, 0, 1500);
+        timer.schedule(task, 0, 1000);
     }
 
     protected void initChart()
