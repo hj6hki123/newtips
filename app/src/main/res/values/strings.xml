@@ -6,8 +6,8 @@
     <string name="TCP_PORT">9997</string>
     <string name="TCP_IP">120.114.68.132</string>
 
-
-
+    <string name="key">0123456789012345</string>
+    <string name="iv">0123456789012345</string>
 
 
     <string-array name="planets_array">

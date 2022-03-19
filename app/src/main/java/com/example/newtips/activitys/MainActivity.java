@@ -156,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
                     pref.edit().putBoolean("darkmode",true).apply();
                 }
                 recreate();
-
-
                 break;
             case R.id.item2:
                 final Uri uri=Uri.parse("http://120.114.68.132");//網址

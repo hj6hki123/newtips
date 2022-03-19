@@ -1,13 +1,19 @@
 package com.example.newtips.common;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
+import android.renderscript.Sampler;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.security.spec.KeySpec;
 import android.util.Base64;
 import android.util.Xml;
+
+import com.example.newtips.R;
 
 import org.w3c.dom.Text;
 
@@ -18,12 +24,18 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public  class Aesencryption {
-
+public  class Aesencryption  {
+    private final String sKey;
+    private final String ivParameter;
+    public Aesencryption(Context context)//新增建構子並獲取Resourse資料
+    {
+        sKey=context.getString(R.string.key);
+        ivParameter=context.getString(R.string.iv);
+    }
 
     // 加密  方法不能為靜態類，KEY&IV 不能為靜態變數
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public  String encrypt(String sSrc,String sKey, String ivParameter) throws Exception {
+    private  String encrypt(String sSrc) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         byte[] raw = sKey.getBytes();
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
@@ -37,7 +49,7 @@ public  class Aesencryption {
 
     // 解密
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public  String decrypt(String sSrc,String sKey, String ivParameter) {
+    private   String decrypt(String sSrc) {
         try {
             byte[] raw = sKey.getBytes("ASCII");
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
@@ -54,11 +66,11 @@ public  class Aesencryption {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String startencode(String str)
+    public  String startencode(String str)
     {
         String output="";
         try {
-            output = new Aesencryption().encrypt(str,"0123456789012345","0123456789012345");
+            output = encrypt(str);
         } catch (Exception e) {
             e.printStackTrace();
         }

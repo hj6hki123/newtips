@@ -115,8 +115,6 @@ public class IntrodusActivity extends AppCompatActivity {
         chirtext.animate().translationX(2000).setDuration(100).setStartDelay(1500);
 
 
-
-
         introdusActivity=this;
        new Handler().postDelayed(new Runnable() {
             @Override

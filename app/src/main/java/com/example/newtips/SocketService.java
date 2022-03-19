@@ -15,7 +15,6 @@ import com.example.newtips.common.Aesencryption;
 import com.example.newtips.common.Constants;
 import com.example.newtips.common.EventMsg;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +35,7 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class SocketService extends Service {
 
 
@@ -54,7 +54,7 @@ public class SocketService extends Service {
     private Thread connectThread;
     private Timer timer = new Timer();
     private OutputStream outputStream;
-
+    private Aesencryption aesencryption;
     //private SocketBinder sockerBinder = new SocketBinder();
 
     private String ip;
@@ -92,6 +92,8 @@ public class SocketService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        aesencryption=new Aesencryption(this);
 
         /*拿到傳遞過來的ip和端口號*/
         ip = getString(R.string.TCP_IP).trim();
@@ -153,7 +155,7 @@ public class SocketService extends Service {
                                         logingmap.put("Password",GlobalData.Login_password);
 
                                         JSONObject login_json=new JSONObject(logingmap);
-                                        sendOrder(Aesencryption.startencode(login_json.toString()));
+                                        sendOrder(aesencryption.startencode(login_json.toString()));
                                         //收資料
                                         String loginacess=br.readLine();
                                         Log.e("get",loginacess+"");
@@ -190,7 +192,7 @@ public class SocketService extends Service {
                                             datamap.put("Switch1",GlobalData.Deviceswitch1);
                                             datamap.put("Switch2",GlobalData.Deviceswitch2);
                                             JSONObject data_json=new JSONObject(datamap);
-                                            sendOrder(Aesencryption.startencode(data_json.toString()) +"");
+                                            sendOrder(aesencryption.startencode(data_json.toString()) +"");
                                             if(data_json.getString("Switch1").equals("1"))
                                                 GlobalData.Deviceswitch1="0";
                                             if(data_json.getString("Switch2").equals("1"))
@@ -223,7 +225,7 @@ public class SocketService extends Service {
                                         JSONObject delet_mac=new JSONObject();
                                         delet_mac.put("Title","3");
                                         delet_mac.put("MacAddress",GlobalData.dlt_mac);
-                                        sendOrder(Aesencryption.startencode(delet_mac.toString()) +"");
+                                        sendOrder(aesencryption.startencode(delet_mac.toString()) +"");
                                         GlobalData.FSM="Datatransport";
                                         break;
                                     case "Changename":
@@ -232,7 +234,7 @@ public class SocketService extends Service {
                                         change_name.put("MacAddress",GlobalData.macaddress_select);
                                         change_name.put("Name1",GlobalData.device_name_change[0]);
                                         change_name.put("Name2",GlobalData.device_name_change[1]);
-                                        sendOrder(Aesencryption.startencode(change_name.toString()) +"");
+                                        sendOrder(aesencryption.startencode(change_name.toString()) +"");
                                         GlobalData.FSM="Datatransport";
                                         Log.e("changename","s11111111111");
                                         break;
@@ -246,7 +248,7 @@ public class SocketService extends Service {
                                         clockeditor.put("Device1ClockEnd",GlobalData.timeArray_clock.get(2));
                                         clockeditor.put("Device2ClockEnd",GlobalData.timeArray_clock.get(3));
                                         clockeditor.put("Macaddress",GlobalData.macaddress_select);
-                                        sendOrder(Aesencryption.startencode(clockeditor.toString()) +"");
+                                        sendOrder(aesencryption.startencode(clockeditor.toString()) +"");
                                         GlobalData.FSM="Datatransport";
                                         Log.e("ClockeditSender",clockeditor.toString()+"");
                                         break;
@@ -258,7 +260,7 @@ public class SocketService extends Service {
                                         JSONObject initdata=new JSONObject();
                                         initdata.put("Title","6");
                                         initdata.put("User",GlobalData.Login_user);
-                                        sendOrder(Aesencryption.startencode(initdata.toString()) +"");
+                                        sendOrder(aesencryption.startencode(initdata.toString()) +"");
                                         String dataget=br.readLine();
                                         Log.e("Inituserdata",dataget+"");
                                         if(dataget!=null)
