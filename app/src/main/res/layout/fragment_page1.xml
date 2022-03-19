@@ -134,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -485,7 +485,7 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/buttonshape"
         android:text="off"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
@@ -668,11 +668,12 @@
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
         android:background="?strokeColor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/spi"
@@ -706,8 +707,7 @@
         app:layout_constraintBottom_toTopOf="@+id/gauge_view_Vdown"
         app:layout_constraintEnd_toEndOf="@+id/gauge_view_Vdown"
         app:layout_constraintStart_toStartOf="@+id/gauge_view_Vdown"
-        app:layout_constraintTop_toTopOf="@+id/devicename2"
-        app:layout_constraintVertical_bias="0.847" />
+        app:layout_constraintTop_toBottomOf="@+id/devicename2" />
 
     <TextView
         android:id="@+id/devicename1"
@@ -727,13 +727,13 @@
         android:id="@+id/devicename2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="null"
         android:textSize="32sp"
         app:autoSizeTextType="uniform"
-        android:layout_marginTop="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
@@ -754,7 +754,7 @@
         android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
         app:layout_constraintStart_toStartOf="@+id/devicename2"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/devicename2"
         gauge:srcCompat="@drawable/edit" />
 
     <ImageView
@@ -776,7 +776,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="@+id/devicename2"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/devicename2"
         gauge:srcCompat="@drawable/chronometer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
