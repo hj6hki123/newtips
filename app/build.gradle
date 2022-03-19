@@ -14,9 +14,9 @@ android {
     defaultConfig {
         applicationId "com.smartsocket.SmartSocketksu"
         minSdk 19
-        targetSdkVersion 30
-        versionCode 17
-        versionName "5.5"
+        targetSdkVersion 31
+        versionCode 18
+        versionName "5.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
