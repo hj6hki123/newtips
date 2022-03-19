@@ -272,7 +272,7 @@ public class GaugeView extends View {
 
     @TargetApi(11)
     private void init() {
-        // TODO Why isn't this working with HA layer?
+        //Why isn't this working with HA layer?
         // The needle is not displayed although the onDraw() is being triggered by invalidate()
         // calls.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

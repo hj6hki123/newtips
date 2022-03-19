@@ -1,34 +1,29 @@
 package com.example.newtips;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.newtips.common.Aesencryption;
 import com.example.newtips.common.Constants;
 import com.example.newtips.common.EventMsg;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
@@ -37,7 +32,6 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.nio.channels.InterruptedByTimeoutException;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,6 +43,11 @@ public class SocketService extends Service {
     public static final String RECEIVE_SERVICE_ACTION="TCPSOCKET_ACTION";
     public static final String RECEIVE_SERVICE_STRING="TCPSOCKET_ReceiveString";
     public static final String RECEIVE_SERVICE_PROBLEM="TCPSOCKET_ReceiveProblem";
+    public static final String LoginAccess_ACTION="TCPSOCKET_LoginAccess";
+    public static final String Loginvoke="Loginvoke";
+    public static final String Init_ACTION="Init_ACTION";
+    public static final String Init_DATA="Init_DATA";
+
     /*socket*/
     private Socket socket;
     /*連接線程*/
@@ -56,7 +55,8 @@ public class SocketService extends Service {
     private Timer timer = new Timer();
     private OutputStream outputStream;
 
-    private SocketBinder sockerBinder = new SocketBinder();
+    //private SocketBinder sockerBinder = new SocketBinder();
+
     private String ip;
     private String port;
     private TimerTask task;
@@ -71,7 +71,8 @@ public class SocketService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return sockerBinder;
+        //return sockerBinder;
+        return null;
     }
 
 
@@ -99,7 +100,9 @@ public class SocketService extends Service {
         /*初始化socket*/
         initSocket();
 
-        return super.onStartCommand(intent, flags, startId);
+        //return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;//不重啟service
+
     }
 
 
@@ -150,7 +153,7 @@ public class SocketService extends Service {
                                         logingmap.put("Password",GlobalData.Login_password);
 
                                         JSONObject login_json=new JSONObject(logingmap);
-                                        sendOrder(Aesencryption.startencode(login_json.toString()) +"");
+                                        sendOrder(Aesencryption.startencode(login_json.toString()));
                                         //收資料
                                         String loginacess=br.readLine();
                                         Log.e("get",loginacess+"");
@@ -159,10 +162,10 @@ public class SocketService extends Service {
                                         {
                                             if(login_acess.getString("Loginaccess").equals("true"))
                                             {
-                                                GlobalData.FSM="Datatransport";
-                                                Intent i=new Intent(getApplicationContext(), MainActivity.class);
-                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(i);
+                                                Intent intent = new Intent();
+                                                intent.setAction(LoginAccess_ACTION);
+                                                intent.putExtra(Loginvoke,true);
+                                                sendBroadcast(intent);
                                             }
                                             else
                                             {
@@ -207,16 +210,11 @@ public class SocketService extends Service {
 
                                                 }
                                             }
-
-
-
-
                                         }
                                         else
                                         {
                                             Log.e("Datatransport","nonemacaddr_select");
                                         }
-
 
                                         break;
 
@@ -252,6 +250,36 @@ public class SocketService extends Service {
                                         GlobalData.FSM="Datatransport";
                                         Log.e("ClockeditSender",clockeditor.toString()+"");
                                         break;
+                                    case "Inituserdata":
+                                        /*
+                                        1.使用者註冊新帳號並第一次配對後，因macaddress未及時被WordListAdapter賦值導致page3拿到廣播後也無法及時改變狀態
+                                        2.使用者在資料庫中以有配對插頭但手機本地端無資料情況下進行初始化，在page2拿到macaddress後與上述問題相同
+                                        */
+                                        JSONObject initdata=new JSONObject();
+                                        initdata.put("Title","6");
+                                        initdata.put("User",GlobalData.Login_user);
+                                        sendOrder(Aesencryption.startencode(initdata.toString()) +"");
+                                        String dataget=br.readLine();
+                                        Log.e("Inituserdata",dataget+"");
+                                        if(dataget!=null)
+                                        {
+                                            JSONObject jsondataget=new JSONObject(dataget);
+
+                                            if(jsondataget.getString("Title").equals("6"))//如果表頭是6
+                                            {
+
+                                                JSONArray initdata_recv=jsondataget.getJSONArray("Initdata");
+                                                Intent intent = new Intent();
+                                                intent.setAction(Init_ACTION);
+                                                intent.putExtra(Init_DATA,initdata_recv.toString());
+                                                sendBroadcast(intent);
+
+                                                toastMsg("資料恢復完成");
+                                            }
+
+                                        }
+                                        GlobalData.FSM="Datatransport";
+                                        break;
                                     default:
                                         break;
                                 }
@@ -277,13 +305,13 @@ public class SocketService extends Service {
 
                         } else if (e instanceof ConnectException) {
                             problem="連接異常或被拒絕!請重新檢查";
-
+                            toastMsg(problem);
                             releaseSocket();
                         }
                         else if(e instanceof SocketException)
                         {
                             problem="伺服器連接異常!請查看連線狀態";
-
+                            toastMsg(problem);
                             releaseSocket();
                         }
                         else if(e instanceof InterruptedException)
@@ -363,7 +391,7 @@ public class SocketService extends Service {
         }
     }
 
-    /*定时发送数据*/
+
     private void sendBeatData() {
         if (timer == null) {
             timer = new Timer();
@@ -376,13 +404,11 @@ public class SocketService extends Service {
                     try {
                         outputStream = socket.getOutputStream();
 
-                        /*这里的编码方式根据你的需求去改*/
+
                         outputStream.write(("test").getBytes("gbk"));
                         outputStream.flush();
                     } catch (Exception e) {
-                        /*发送失败说明socket断开了或者出现了其他错误*/
-                        toastMsg("连接断开，正在重连");
-                        /*重连*/
+
                         releaseSocket();
                         e.printStackTrace();
 

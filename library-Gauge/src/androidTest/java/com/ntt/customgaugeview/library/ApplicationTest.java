@@ -1,13 +1,25 @@
 package com.ntt.customgaugeview.library;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import android.content.Context;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+
+@RunWith(AndroidJUnit4.class)
+public class ApplicationTest {
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        assertEquals("com.example.xmpp", appContext.getPackageName());
+
+    }
+
+    private void assertEquals(String s, String packageName) {
     }
 }

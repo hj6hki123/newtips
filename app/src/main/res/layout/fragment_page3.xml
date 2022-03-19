@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mDat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText"
+    android:scrollbarStyle="insideOverlay"
+    android:scrollbars="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="設備之功率圖表"
+            android:textSize="30sp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#52FFFFFF"
+            android:layout_marginTop="3dp"/>
+
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="3dp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="電費預覽"
+            android:textSize="30sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_pay"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingBottom="10dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:strokeWidth="0dp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/checkpaytext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:inputType="numberDecimal"
+                    android:text="平均一度電費用"
+                    android:textSize="18sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_payrat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:autofillHints="creditCardNumber"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:text="5.0"
+                    app:layout_constraintBottom_toBottomOf="@+id/checkpaytext"
+                    app:layout_constraintStart_toEndOf="@+id/checkpaytext"
+                    app:layout_constraintTop_toTopOf="@+id/checkpaytext" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="14dp"
+                    android:layout_toEndOf="@+id/editText_payrat"
+                    android:text="TWD"
+                    android:textSize="20sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="@+id/editText_payrat"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/editText_payrat"
+                    app:layout_constraintTop_toTopOf="@+id/editText_payrat" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Button_StartCul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="7dp"
+                    android:ellipsize="middle"
+                    android:text="計算"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/textpay_device1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="device1"
+                    android:textColor="#2B9C16"
+                    android:textSize="20sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/cardvline" />
+
+                <TextView
+                    android:id="@+id/textpay_device2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textpay_device1"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="8dp"
+                    android:text="device2"
+                    android:textSize="20sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColor="#4A75CA"
+                    app:layout_constraintEnd_toEndOf="@+id/textpay_device1"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textpay_device1"
+                    app:layout_constraintTop_toBottomOf="@+id/textpay_device1" />
+
+                <TextView
+                    android:id="@+id/textofpay1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textpay_device1"
+                    android:layout_alignBottom="@+id/textpay_device1"
+                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@+id/textpay_device1"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textColor="#2B9C16"
+                    app:layout_constraintBottom_toBottomOf="@+id/textpay_device1"
+                    app:layout_constraintStart_toEndOf="@+id/textpay_device1"
+                    app:layout_constraintTop_toTopOf="@+id/textpay_device1" />
+
+                <TextView
+                    android:id="@+id/textofpay2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textpay_device2"
+                    android:layout_alignBottom="@+id/textpay_device2"
+                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@+id/textpay_device2"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textColor="#4A75CA"
+                    app:layout_constraintBottom_toBottomOf="@+id/textpay_device2"
+                    app:layout_constraintStart_toEndOf="@+id/textpay_device2"
+                    app:layout_constraintTop_toTopOf="@+id/textpay_device2" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="每日使用時數"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/checkpaytext"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/checkpaytext"
+                    app:layout_constraintTop_toBottomOf="@+id/checkpaytext" />
+
+                <EditText
+                    android:id="@+id/editTextPayhours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:inputType="numberDecimal"
+                    android:text="24"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="HOURS"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextPayhours"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/editTextPayhours"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_payrat" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/cardvline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#52FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="時鐘設定"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#52FFFFFF"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:strokeWidth="0dp"
+            >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:id="@+id/device1_timeEnd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.375">
+
+                    <TextView
+                        android:id="@+id/time1_End_12H"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:format12Hour="mmaa"
+                        android:text="下午"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/time1_End"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="02:10"
+                        android:textSize="30sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/device1_enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="device1"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.38" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/device2_enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="device2"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/device2_timeBegin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.90" />
+
+
+                <LinearLayout
+                    android:id="@+id/device1_timeBegin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/device1_timeEnd"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.319">
+
+                    <TextView
+                        android:id="@+id/time1_Begin_12H"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:format12Hour="mmaa"
+                        android:text="上午"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/time1_Begin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="02:10"
+                        android:textSize="40sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/device2_timeEnd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/device1_timeEnd"
+                    app:layout_constraintVertical_bias="0.71">
+
+                    <TextView
+                        android:id="@+id/time2_End_12H"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:format12Hour="mmaa"
+                        android:text="下午"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/time2_End"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="02:10"
+                        android:textSize="30sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/device2_timeBegin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/device2_timeEnd"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/device1_timeBegin"
+                    app:layout_constraintVertical_bias="0.477">
+
+                    <TextView
+                        android:id="@+id/time2_Begin_12H"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:format12Hour="mmaa"
+                        android:text="上午"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/time2_Begin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="02:10"
+                        android:textSize="40sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.6"
+                    android:text="開啟時間"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline10"
+                    app:layout_constraintEnd_toEndOf="@+id/device1_timeBegin"
+                    app:layout_constraintStart_toStartOf="@+id/device1_timeBegin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.6"
+                    android:text="關閉時間"
+
+                    app:layout_constraintBottom_toTopOf="@+id/guideline10"
+                    app:layout_constraintEnd_toEndOf="@+id/device1_timeEnd"
+                    app:layout_constraintStart_toStartOf="@+id/device1_timeEnd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.33" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.96" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="基本資料"
+            android:textSize="30sp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#52FFFFFF"
+
+            android:layout_marginTop="3dp"/>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+            <TableRow>
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="使用者帳號"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/user_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="test123"
+                    android:textSize="20sp" />
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+            <TableRow>
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="IP"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/ip_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="114.27.52.154"
+                    android:textSize="20sp" />
+
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+            <TableRow>
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="MAC位址"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/mac_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="F4:5A:46:9D:25:75"
+                    android:textSize="20sp" />
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+            <TableRow>
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="連接狀態"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/state_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="ONLINE"
+                    android:textSize="20sp"
+                    />
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0F0E0E0E"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"/>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="3dip"
+                    android:text="版本號碼"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/ver_text"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="V4.1"
+                    android:textSize="20sp" />
+            </TableRow>
+        </TableLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</ScrollView>
