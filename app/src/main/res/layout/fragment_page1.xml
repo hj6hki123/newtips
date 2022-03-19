@@ -134,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.48" />
+        app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -731,6 +731,7 @@
         android:text="null"
         android:textSize="32sp"
         app:autoSizeTextType="uniform"
+        android:layout_marginTop="3dp"
         app:layout_constraintBottom_toTopOf="@+id/spinner_gauge2"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,10 +13,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -88,9 +93,10 @@ public class page3 extends Fragment {
     MaterialCardView card_view;
     Button startpay;
     TextView getpay1,getpay2,device1_payname,device2_payname;
-    EditText editText_payrat;
+    EditText editText_payrat,editTextPayhours;
     Boolean start_cul=false;
     int tt=0;
+    private boolean editpayflag=false;//標記edittext不會死迴圈
     float[] cul_kw1={0,0,0,0,0};
     float[] cul_kw2={0,0,0,0,0};
     public page3() {
@@ -114,7 +120,7 @@ public class page3 extends Fragment {
         initChart();
         startRun();
         timerUI();
-        randomcolor(card_view);
+        //randomcolor(card_view);
         clock_LeftTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +160,7 @@ public class page3 extends Fragment {
                 getdataFrompref();
             }
         });
-        card_view.setOnClickListener(v -> randomcolor(card_view));
+        //card_view.setOnClickListener(v -> randomcolor(card_view));
 
         startpay.setOnClickListener(v ->
         {
@@ -188,6 +194,44 @@ public class page3 extends Fragment {
 
 
         });
+
+
+        editTextPayhours.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()>0)
+                {
+                    if(Float.parseFloat(s.toString())>24)
+                    {
+                        editTextPayhours.setText("24");
+                        editTextPayhours.clearFocus();
+                    }
+                }
+            }
+        });
+
+
+        TextView.OnEditorActionListener onEditorActionListener=new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_DONE){
+                    //Clear focus here from edittext
+                    editTextPayhours.clearFocus();
+                    editText_payrat.clearFocus();
+                }
+                return false;
+            }
+        };
+        editTextPayhours.setOnEditorActionListener(onEditorActionListener);
+        //editText_payrat.setOnEditorActionListener(onEditorActionListener);
 
     }
 
@@ -261,6 +305,7 @@ private void initpref(){
         device1_payname=(TextView) root.findViewById(R.id.textpay_device1);
         device2_payname=(TextView) root.findViewById(R.id.textpay_device2);
         editText_payrat=(EditText)  root.findViewById(R.id.editText_payrat);
+        editTextPayhours=(EditText)  root.findViewById(R.id.editTextPayhours);
     }
     private  void timepickManager(int deviceID,int targetResld1,int targetResld2)
     {
@@ -303,8 +348,8 @@ private void initpref(){
                                             kw2_sum+=i;
 
                                         Float payrat=Float.parseFloat(editText_payrat.getText().toString());
-                                        Float kwh1_abs=(kw1_sum/5000.0f)*24*30* payrat;
-                                        Float kwh2_abs=(kw2_sum/5000.0f)*24*30*payrat;
+                                        Float kwh1_abs=(kw1_sum/5000.0f)*Float.parseFloat(editTextPayhours.getText().toString())*30* payrat;
+                                        Float kwh2_abs=(kw2_sum/5000.0f)*Float.parseFloat(editTextPayhours.getText().toString())*30*payrat;
                                         DecimalFormat df =new DecimalFormat("#0.000");
                                         getpay1.setText(df.format(kwh1_abs)+"TWD");
                                         getpay2.setText(df.format(kwh2_abs)+"TWD");
