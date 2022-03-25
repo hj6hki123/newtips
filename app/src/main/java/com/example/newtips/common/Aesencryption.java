@@ -78,5 +78,18 @@ public  class Aesencryption  {
         return output;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public  String startdecode(String str)
+    {
+        String output="";
+        try {
+            output = decrypt(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+   //     Log.e("aes",output);
+        return output;
+    }
+
 
 }

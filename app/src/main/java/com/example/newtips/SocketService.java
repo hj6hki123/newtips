@@ -157,7 +157,11 @@ public class SocketService extends Service {
                                         JSONObject login_json=new JSONObject(logingmap);
                                         sendOrder(aesencryption.startencode(login_json.toString()));
                                         //收資料
+                                        Log.e("aes","3333333333333");
                                         String loginacess=br.readLine();
+                                        Log.e("aes","444444444444444");
+                                        loginacess=aesencryption.startdecode(loginacess);
+
                                         Log.e("get",loginacess+"");
                                         JSONObject login_acess=new JSONObject(loginacess);
                                         if(login_acess.getString("Title").equals("1"))
@@ -199,6 +203,7 @@ public class SocketService extends Service {
                                                 GlobalData.Deviceswitch2="0";
 
                                             String dataget=br.readLine();
+                                            dataget = aesencryption.startdecode(dataget);
                                             Log.e("Datatransport",dataget+"");
                                             if(dataget!=null)
                                             {
@@ -262,6 +267,7 @@ public class SocketService extends Service {
                                         initdata.put("User",GlobalData.Login_user);
                                         sendOrder(aesencryption.startencode(initdata.toString()) +"");
                                         String dataget=br.readLine();
+                                        dataget = aesencryption.startdecode(dataget);
                                         Log.e("Inituserdata",dataget+"");
                                         if(dataget!=null)
                                         {
